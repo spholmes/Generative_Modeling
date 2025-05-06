@@ -2,7 +2,6 @@ index
 workshop-on-using-generative-models
 our-learning-goals
 prerequisites
-open-box-versus-black-box.
 beyond-black-box-simulation
 new-lingua-franca-of-science
 new-lingua-franca-of-science-1

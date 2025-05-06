@@ -1,9 +1,3 @@
----
-title: "Labs"
-author: "Susan Holmes"
-date: "2025-05-06"
-output: html_document
----
 
 # Labs
 

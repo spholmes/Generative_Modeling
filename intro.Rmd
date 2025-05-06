@@ -1,14 +1,28 @@
----
-title: "Intro"
-author: "Susan Holmes"
-date: "2025-05-06"
-output: html_document
----
-
-
 # Index
 
+# Workshop on using generative models
 
-# Lisbon, 7, 8 May, 2025
+ **Lisbon, 7, 8 May, 2025**
+
+
+## Our learning goals:
+
+ - Learn how to use simulation tools to solve and understand statistical models.
+ - Go over examples of experimental design using generative models.  
+ - Use different R packages to 
+
+## Prerequisites:
+
+- Some statistical know-how and R and RStudio installed on your laptops.
+- Some useful buzzwords and acronyms to look up in case: 
+
+ GOF: *Goodness of Fit*
+ MCMC: *Markov chain Monte Carlo*
+ ABC: *Approximate Bayesian Computation*
+ Random generation: From uniform and non-uniform distributions.
+ Mixtures: Finite combinations of known distributions
+ Hierarchical Models: Infinite mixtures
+ GANs: [Generative Adversarial network](https://en.wikipedia.org/wiki/Generative_adversarial_network)
+
 
 
