@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Likelihood-Free Inference via Classification</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Susan Holmes" />
+    <meta name="date" content="2025-05-04" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: bottom
+
+# Likelihood-Free Inference via Classification
+
+Gutmann, M. U., Dutta, R., Kaski, S., &amp; Corander, J. (2018). *Likelihood-Free Inference via Classification*. Statistics and Computing.  
+
+.pull-left[
+Lisbon, 2025
+]
+---
+
+
+
+# Motivation  
+
+- Many complex simulators → no tractable likelihood  
+- **Approximate Bayesian Computation (ABC)** sidesteps likelihood by simulating and comparing summaries  
+- But choosing summaries and distance thresholds is ad hoc  
+- **Gutmann et al. (2018)** propose learning a classifier to distinguish observed vs. simulated and use its outputs for inference  
+
+---
+
+# Likelihood-Free Inference: The Big Picture  
+
+1. **Generative model** `\(p(x\mid\theta)\)` is a black-box simulator  
+2. **Observed data** `\(x_{\rm obs}\)`  
+3. **Goal:** Approximate `\(p(\theta\mid x_{\rm obs})\)` without ever evaluating `\(p(x\mid\theta)\)`  
+
+---
+
+
+# What is ABC?
+
+- **Approximate Bayesian Computation (ABC)**  
+- A likelihood‐free inference method  
+- Replace an intractable likelihood with simulation + summary statistics  
+- Accept parameter draws that produce simulated data “close” to the observed data  
+
+---
+
+# When to Use ABC
+
+- Complex generative models with intractable or expensive likelihoods  
+- Examples: population genetics, epidemiology, systems biology  
+- Enables Bayesian inference without ever evaluating \(p(x\mid\theta)\)  
+
+---
+
+# The ABC Rejection Algorithm
+
+
+``` r
+# Observed summary statistic
+s_obs &lt;- summary_statistic(x_obs)
+
+# Rejection ABC
+accepted &lt;- numeric()
+for (i in seq_len(N)) {
+  theta_i &lt;- sample_prior()
+  x_sim   &lt;- simulator(theta_i)
+  s_sim   &lt;- summary_statistic(x_sim)
+  if (abs(s_sim - s_obs) &lt; epsilon) {
+    accepted &lt;- c(accepted, theta_i)
+  }
+}
+posterior_samples &lt;- accepted
+```
+
+---
+
+# Illustrated Example: Estimating a Mean
+
+
+``` r
+set.seed(42)
+# 1. Observed data
+x_obs &lt;- rnorm(50, mean = 5, sd = 2)
+s_obs &lt;- mean(x_obs)
+
+# 2. Simulate candidates
+thetas &lt;- runif(10000, 0, 10)
+sims   &lt;- sapply(thetas, function(theta) mean(rnorm(50, theta, 2)))
+df     &lt;- data.frame(theta = thetas, s_sim = sims)
+```
+
+---
+
+
+``` r
+# 3. Histogram of summary statistics
+ggplot(df, aes(x = s_sim)) +
+  geom_histogram(binwidth = 0.1, fill = "gray80", color = "white") +
+  geom_vline(xintercept = s_obs, color = "red", size = 1) +
+  labs(
+    title = "Simulated Means vs. Observed Mean",
+    x = "Simulated Mean",
+    y = "Count"
+  )
+```
+
+&lt;img src="Likelihood_Free_Inference_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Acceptance Threshold Visualization
+
+
+``` r
+epsilon &lt;- 0.1
+df$accepted &lt;- abs(df$s_sim - s_obs) &lt; epsilon
+
+ggplot(df, aes(x = theta, y = s_sim, color = accepted)) +
+  geom_point(alpha = 0.5) +
+  scale_color_manual(values = c("FALSE" = "gray70", "TRUE" = "steelblue")) +
+  geom_hline(yintercept = s_obs, linetype = "dashed") +
+  labs(
+    title = "ABC Acceptance Region",
+    x = expression(theta),
+    y = "Simulated Mean",
+    color = "Accepted"
+  )
+```
+
+&lt;img src="Likelihood_Free_Inference_files/figure-html/abc-threshold-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# ABC Approximate Posterior
+
+
+``` r
+post &lt;- df$theta[df$accepted]
+
+ggplot(data.frame(theta = post), aes(x = theta)) +
+  geom_density(fill = "skyblue", alpha = 0.6) +
+  labs(
+    title = "ABC Approximate Posterior for θ",
+    x = expression(theta),
+    y = "Density"
+  )
+```
+
+&lt;img src="Likelihood_Free_Inference_files/figure-html/abc-posterior-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Extensions of ABC
+
+- **ABC‐SMC**: Sequential Monte Carlo to adaptively reduce `\(\varepsilon\)` 
+- **ABC‐MCMC**: MCMC scheme with ABC acceptance step  
+- **Regression Adjustment**: post‐processing to correct bias in posterior  
+
+---
+
+# References about ABC
+
+1. Beaumont, M. A., Zhang, W., &amp; Balding, D. J. (2002). Approximate Bayesian computation in population genetics. *Genetics*, **162**(4), 2025–2035.  
+2. Marin, J.-M., Pudlo, P., Robert, C. P., &amp; Ryder, R. J. (2012). Approximate Bayesian computational methods. *Statistics and Computing*, **22**(6), 1167–1180.  
+3. Sisson, S. A., Fan, Y., &amp; Beaumont, M. (2018). *Handbook of Approximate Bayesian Computation*. CRC Press.  
+```
+
+
+---
+
+# Classification-Based LFI  
+
+- Simulate $\{\theta_i,\,x_i\}$ from the prior and simulator  
+- **Label** data:  
+  - $y=1$ for $x_i\sim p(x\mid\theta_i)$ close to $x_{\rm obs}$  
+  - $y=0$ for simulated from other $\theta$  
+- Train a **discriminator** $D(x)\approx P(y=1\mid x)$  
+- Use $D(x_{\rm obs})$ (or its logit) as a surrogate likelihood  
+
+---
+
+# Algorithm Sketch  
+
+```
+for (t in 1:T) {
+  θ_samples &lt;- sample_prior(N)
+  x_sims &lt;- simulator(θ_samples)
+  y_labels &lt;- ifelse(distance(x_sims, x_obs) &lt; ε_t, 1, 0)
+  D_t &lt;- train_classifier(x_sims, y_labels)
+  # Use D_t to weight or propose new θ in SMC/PMC scheme
+}
+```
+
+
+
+
+# Motivation
+
+- Many complex simulators → no tractable likelihood  
+- **Approximate Bayesian Computation (ABC)** sidesteps likelihood by simulating and comparing summaries  
+- Manual choice of summaries and thresholds can be ad hoc  
+- **Gutmann et al. (2018)** propose using a classifier to distinguish observed vs. simulated, turning that into a discrepancy  
+
+---
+
+# Likelihood-Free Inference: The Big Picture
+
+1. **Simulator**: black-box generative model $$p(x \mid \theta)$$  
+2. **Observed data**: $$x_{\mathrm{obs}}$$  
+3. **Goal**: Approximate posterior $$p(\theta \mid x_{\mathrm{obs}})$$ without evaluating $$p(x \mid \theta)$$  
+
+---
+
+# Classification-Based LFI
+
+- Draw $(\theta_i, x_i)_{i=1}^N$ from the prior and simulator  
+- **Label** each $x_i$:  
+  - $y_i = 1$ if $x_i$ is “close” to $x_{\mathrm{obs}}$ 
+  - $y_i = 0$ otherwise  
+- Train classifier $D(x)\approx P(y=1 \mid x)$ 
+- Use classifier output $D(x_{\mathrm{obs}})$ or its logit as a surrogate likelihood  
+
+---
+
+# Algorithm Sketch
+
+```r
+for (t in seq_len(T)) {
+  theta &lt;- sample_prior(N)
+  x_sim &lt;- simulator(theta)
+  y     &lt;- as.integer(distance(x_sim, x_obs) &lt; eps[t])
+  D     &lt;- train_classifier(x_sim, y)
+  # Use D to weight or propose new theta in an SMC/PMC loop
+}
+```
+
+---
+
+# Example: 1D Gaussian Mixture
+
+
+``` r
+set.seed(123)
+n &lt;- 500; p &lt;- 0.3
+# Observed: two-component Gaussian mixture
+obs &lt;- data.frame(
+  x = c(rnorm(n*p, -2, 1),
+        rnorm(n*(1-p), 3, 0.5)),
+  label = "Observed"
+)
+# Simulated under wrong single-Gaussian model
+sim &lt;- data.frame(
+  x = rnorm(n, 0.5, 1.5),
+  label = "Simulated"
+)
+df &lt;- rbind(obs, sim)
+```
+
+---
+
+
+``` r
+# Scatter plot
+library(ggplot2)
+ggplot(df, aes(x = x, y = 0, color = label)) +
+  geom_jitter(height = 0.1, alpha = 0.6) +
+  theme_minimal() +
+  labs(title = "Observed vs. Simulated Samples",
+       x = "Value", y = "", color = "")
+```
+
+&lt;img src="Likelihood_Free_Inference_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Example: Logistic Discriminator
+
+$$
+D(x) = \mathrm{logit}^{-1}\bigl(\beta_0 + \beta_1 x\bigr)
+$$
+
+---
+
+
+``` r
+# Fit logistic regression
+df$y_bin &lt;- ifelse(df$label == "Observed", 1, 0)
+fit &lt;- glm(y_bin ~ x, data = df, family = binomial)
+# ROC curve
+library(pROC)
+probs   &lt;- predict(fit, type = "response")
+roc_obj &lt;- roc(df$y_bin, probs)
+auc_val &lt;- auc(roc_obj)
+# Plot ROC
+roc_df &lt;- data.frame(
+  fpr = rev(roc_obj$specificities),
+  tpr = rev(roc_obj$sensitivities)
+)
+```
+
+---
+
+
+``` r
+library(ggplot2)
+ggplot(roc_df, aes(x = fpr, y = tpr)) +
+  geom_line(linewidth = 1) +
+  geom_abline(lty = 2) +
+  theme_minimal() +
+  labs(title = sprintf("ROC Curve (AUC = %.2f)", auc_val),
+       x = "False Positive Rate",
+       y = "True Positive Rate")
+```
+
+&lt;img src="Likelihood_Free_Inference_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Applications &amp; Case Studies
+
+- **Population genetics**: coalescent simulators for demographic inference  
+- **Systems biology**: stochastic models of biochemical networks  
+- **Epidemiology**: agent-based epidemic simulators  
+
+---
+
+# Practical Tips
+
+- **Classifier choice**:  
+  - Logistic regression for speed  
+  - Random forests / GBMs for nonlinearity  
+  - Neural nets for high-dimensional data  
+- **Features**: raw data vs. summary statistics  
+- **Simulation budget**: trade-off between classifier accuracy and compute cos 
+- **Sequential schemes**: embed into SMC-ABC to adapt $\varepsilon$  
+
+---
+
+# Advantages &amp; Limitations
+
+| Pros                                   | Cons                                 |
+|----------------------------------------|--------------------------------------|
+| Automatic, data-driven discrepancy     | Classifier may fit simulator quirks  |
+| Continuous distance (AUC, logit)       | Extra training overhead              |
+| Integrates into ABC/SMC frameworks     | Requires careful label calibration   |
+
+---
+
+# Summary &amp; Outlook
+
+- **Classification** reframes ABC as a supervised learning problem  
+- Provides continuous, interpretable discrepancy measures  
+- Future directions:  
+  - Deep architectures for high-dimensional simulators  
+  - Amortized inference for rapid repeated queries  
+  - Hybrid likelihood-based &amp; classification approaches  
+
+---
+
+# References
+
+1. Gutmann, M. U., Dutta, R., Kaski, S., &amp; Corander, J. (2018). *Likelihood-Free Inference via Classification*. Statistics and Computing.  
+2. Cranmer, K., Brehmer, J., &amp; Louppe, G. (2020). *The Frontier of Simulation-Based Inference*. PNAS.  
+3. Papamakarios, G. &amp; Murray, I. (2016). *Fast ε-Free Inference of Simulation Models with Bayesian Conditional Density Estimation*. NeurIPS.  
+4. Gutmann, M. U. &amp; Hyvärinen, A. (2012). *Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models*. AISTATS.  
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
