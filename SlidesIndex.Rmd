@@ -1,0 +1,38 @@
+---
+title: "Generative Modeling Workshop"
+author: "Susan Holmes"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Slides 
+
+ - [NotBlackBoxSimulation](Slides/NotBlackBoxS.html)
+ - [Hierarchical Models](Slides/HierarchicalS.html)
+ - [Experimental Design](Slides/Design1S.html)
+ - [Identifiability](Slides/NonIdentifiabilityS.html)
+ 
+
+# Labs and Challenges : 
+
+ - Find code for an example of a hierarchical generative model in
+ the book: [Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)
+
+ - Install the package `generative` from the github repository 
+ `spholme`/generative` using the package `devtools` with
+ 
+ ```
+ devtools::install_github("spholmes/generative")
+ ```
+ 
+ - Try out examples from the repository of the paper at: [https://go.wisc.edu/833zs8](https://go.wisc.edu/833zs8) 
+ 
+ - Code: [https://go.wisc.edu/7222i9](https://go.wisc.edu/7222i9)
+ 
+ 
+ 
+
