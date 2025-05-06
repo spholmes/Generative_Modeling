@@ -1,0 +1,253 @@
+---
+title: "Generative Diffusion Models"
+subtitle: "A Tutorial Based on Saharia et al. (2022)"
+output:
+  xaringan::moon_reader:
+    css: 
+    - default
+    - css/xaringan-themer.css
+    mathjax: default
+    self_contained: false
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+    seal: false
+---
+class: bottom
+
+# Generative Diffusion Models
+A Tutorial Based on Saharia et al. (2022)
+
+.pull-left[
+Lisbon, 2025
+]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo      = TRUE,
+  warning   = FALSE,
+  message   = FALSE,
+  fig.width = 5,
+  fig.height= 4,
+  fig.align = "center"
+)
+library(ggplot2)
+```
+
+---
+
+# What Are Diffusion Models?
+
+- Generative models that **gradually corrupt** data with noise (forward process)  
+- Then **learn to reverse** this noising (reverse process) via a neural network  
+- Produce high-quality samples by iteratively denoising pure noise  
+
+---
+
+# Forward Diffusion Process
+
+We define a sequence of noised variables  
+$$q(x_t \mid x_{t-1}) \;=\; \mathcal{N}\bigl(x_t; \sqrt{1-\beta_t}\,x_{t-1},\;\beta_t I\bigr)$$  
+with a schedule $\{\beta_t\}$.  After $T$ steps:  
+$$q(x_t \mid x_0)
+=\mathcal{N}\bigl(x_t; \sqrt{\bar\alpha_t}\,x_0,\;(1-\bar\alpha_t)I\bigr),
+\quad
+\bar\alpha_t = \prod_{s=1}^t (1-\beta_s).$$
+
+---
+
+# R Example: Forward Noising of a 1D Mixture
+
+```{r forward-noise}
+set.seed(1)
+n <- 1000
+# Original data: mixture of two Gaussians
+x0 <- c(rnorm(n*0.5,-2,1), rnorm(n*0.5, 2,1))
+# Linear beta schedule
+T <- 5
+beta <- seq(0.1, 0.3, length.out = T)
+alpha_bar <- cumprod(1 - beta)
+
+# Simulate x_t for t = 1,3,5
+dfs <- lapply(c(1,3,5), function(t) {
+  sigma <- sqrt(1 - alpha_bar[t])
+  data.frame(
+    x = rnorm(length(x0), mean = sqrt(alpha_bar[t]) * x0, sd = sigma),
+    t = paste0("t=", t)
+  )
+})
+df_noise <- do.call(rbind, dfs)
+```
+
+---
+
+```{r}
+ggplot(df_noise, aes(x = x, fill = t)) +
+  geom_density(alpha = 0.4) +
+  labs(title = "Forward Diffusion: Noising at Various t",
+       x = expression(x[t]), fill = "Step") +
+  theme_minimal()
+```
+
+---
+
+# Visual: Forward Diffusion
+
+![](figs/forward_diffusion.png){width=60%}
+
+_(When you knit, the above code produces densities at t=1,3,5.)_
+
+---
+
+# Reverse Diffusion Process
+
+The reverse (generative) process is
+$$p_\theta(x_{t-1}\!\mid x_t)=\mathcal{N}\bigl(x_{t-1};\mu_\theta(x_t,t),\Sigma_\theta(t)\bigr)$$ 
+
+We train a network to predict the noise term $\epsilon$ in:
+$$x_t = \sqrt{\bar\alpha_t}\,x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon.$$
+
+---
+
+# Learning Objective
+
+One can show the simple training loss:
+$$\mathcal{L}(\theta)
+= \mathbb{E}_{x_0,\epsilon,t}
+\Bigl\|\epsilon - \epsilon_\theta\bigl(\sqrt{\bar\alpha_t}x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon,\;t\bigr)\Bigr\|^2.$$
+
+---
+
+# Pseudocode: Sampling from a Diffusion Model
+
+```r
+# assume epsilon_theta(x, t) is our trained denoiser
+x_T <- rnorm(n)    # start from pure noise
+for (t in T:1) {
+  z <- if (t>1) rnorm(n) else 0
+  mu <- (1/sqrt(1 - beta[t])) * (x_t - (beta[t]/sqrt(1 - alpha_bar[t])) * 
+        epsilon_theta(x_t, t))
+  sigma_t <- sqrt(beta[t])
+  x_[t-1] <- mu + sigma_t * z
+}
+# x_0 is a sample from the learned distribution
+```
+
+---
+
+# Illustrative Example: 1D Reverse
+
+```{r reverse-demo, eval=FALSE}
+# Placeholder: if you have a trained epsilon_theta(), run above loop
+# Here we'd plot x_t histograms evolving from noise to learned mixture
+```
+
+---
+
+# Applications & Extensions
+
+- **Image synthesis**: Denoising Diffusion Probabilistic Models (DDPM)  
+- **Conditional generation**: classifier guidance, classifier-free guidance  
+- **Latent diffusion**: work in latent space for efficiency  
+- **Score-based SDE**: continuous-time analogues  
+
+---
+
+# Key References
+
+1. Ho, J., Jain, A., & Abbeel, P. (2020). *Denoising Diffusion Probabilistic Models*. NeurIPS.  
+2. Song, Y., & Ermon, S. (2019). *Generative Modeling by Estimating Gradients of the Data Distribution*. NeurIPS.  
+3. Saharia, C., et al. (2022). *Photorealistic Text-to-Image Diffusion Models with Deep Text Encoding*. arXiv:2209.02646.  
+4. Kingma, D. P., & Dhariwal, P. (2021). *Improved DDPMs*. arXiv:2102.09672.  
+
+---
+
+
+---
+# Deep Dive: What Are Diffusion Models?  
+---
+
+# Core Idea  
+
+- **Forward (noising) process**: gradually corrupt data  
+  $$q(x_t\mid x_{t-1})=\mathcal{N}\bigl(x_t;\sqrt{1-\beta_t}\,x_{t-1},\,\beta_tI\bigr)$$  
+  over \(t=1,\dots,T\).  
+- **Reverse (denoising) process**: learn to invert the noise  
+  $$p_\theta(x_{t-1}\mid x_t)=\mathcal{N}\bigl(x_{t-1};\mu_\theta(x_t,t),\,\Sigma_\theta(t)\bigr).$$  
+- A neural network \(\epsilon_\theta(x_t,t)\) predicts the noise \(\epsilon\) added at each step.  
+
+---
+
+# The Forward Chain  
+
+- Start from clean data \(x_0\).  
+- At each step \(t\), add Gaussian noise with variance \(\beta_t\).  
+- After \(T\) steps, \(x_T\) is nearly isotropic Gaussian, independent of \(x_0\).  
+- Closed‐form:  
+  $$q(x_t\mid x_0)=\mathcal{N}\bigl(x_t;\sqrt{\bar\alpha_t}\,x_0,\,(1-\bar\alpha_t)I\bigr),\quad\bar\alpha_t=\prod_{s=1}^t(1-\beta_s).$$  
+
+---
+
+# The Reverse Chain  
+
+- We cannot sample \(x_{t-1}\) exactly, so we train \(\epsilon_\theta\) to predict noise:  
+  $$x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\epsilon,\quad\epsilon\sim\mathcal{N}(0,I).$$  
+- Loss function:  
+  $$\mathcal{L}(\theta)=\mathbb{E}_{x_0,t,\epsilon}\bigl\|\epsilon-\epsilon_\theta(x_t,t)\bigr\|^2.$$  
+- Once trained, sample by starting at \(x_T\sim\mathcal{N}(0,I)\) and iteratively applying the learned denoiser.  
+
+---
+
+# Connection to Score Matching  
+
+- **Score function**: \(\nabla_{x}\log q(x_t)\).  
+- Score‐based models estimate this gradient and perform Langevin‐style sampling.  
+- Diffusion models parameterize a noise‐prediction function \(\epsilon_\theta\), which implicitly yields a score:  
+  $$\nabla_{x_t}\log q(x_t\mid x_0)\propto -\frac{\epsilon_\theta(x_t,t)}{\sqrt{1-\bar\alpha_t}}.$$  
+
+---
+
+# Noise Schedules  
+
+- **Linear schedule**: \(\beta_t\) increases linearly from small to large.  
+- **Cosine schedule** (Nichol & Dhariwal): shapes \(\bar\alpha_t\) with cosine for smoother noise injection.  
+- Choice of schedule affects sample quality and training stability.  
+
+---
+
+# Variants & Extensions  
+
+- **DDPM** (Ho et al., 2020): the original denoising diffusion probabilistic model.  
+- **DDIM** (Song et al., 2020): deterministic sampling paths for faster sampling.  
+- **Score‐based SDEs** (Song et al., 2021): continuous‐time diffusion via stochastic differential equations.  
+- **Latent diffusion** (Rombach et al., 2022): apply diffusion in a lower‐dimensional latent space for efficiency.  
+
+---
+
+# Practical Considerations  
+
+- **Network architecture**: U-Net backbone with attention for images.  
+- **Computational cost**: sampling requires \(T\) neural‐net evaluations—often \(T\)=1000.  
+- **Acceleration**: DDIM, PNDM, and other fast samplers reduce steps to 50–100 with minimal quality loss.  
+- **Hyperparameters**: choice of \(\beta_t\), model capacity, batch size.  
+
+---
+
+# Applications  
+
+- **Image synthesis**: photorealistic generation (e.g., Stable Diffusion).  
+- **Conditional generation**: text‐to‐image, super‐resolution, inpainting.  
+- **Audio & video**: waveform generation, video frame interpolation.  
+- **Scientific modeling**: molecular conformer sampling, weather forecast emulation.  
+
+---
+
+# Key References  
+
+1. Ho, J., Jain, A., & Abbeel, P. (2020). *Denoising Diffusion Probabilistic Models*. NeurIPS.  
+2. Song, Y., & Ermon, S. (2021). *Score-Based Generative Modeling through Stochastic Differential Equations*. ICLR.  
+3. Nichol, A. Q., & Dhariwal, P. (2021). *Improved Denoising Diffusion Probabilistic Models*. ICML.  
+4. Rombach, R., Blattmann, A., Lorenz, D., Esser, P., & Ommer, B. (2022). *High‐Resolution Image Synthesis with Latent Diffusion Models*. CVPR.  
+5. Saharia, C., et al. (2022). *Photorealistic Text‐to‐Image Diffusion Models with Deep Text Encoding*. arXiv:2209.02646.  
+

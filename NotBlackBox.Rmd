@@ -13,6 +13,8 @@ output:
     seal: false
 ---
 
+# Beyond Black Box Simulation
+
 class: title
 background-image: url("figure/cover-transparent.png")
 background-size: cover
@@ -188,5 +190,6 @@ the evolution of mimicry in butterflies, longitudinal study design, the duality 
 * Code (R + Python + NetLogo): [https://go.wisc.edu/7222i9](https://go.wisc.edu/7222i9)
 
 A github repository of the material is available here:
+[spholmes.github.io/GenerativeModeling/docs/](spholmes.github.io/GenerativeModeling/docs/)
 
 

@@ -1,0 +1,69 @@
+
+---
+title: "Adversarial Bayesian Computation"
+author: "Susan Holmes"
+date: "May 8th, 2025"
+output:
+  xaringan::moon_reader:
+    css: 
+    - default
+    - css/xaringan-themer.css
+    mathjax: default
+    self_contained: false
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+    seal: false
+---
+
+
+# Adversarial Bayesian Simulation  
+**Yuexi Wang & Veronika Ročková**  
+arXiv:2208.12113 
+
+# Background & Motivation  
+- **Approximate Bayesian Computation (ABC):** inference when likelihood is intractable by comparing observed vs. simulated summaries.
+
+- **Deep implicit samplers (GANs & AVB):** learn to generate samples without explicit likelihoods via adversarial training 
+
+- **Goal:** Combine ABC’s principled Bayesian framework with GAN‐style samplers to draw posterior samples efficiently 
+
+---
+
+# B-GAN Sampler Overview  
+- **Conditional GAN mapping:** learn deterministic map $G_\phi(z, x_{\text{obs}})$ from noise $z$ and observed data to latent parameters 
+
+- **Adversarial objective:** train discriminator $D_\psi$ to distinguish true ABC draws $\theta \sim p(\theta\mid x_{\text{obs}})$ from generated $\theta'=G_\phi(z)$ 
+
+- **Posterior sampling:** once $G_\phi$ is trained, draw $z\sim p_z$ and compute $\theta'=G_\phi(z)$ for iid posterior samples at negligible cost 
+
+---
+
+# Post‐Processing Refinements  
+1. **Importance Reweighting:** use data‐driven proposal distributions and assign weights to $G_\phi(z)$ to correct discrepancies 
+
+2. **Variational Bayes (VB) Refinement:** initialize a VB approximation from $G_\phi$ samples and optimize ELBO to further tighten the posterior approximation 
+---
+
+# Theoretical Guarantees  
+- **Total variation convergence:** under certain capacity conditions on generator and discriminator networks:
+$$\mathrm{TV}\bigl(p(\theta\mid x),\,p_{\mathrm{B\mbox{-}GAN}}(\theta\mid x)\bigr)\;\to\;0$$
+  as the network sizes grow 
+- Bridges frequentist‐Bayesian analysis by quantifying approximation error in likelihood‐free settings 
+---
+
+# Empirical Performance  
+
+- **Simulated benchmarks:** competitive with state‐of‐the‐art likelihood‐free simulators on toy and real‐data examples 
+
+- **Efficiency:** once trained, generates thousands of posterior draws in milliseconds per sample 
+
+- **Flexibility:** adapts to complex posteriors without hand‐tuned summary statistics 
+---
+
+# References  
+
+1. Wang, Y. & Ročková, V. (2023). *Adversarial Bayesian Simulation*. arXiv:2208.12113 
+2. Marin, J.-M., et al. (2012). *Approximate Bayesian Computational Methods*. Statistics and Computing.  
+3. Goodfellow, I., et al. (2014). *Generative Adversarial Nets*. NeurIPS.  
+4. Mescheder, L., Nowozin, S. & Geiger, A. (2017). *Adversarial Variational Bayes: Unifying Variational Autoencoders and GANs*. ICML.  

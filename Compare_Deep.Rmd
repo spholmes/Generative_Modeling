@@ -1,0 +1,111 @@
+---
+title: "Generative Models: different perspectives"
+author: "Susan Holmes"
+date: "May 8th, 2025"
+output:
+  xaringan::moon_reader:
+    css: 
+    - default
+    - css/xaringan-themer.css
+    self_contained: true
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+    seal: false
+---
+
+
+---
+# Comparing Generative Models  
+### Statistical vs. Deep-Learning Perspectives  
+---
+
+# Classical Statistical Generative Models  
+- **Definition**: Probabilistic models specifying an explicit likelihood  
+- **Structure**: Hierarchical, with parameters at multiple levels  
+- **Sources of variation**: Incorporated via random effects and noise terms  
+- **Inference**: Bayes’ theorem, MCMC, EM algorithm  
+
+---
+
+# Examples of Statistical Generative Models  
+- **Mixture Models** (e.g. Gaussian mixtures)  
+- **Hierarchical Bayesian Models** (e.g. multi-level regression)  
+- **Latent Variable Models** (e.g. factor analysis, topic models)  
+- **Nonparametric Bayes** (e.g. Dirichlet processes)  
+
+---
+
+# Key Features (Statistics)  
+| Aspect               | Description                                     |
+|----------------------|-------------------------------------------------|
+| **Interpretability** | Parameters and structure have clear meaning     |
+| **Uncertainty**      | Full posterior gives credible intervals         |
+| **Flexibility**      | Can encode domain knowledge as priors/hierarchy |
+| **Compute**          | Often relies on MCMC or variational inference   |
+
+---
+
+# Deep Generative Models (DL)  
+- **Goal**: Learn to sample from complex, high-dimensional distributions  
+- **Approaches**:  
+  - Variational Autoencoders (VAEs)  
+  - Generative Adversarial Networks (GANs)  
+  - **Diffusion Models**  
+
+---
+
+# Diffusion Deep Generative Models  
+- **Forward process**: Gradually add Gaussian noise to data  
+- **Reverse process**: Neural network learns to denoise via score matching  
+- **Training**: Minimize simple denoising objective  
+- **Results**: High-quality image, audio, and video synthesis  
+
+---
+
+# Comparison: Modeling & Likelihood  
+| Feature               | Statistical Models         | Diffusion Models                |
+|-----------------------|----------------------------|---------------------------------|
+| **Likelihood**        | Explicit, tractable        | Implicit (learned via denoising)|
+| **Flexibility**       | Custom priors & structure  | Flexible neural architectures   |
+| **Interpretability**  | High (parameters interpretable) | Lower (black-box networks)  |
+
+---
+
+# Comparison: Inference & Training  
+- **Statistical**:  
+  - MCMC, Variational Bayes, EM  
+  - Can be slow, scales poorly in high-dim’l  
+- **Diffusion**:  
+  - Stochastic gradient descent on denoising loss  
+  - Scales to images (millions of dims), leverages GPU  
+
+---
+
+# Applications & Trade-Offs  
+| Domain                  | Statistical Models                 | Diffusion Models             |
+|-------------------------|------------------------------------|------------------------------|
+| **Science / Bio**       | Hierarchical data integration      | Data augmentation, image synthesis |
+| **Economics / Social**  | Causal inference, uncertainty quantification | Simulations, forecasting   |
+| **Vision / Media**      | Limited to small-scale image models| Photo-realistic image/video generation |
+
+---
+
+# Future Directions & Hybrids  
+- **Bridging worlds**: Incorporate structured priors into neural diffusion  
+- **Amortized inference** for hierarchical models (VAEs + Bayes)  
+- **Probabilistic programming + deep nets** (e.g. Pyro, TensorFlow Probability)  
+- **Better uncertainty** in deep generative outputs  
+
+---
+
+# References  
+1. Gelman, A., et al. (2013). *Bayesian Data Analysis*. CRC Press.  
+2. Bishop, C. M. (2006). *Pattern Recognition and Machine Learning*. Springer.  
+3. D. P. Kingma & M. Welling (2014). Auto-Encoding Variational Bayes. _ICLR_.  
+4. P. Dhariwal & A. Nichol (2021). Diffusion Models Beat GANs on Image Synthesis. _NeurIPS_.  
+5. J. Ho, A. Jain & P. Abbeel (2020). Denoising Diffusion Probabilistic Models. _NeurIPS_.  
+6. Song, Y. & Ermon, S. (2019). Generative Modeling by Estimating Gradients of the Data Distribution. _NeurIPS_.  
+7. Blei, D. M., Kucukelbir, A., & McAuliffe, J. D. (2017). Variational Inference: A Review for Statisticians. _JASA_.  
+
+
