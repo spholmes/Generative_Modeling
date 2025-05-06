@@ -1,5 +1,5 @@
 book_filename: "index"
-rmd_files: ["NotBlackBox.Rmd","intro.Rmd", "Slides.Rmd", "Practicals.Rmd","NotBlackBox.Rmd"]
+rmd_files: ["intro.Rmd","NotBlackBox.Rmd","SlidesIndex.Rmd"]
 output_dir: "docs"
 delete_merged_file: true
 split_by: "rmd"

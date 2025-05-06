@@ -15,9 +15,8 @@ output:
 
 # Beyond Black Box Simulation
 
-class: title
-background-image: url("figure/cover-transparent.png")
-background-size: cover
+
+<img src="figure/transparent.png"/>
 
 ```{r, packages, echo = FALSE, warnings = FALSE, message = FALSE}
 library(RefManageR)
@@ -40,8 +39,8 @@ th <- theme_classic() +
 
 theme_set(th)
 
-BibOptions(cite.style = "numeric")
-#bib <- ReadBib("references.bib")
+# BibOptions(cite.style = "numeric")
+# bib <- ReadBib("references.bib")
 ```
 
 <div id="title">
@@ -67,39 +66,36 @@ joint work with,
 
 ---
 
-### New Lingua Franca of Science
+## New Lingua Franca of Science
 
-.pull-left[
+
 1. Simulators have emerged as a general problem-solving device across various domains, many of which now have rich, open-source libraries.
 2. Where is the interface with statistics?
 	- Experimental design, model building, and decision-making.
-]
 
-.pull-right[
-.center[
+
 <img src="figure/esm.png"/>
-]
+
 
 The E3SM is used for long-term climate projections.
-]
+
 
 ---
 
 ### New Lingua Franca of Science
 
-.pull-left[
+
 1. Simulators have emerged as a general problem-solving device across various domains, many of which now have rich, open-source libraries.
 2. Where is the interface with statistics?
 	- Experimental design, model building, and decision-making.
-]
 
-.pull-right[
-.center[
+
+
 <img src="figure/splatter.png"/>
-]
+
 
 Splatter generates synthetic single-cell genomics data.
-]
+
 
 ---
 
@@ -107,16 +103,16 @@ Splatter generates synthetic single-cell genomics data.
 
 Transparent simulators can be built by interactively composing simple modules. Probabilistic programming has simplified the process.
 
-.pull-three-left[
-<img src="figure/modules.jpeg" width=700/>
-]
 
-.pull-three-right[
+<img src="figure/modules.jpeg" width=700/>
+
+
+
 a. Regression <br/>
 b: Hierarchy <br/>
 c: Latent Structure <br/>
 d: Temporal Variation
-]
+
 
 ---
 
@@ -124,9 +120,9 @@ d: Temporal Variation
 
 By learning a discriminator to contrast real vs. simulated data, we can systematically improve the assumed generative mechanism.
 
-.center[
+
 <img src="figure/iterability.jpeg" width=730/>
-]
+
 
 ---
 
@@ -145,9 +141,9 @@ Let's consider a microbiomics case study: To block or not to block?
 
 How can we navigate trade-offs like this? Simulate!
 
-.center[
+
 <img src="figure/blocking.jpeg" width=840/>
-]
+
 
 Simulators provide data for more precise decision-making.
 
@@ -158,9 +154,9 @@ Simulators provide data for more precise decision-making.
 Following the outbreak of COVID-19, the research community came together to build simulators that could inform pandemic response.
 * E.g., "What would happen if we held classes remotely for two weeks?"
 	
-.center[
+
 <img src="figure/covasim.png" width=700/>
-]
+
 	
 
 ---
@@ -190,6 +186,6 @@ the evolution of mimicry in butterflies, longitudinal study design, the duality 
 * Code (R + Python + NetLogo): [https://go.wisc.edu/7222i9](https://go.wisc.edu/7222i9)
 
 A github repository of the material is available here:
-[spholmes.github.io/GenerativeModeling/docs/](spholmes.github.io/GenerativeModeling/docs/)
+[spholmes.github.io/GenerativeModeling/docs/](https://spholmes.github.io/GenerativeModeling/docs/)
 
 
