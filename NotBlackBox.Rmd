@@ -186,6 +186,6 @@ the evolution of mimicry in butterflies, longitudinal study design, the duality 
 * Code (R + Python + NetLogo): [https://go.wisc.edu/7222i9](https://go.wisc.edu/7222i9)
 
 A github repository of the material is available here:
-[spholmes.github.io/GenerativeModeling/docs/](https://spholmes.github.io/GenerativeModeling/docs/)
+[https://spholmes.github.io/Generative_Modeling/](https://spholmes.github.io/Generative_Modeling/)
 
 

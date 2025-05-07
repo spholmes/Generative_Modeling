@@ -17,12 +17,20 @@
 - Some useful buzzwords and acronyms to look up in case: 
 
  GOF: *Goodness of Fit*
+ 
  MCMC: *Markov chain Monte Carlo*
+ 
  ABC: *Approximate Bayesian Computation*
+ 
  Random generation: From uniform and non-uniform distributions.
+ 
  Mixtures: Finite combinations of known distributions
+ 
  Hierarchical Models: Infinite mixtures
+ 
  GANs: [Generative Adversarial network](https://en.wikipedia.org/wiki/Generative_adversarial_network)
-
+ 
+ Identifiability
+ 
 
 
