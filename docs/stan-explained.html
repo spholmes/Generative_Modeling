@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Stan Explained” | Generative Modeling Workshop</title>
+  <meta name="description" content="9 Stan Explained” | Generative Modeling Workshop" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Stan Explained” | Generative Modeling Workshop" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Stan Explained” | Generative Modeling Workshop" />
+  
+  
+  
+
+<meta name="author" content="Susan Holmes" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html"><i class="fa fa-check"></i><b>2</b> Workshop on using generative models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#our-learning-goals"><i class="fa fa-check"></i><b>2.1</b> Our learning goals:</a></li>
+<li class="chapter" data-level="2.2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#prerequisites"><i class="fa fa-check"></i><b>2.2</b> Prerequisites:</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html"><i class="fa fa-check"></i><b>3</b> Beyond Black Box Simulation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science"><i class="fa fa-check"></i><b>3.1</b> New Lingua Franca of Science</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science-1"><i class="fa fa-check"></i><b>3.1.1</b> New Lingua Franca of Science</a></li>
+<li class="chapter" data-level="3.1.2" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#grammar-of-generative-models"><i class="fa fa-check"></i><b>3.1.2</b> Grammar of Generative Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#discrepancy-and-iterability"><i class="fa fa-check"></i><b>3.1.3</b> Discrepancy and Iterability</a></li>
+<li class="chapter" data-level="3.1.4" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#experimental-design-renaissance"><i class="fa fa-check"></i><b>3.1.4</b> Experimental Design Renaissance</a></li>
+<li class="chapter" data-level="3.1.5" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#simulation-to-the-rescue"><i class="fa fa-check"></i><b>3.1.5</b> Simulation to the Rescue</a></li>
+<li class="chapter" data-level="3.1.6" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim"><i class="fa fa-check"></i><b>3.1.6</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.7" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim-1"><i class="fa fa-check"></i><b>3.1.7</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.8" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#what-are-we-going-to-study"><i class="fa fa-check"></i><b>3.1.8</b> What are we going to study ?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="slides.html"><a href="slides.html"><i class="fa fa-check"></i><b>4</b> Slides</a></li>
+<li class="chapter" data-level="5" data-path="labs-and-challenges.html"><a href="labs-and-challenges.html"><i class="fa fa-check"></i><b>5</b> Labs and Challenges :</a></li>
+<li class="chapter" data-level="6" data-path="intervention.html"><a href="intervention.html"><i class="fa fa-check"></i><b>6</b> Intervention</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="intervention.html"><a href="intervention.html#start-defining-the-intervention-in-a-time-series"><i class="fa fa-check"></i><b>6.1</b> Start defining the intervention in a time series</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervention_optimize.html"><a href="intervention_optimize.html"><i class="fa fa-check"></i><b>7</b> Intervention_Optimize</a></li>
+<li class="chapter" data-level="8" data-path="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><i class="fa fa-check"></i><b>8</b> Heteroskedastic Mixtures : goodness of fit iterations</a></li>
+<li class="chapter" data-level="9" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>9</b> Stan Explained”</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>9.1</b> <code>gmm.stan</code> file</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>9.1.1</b> In plain English</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Generative Modeling Workshop</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="stan-explained" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Stan Explained”<a href="stan-explained.html#stan-explained" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="gmm.stan-file" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> <code>gmm.stan</code> file<a href="stan-explained.html#gmm.stan-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Be very careful with the indenting and format</p>
+<pre><code>data {
+  int&lt;lower=0&gt; K;
+  int&lt;lower=0&gt; N;
+  matrix[N, 2] x;
+}
+
+parameters {
+  simplex[K] pi;
+  matrix[K, 2] mu;
+  real&lt;lower=0&gt; sigma;
+}
+
+model {
+  vector[K] log_prob;
+  for (n in 1:N) {
+    for (k in 1:K) {
+      log_prob[k] = log(pi[k]) + normal_lpdf(x[n] | mu[k], sigma);
+    }
+    target += log_sum_exp(log_prob);
+  }
+}
+
+
+generated quantities {
+  matrix[N, 2] x_sim;
+  for (n in 1:N) {
+    int z;
+    z = categorical_rng(pi);
+    x_sim[n] = to_row_vector(normal_rng(mu[z], sigma));
+  }
+}
+
+
+
+</code></pre>
+<p>The Stan file defines a mixture of K Gaussians, with shared sigma, mixture weights pi, and component means mu[k]. The data block specifies K, N, and a 2D matrix x (of size N by 2). In the parameters block, pi is a simplex of size K, mu contains K by 2 means, and sigma is positive. The model computes log_prob[k] for each data point, but yes, since <code>normal_lpdf</code> expects scalar inputs, it sums across dimensions when x[n] and mu[k] are vectors.</p>
+<p>Thought for a few seconds</p>
+<p>Here’s what this Stan program does, block by block:</p>
+<hr />
+<div id="data-block" class="section level4 hasAnchor" number="9.1.0.1">
+<h4><span class="header-section-number">9.1.0.1</span> 1. <strong>Data block</strong><a href="stan-explained.html#data-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>data {
+  int&lt;lower=0&gt; K;            // number of mixture components
+  int&lt;lower=0&gt; N;            // number of observations
+  matrix[N, 2] x;            // N data points in ℝ²
+}</code></pre>
+<ul>
+<li><strong>K</strong>: how many Gaussian clusters you want.</li>
+<li><strong>N</strong>: how many 2-dimensional observations.</li>
+<li><strong>x</strong>: your observed data, an N×2 matrix.</li>
+</ul>
+<hr />
+</div>
+<div id="parameters-block" class="section level4 hasAnchor" number="9.1.0.2">
+<h4><span class="header-section-number">9.1.0.2</span> 2. <strong>Parameters block</strong><a href="stan-explained.html#parameters-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>parameters {
+  simplex[K] pi;             // mixing proportions over K components
+  matrix[K, 2] mu;           // 2D mean vector for each component
+  real&lt;lower=0&gt; sigma;       // shared (isotropic) standard deviation
+}</code></pre>
+<ul>
+<li><strong>pi</strong> is a length-K simplex (nonnegative, sums to 1) giving the prior weight of each component.</li>
+<li><strong>mu[k]</strong> is the 2-vector mean of component <em>k</em>.</li>
+<li><strong>sigma</strong> is a single positive scalar: all components share the same spherical (isotropic) standard deviation.</li>
+</ul>
+<hr />
+</div>
+<div id="model-block" class="section level4 hasAnchor" number="9.1.0.3">
+<h4><span class="header-section-number">9.1.0.3</span> 3. <strong>Model block</strong><a href="stan-explained.html#model-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>model {
+  vector[K] log_prob;
+  for (n in 1:N) {
+    for (k in 1:K) {
+      log_prob[k] = 
+        log(pi[k])                      // log prior weight of component k
+        + normal_lpdf(x[n] | mu[k], sigma);
+        // this expands to the sum of two independent
+        // Normal(μ[k][d], σ) log-densities for d=1,2
+    }
+    target += log_sum_exp(log_prob);  // “log mixture density” trick
+  }
+}</code></pre>
+<ul>
+<li><h2 id="for-each-data-point-xn-and-each-component-k-it-computes" class="hasAnchor">For each data point <strong>x[n]</strong> and each component <strong>k</strong>, it computes<a href="stan-explained.html#for-each-data-point-xn-and-each-component-k-it-computes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<span class="math display">\[
+  \log\bigl(\pi_k\bigr)
+  + \sum_{d=1}^2 \log\bigl[
+     \mathrm{Normal}\bigl(x_{n,d}\mid \mu_{k,d},\sigma\bigr)
+  \bigr].
+\]</span></li>
+<li>It then adds
+<span class="math inline">\(\log\bigl(\sum_k \exp(\text{that})\bigr)\)</span>
+to the joint log-posterior, which implements a K-component Gaussian mixture likelihood.</li>
+</ul>
+<hr />
+</div>
+<div id="generated-quantities-block" class="section level4 hasAnchor" number="9.1.0.4">
+<h4><span class="header-section-number">9.1.0.4</span> 4. <strong>Generated Quantities block</strong><a href="stan-explained.html#generated-quantities-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>generated quantities {
+  matrix[N, 2] x_sim;
+  for (n in 1:N) {
+    int z;
+    z = categorical_rng(pi);                    // sample a component label
+    x_sim[n] = to_row_vector(normal_rng(mu[z], sigma));
+  }
+}</code></pre>
+<ul>
+<li><p>After fitting, this simulates a new dataset <strong>x_sim</strong> of the same size:</p>
+<ol style="list-style-type: decimal">
+<li>Draw a component label <strong>z</strong> from <strong>Categorical(pi)</strong>.</li>
+<li>Draw a 2-vector from <strong>Normal(mu[z], σ)</strong> in each coordinate.</li>
+</ol></li>
+</ul>
+<p>This gives you posterior-predictive (replicated) data from the inferred mixture.</p>
+<hr />
+</div>
+<div id="in-plain-english" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> In plain English<a href="stan-explained.html#in-plain-english" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You are fitting a <strong>K-component mixture of 2D, spherical Gaussians</strong> to your data.</p>
+<ul>
+<li><strong>π</strong> are the mixing weights,</li>
+<li><strong>μₖ</strong> are the 2D cluster centers,</li>
+<li><strong>σ</strong> is the common cluster “spread.”</li>
+</ul>
+<p>The sampler will infer the posterior distribution over these parameters, and then generate a new simulated dataset of size <strong>N</strong> from that fitted mixture.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

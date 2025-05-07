@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Heteroskedastic Mixtures : goodness of fit iterations | Generative Modeling Workshop</title>
+  <meta name="description" content="8 Heteroskedastic Mixtures : goodness of fit iterations | Generative Modeling Workshop" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Heteroskedastic Mixtures : goodness of fit iterations | Generative Modeling Workshop" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Heteroskedastic Mixtures : goodness of fit iterations | Generative Modeling Workshop" />
+  
+  
+  
+
+<meta name="author" content="Susan Holmes" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intervention_optimize.html"/>
+<link rel="next" href="stan-explained.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html"><i class="fa fa-check"></i><b>2</b> Workshop on using generative models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#our-learning-goals"><i class="fa fa-check"></i><b>2.1</b> Our learning goals:</a></li>
+<li class="chapter" data-level="2.2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#prerequisites"><i class="fa fa-check"></i><b>2.2</b> Prerequisites:</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html"><i class="fa fa-check"></i><b>3</b> Beyond Black Box Simulation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science"><i class="fa fa-check"></i><b>3.1</b> New Lingua Franca of Science</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science-1"><i class="fa fa-check"></i><b>3.1.1</b> New Lingua Franca of Science</a></li>
+<li class="chapter" data-level="3.1.2" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#grammar-of-generative-models"><i class="fa fa-check"></i><b>3.1.2</b> Grammar of Generative Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#discrepancy-and-iterability"><i class="fa fa-check"></i><b>3.1.3</b> Discrepancy and Iterability</a></li>
+<li class="chapter" data-level="3.1.4" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#experimental-design-renaissance"><i class="fa fa-check"></i><b>3.1.4</b> Experimental Design Renaissance</a></li>
+<li class="chapter" data-level="3.1.5" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#simulation-to-the-rescue"><i class="fa fa-check"></i><b>3.1.5</b> Simulation to the Rescue</a></li>
+<li class="chapter" data-level="3.1.6" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim"><i class="fa fa-check"></i><b>3.1.6</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.7" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim-1"><i class="fa fa-check"></i><b>3.1.7</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.8" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#what-are-we-going-to-study"><i class="fa fa-check"></i><b>3.1.8</b> What are we going to study ?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="slides.html"><a href="slides.html"><i class="fa fa-check"></i><b>4</b> Slides</a></li>
+<li class="chapter" data-level="5" data-path="labs-and-challenges.html"><a href="labs-and-challenges.html"><i class="fa fa-check"></i><b>5</b> Labs and Challenges :</a></li>
+<li class="chapter" data-level="6" data-path="intervention.html"><a href="intervention.html"><i class="fa fa-check"></i><b>6</b> Intervention</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="intervention.html"><a href="intervention.html#start-defining-the-intervention-in-a-time-series"><i class="fa fa-check"></i><b>6.1</b> Start defining the intervention in a time series</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervention_optimize.html"><a href="intervention_optimize.html"><i class="fa fa-check"></i><b>7</b> Intervention_Optimize</a></li>
+<li class="chapter" data-level="8" data-path="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><i class="fa fa-check"></i><b>8</b> Heteroskedastic Mixtures : goodness of fit iterations</a></li>
+<li class="chapter" data-level="9" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>9</b> Stan Explained”</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>9.1</b> <code>gmm.stan</code> file</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>9.1.1</b> In plain English</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Generative Modeling Workshop</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="heteroskedastic-mixtures-goodness-of-fit-iterations" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Heteroskedastic Mixtures : goodness of fit iterations<a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#heteroskedastic-mixtures-goodness-of-fit-iterations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-2" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb17-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-3" tabindex="-1"></a><span class="fu">library</span>(scico)</span>
+<span id="cb17-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-4" tabindex="-1"></a><span class="fu">library</span>(generative)</span>
+<span id="cb17-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-5" tabindex="-1"></a><span class="fu">review_theme</span>()</span>
+<span id="cb17-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb17-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">090322</span>)</span></code></pre></div>
+<ul>
+<li>Simulate data from a heteroskedastic mixture of t’s</li>
+<li>Fit a standard GMM (stan)</li>
+<li>Fit a discriminator (caret)</li>
+<li>Visualize discriminator probabilities</li>
+<li>Fit updated heteroskedastic model</li>
+<li>Repeat discrimination</li>
+<li>Fit true model</li>
+<li>Repeat discrimination</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-1" tabindex="-1"></a>disc_data <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb18-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb18-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">t_mixture</span>(<span class="dv">500</span>)</span>
+<span id="cb18-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-4" tabindex="-1"></a><span class="fu">ggplot</span>(x) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(V1, V2)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb18-7" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb19-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/true_mixture.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">400</span>, <span class="at">width =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb20-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_gmm</span>(x, <span class="at">K =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## ------------------------------------------------------------ 
+## EXPERIMENTAL ALGORITHM: 
+##   This procedure has not been thoroughly tested and may be unstable 
+##   or buggy. The interface is subject to change. 
+## ------------------------------------------------------------ 
+## Gradient evaluation took 0.000723 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 7.23 seconds. 
+## Adjust your expectations accordingly! 
+## Begin eta adaptation. 
+## Iteration:   1 / 250 [  0%]  (Adaptation) 
+## Iteration:  50 / 250 [ 20%]  (Adaptation) 
+## Iteration: 100 / 250 [ 40%]  (Adaptation) 
+## Iteration: 150 / 250 [ 60%]  (Adaptation) 
+## Iteration: 200 / 250 [ 80%]  (Adaptation) 
+## Success! Found best value [eta = 1] earlier than expected. 
+## Begin stochastic gradient ascent. 
+##   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes  
+##    100        -2745.118             1.000            1.000 
+##    200        -2427.204             0.565            1.000 
+##    300        -2427.541             0.377            0.131 
+##    400        -2425.820             0.283            0.131 
+##    500        -2425.803             0.226            0.001   MEDIAN ELBO CONVERGED 
+## Drawing a sample of size 1000 from the approximate posterior...  
+## COMPLETED. 
+## Finished in  1.7 seconds.</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb22-1" tabindex="-1"></a>x_sim <span class="ot">&lt;-</span> <span class="fu">mixture_predictive</span>(fit)</span>
+<span id="cb22-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb22-2" tabindex="-1"></a><span class="fu">ggplot</span>(x_sim) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb22-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb22-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> .iteration) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb22-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb23-1" tabindex="-1"></a>disc_data[[<span class="st">&quot;gmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">bind_dicriminative</span>(x, x_sim)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-1" tabindex="-1"></a>gbmGrid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(</span>
+<span id="cb24-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-2" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">5</span>,</span>
+<span id="cb24-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-3" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">100</span>,</span>
+<span id="cb24-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-4" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.1</span>,</span>
+<span id="cb24-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-5" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">2</span></span>
+<span id="cb24-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-6" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-7" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-8" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(</span>
+<span id="cb24-9"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-9" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>,</span>
+<span id="cb24-10"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-10" tabindex="-1"></a>  <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb24-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-11" tabindex="-1"></a>  <span class="at">repeats =</span> <span class="dv">10</span></span>
+<span id="cb24-12"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-12" tabindex="-1"></a>)</span>
+<span id="cb24-13"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-13" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-14" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb24-15"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-15" tabindex="-1"></a>  <span class="at">x =</span> disc_data[[<span class="st">&quot;gmm&quot;</span>]] <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>y) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>(), </span>
+<span id="cb24-16"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-16" tabindex="-1"></a>  <span class="at">y =</span> disc_data[[<span class="st">&quot;gmm&quot;</span>]]<span class="sc">$</span>y, </span>
+<span id="cb24-17"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb24-18"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-18" tabindex="-1"></a>  <span class="at">tuneGrid =</span> gbmGrid,</span>
+<span id="cb24-19"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-19" tabindex="-1"></a>  <span class="at">trControl =</span> trControl,</span>
+<span id="cb24-20"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-20" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb24-21"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb24-21" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 1 package is needed and is not installed. (gbm). Would you like to try to install it now?
+## 1: yes
+## 2: no
+## 
+## 
+## The downloaded binary packages are in
+##  /var/folders/9m/6136fr3s7619m_62rh3bvb8r0000gr/T//RtmpllcfsR/downloaded_packages</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb26-1" tabindex="-1"></a>fit</span></code></pre></div>
+<pre><code>## Stochastic Gradient Boosting 
+## 
+## 1000 samples
+##    2 predictor
+##    2 classes: &#39;simulated&#39;, &#39;true&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 10 times) 
+## Summary of sample sizes: 900, 900, 900, 900, 900, 900, ... 
+## Resampling results:
+## 
+##   Accuracy  Kappa
+##   0.543     0.086
+## 
+## Tuning parameter &#39;n.trees&#39; was held constant at a value of 100
+## Tuning parameter &#39;interaction.depth&#39; was held constant at
+##  a value of 5
+## Tuning parameter &#39;shrinkage&#39; was held constant at a value of 0.1
+## Tuning parameter &#39;n.minobsinnode&#39; was
+##  held constant at a value of 2</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb28-1" tabindex="-1"></a>p[[<span class="st">&quot;gmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prob =</span> <span class="fu">predict</span>(fit, disc_data[[<span class="st">&quot;gmm&quot;</span>]], <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb28-2" tabindex="-1"></a>  <span class="fu">bind_cols</span>(disc_data[[<span class="st">&quot;gmm&quot;</span>]]) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb28-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_label =</span> <span class="fu">fct_recode</span>(y, <span class="st">&quot;Posterior Samples&quot;</span> <span class="ot">=</span> <span class="st">&quot;simulated&quot;</span>, <span class="st">&quot;True Data&quot;</span> <span class="ot">=</span> <span class="st">&quot;true&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb29-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_gmm_cov</span>(x, <span class="at">K =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## ------------------------------------------------------------ 
+## EXPERIMENTAL ALGORITHM: 
+##   This procedure has not been thoroughly tested and may be unstable 
+##   or buggy. The interface is subject to change. 
+## ------------------------------------------------------------ 
+## Gradient evaluation took 0.002066 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 20.66 seconds. 
+## Adjust your expectations accordingly! 
+## Begin eta adaptation. 
+## Iteration:   1 / 250 [  0%]  (Adaptation) 
+## Iteration:  50 / 250 [ 20%]  (Adaptation) 
+## Iteration: 100 / 250 [ 40%]  (Adaptation) 
+## Iteration: 150 / 250 [ 60%]  (Adaptation) 
+## Iteration: 200 / 250 [ 80%]  (Adaptation) 
+## Success! Found best value [eta = 1] earlier than expected. 
+## Begin stochastic gradient ascent. 
+##   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes  
+##    100        -2451.708             1.000            1.000 
+##    200        -2445.865             0.501            1.000 
+##    300        -2445.244             0.334            0.002   MEDIAN ELBO CONVERGED 
+## Drawing a sample of size 1000 from the approximate posterior...  
+## COMPLETED. 
+## Finished in  3.5 seconds.</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb31-1" tabindex="-1"></a>x_sim <span class="ot">&lt;-</span> <span class="fu">mixture_predictive</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-1" tabindex="-1"></a>disc_data[[<span class="st">&quot;gmm_cov&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">bind_dicriminative</span>(x, x_sim)</span>
+<span id="cb32-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-2" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb32-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-3" tabindex="-1"></a>  <span class="at">x =</span> disc_data[[<span class="st">&quot;gmm_cov&quot;</span>]] <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>y) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>(), </span>
+<span id="cb32-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-4" tabindex="-1"></a>  <span class="at">y =</span> disc_data[[<span class="st">&quot;gmm_cov&quot;</span>]]<span class="sc">$</span>y, </span>
+<span id="cb32-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-5" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb32-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-6" tabindex="-1"></a>  <span class="at">tuneGrid =</span> gbmGrid,</span>
+<span id="cb32-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-7" tabindex="-1"></a>  <span class="at">trControl =</span> trControl,</span>
+<span id="cb32-8"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb32-9"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-9" tabindex="-1"></a>)</span>
+<span id="cb32-10"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-10" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-11" tabindex="-1"></a>fit</span></code></pre></div>
+<pre><code>## Stochastic Gradient Boosting 
+## 
+## 1000 samples
+##    2 predictor
+##    2 classes: &#39;simulated&#39;, &#39;true&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 10 times) 
+## Summary of sample sizes: 900, 900, 900, 900, 900, 900, ... 
+## Resampling results:
+## 
+##   Accuracy  Kappa 
+##   0.5253    0.0506
+## 
+## Tuning parameter &#39;n.trees&#39; was held constant at a value of 100
+## Tuning parameter &#39;interaction.depth&#39; was held constant at
+##  a value of 5
+## Tuning parameter &#39;shrinkage&#39; was held constant at a value of 0.1
+## Tuning parameter &#39;n.minobsinnode&#39; was
+##  held constant at a value of 2</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb34-1" tabindex="-1"></a>p[[<span class="st">&quot;gmm_cov&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prob =</span> <span class="fu">predict</span>(fit, disc_data[[<span class="st">&quot;gmm_cov&quot;</span>]], <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb34-2" tabindex="-1"></a>  <span class="fu">bind_cols</span>(disc_data[[<span class="st">&quot;gmm_cov&quot;</span>]]) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb34-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_label =</span> <span class="fu">fct_recode</span>(y, <span class="st">&quot;Posterior Samples&quot;</span> <span class="ot">=</span> <span class="st">&quot;simulated&quot;</span>, <span class="st">&quot;True Data&quot;</span> <span class="ot">=</span> <span class="st">&quot;true&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb35-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_tmm</span>(x, <span class="at">K =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## ------------------------------------------------------------ 
+## EXPERIMENTAL ALGORITHM: 
+##   This procedure has not been thoroughly tested and may be unstable 
+##   or buggy. The interface is subject to change. 
+## ------------------------------------------------------------ 
+## Gradient evaluation took 0.002041 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 20.41 seconds. 
+## Adjust your expectations accordingly! 
+## Begin eta adaptation. 
+## Iteration:   1 / 250 [  0%]  (Adaptation) 
+## Iteration:  50 / 250 [ 20%]  (Adaptation) 
+## Iteration: 100 / 250 [ 40%]  (Adaptation) 
+## Iteration: 150 / 250 [ 60%]  (Adaptation) 
+## Iteration: 200 / 250 [ 80%]  (Adaptation) 
+## Success! Found best value [eta = 1] earlier than expected. 
+## Begin stochastic gradient ascent. 
+##   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes  
+##    100        -2655.391             1.000            1.000 
+##    200        -2649.922             0.501            1.000 
+##    300        -2637.090             0.336            0.005   MEDIAN ELBO CONVERGED 
+## Drawing a sample of size 1000 from the approximate posterior...  
+## COMPLETED. 
+## Finished in  3.3 seconds.</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb37-1" tabindex="-1"></a>x_sim <span class="ot">&lt;-</span> <span class="fu">mixture_predictive</span>(fit)</span>
+<span id="cb37-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb37-2" tabindex="-1"></a><span class="fu">ggplot</span>(x_sim) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb37-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb37-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> .iteration) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb37-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-1" tabindex="-1"></a>disc_data[[<span class="st">&quot;tmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">bind_dicriminative</span>(x, x_sim, <span class="at">iter =</span> <span class="dv">4</span>)</span>
+<span id="cb38-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-2" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb38-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-3" tabindex="-1"></a>  <span class="at">x =</span> disc_data[[<span class="st">&quot;tmm&quot;</span>]] <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>y) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>(),</span>
+<span id="cb38-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-4" tabindex="-1"></a>  <span class="at">y =</span> disc_data[[<span class="st">&quot;tmm&quot;</span>]]<span class="sc">$</span>y, </span>
+<span id="cb38-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-5" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;gbm&quot;</span>,</span>
+<span id="cb38-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-6" tabindex="-1"></a>  <span class="at">tuneGrid =</span> gbmGrid,</span>
+<span id="cb38-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-7" tabindex="-1"></a>  <span class="at">trControl =</span> trControl,</span>
+<span id="cb38-8"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb38-9"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-9" tabindex="-1"></a>)</span>
+<span id="cb38-10"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-10" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb38-11" tabindex="-1"></a>fit</span></code></pre></div>
+<pre><code>## Stochastic Gradient Boosting 
+## 
+## 1000 samples
+##    2 predictor
+##    2 classes: &#39;simulated&#39;, &#39;true&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 10 times) 
+## Summary of sample sizes: 900, 900, 900, 900, 900, 900, ... 
+## Resampling results:
+## 
+##   Accuracy  Kappa 
+##   0.5844    0.1688
+## 
+## Tuning parameter &#39;n.trees&#39; was held constant at a value of 100
+## Tuning parameter &#39;interaction.depth&#39; was held constant at
+##  a value of 5
+## Tuning parameter &#39;shrinkage&#39; was held constant at a value of 0.1
+## Tuning parameter &#39;n.minobsinnode&#39; was
+##  held constant at a value of 2</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb40-1" tabindex="-1"></a>p[[<span class="st">&quot;tmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prob =</span> <span class="fu">predict</span>(fit, disc_data[[<span class="st">&quot;tmm&quot;</span>]], <span class="at">type =</span> <span class="st">&quot;prob&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb40-2" tabindex="-1"></a>  <span class="fu">bind_cols</span>(disc_data[[<span class="st">&quot;tmm&quot;</span>]]) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb40-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y_label =</span> <span class="fu">fct_recode</span>(y, <span class="st">&quot;Posterior Samples&quot;</span> <span class="ot">=</span> <span class="st">&quot;simulated&quot;</span>, <span class="st">&quot;True Data&quot;</span> <span class="ot">=</span> <span class="st">&quot;true&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-1" tabindex="-1"></a>p_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(p, <span class="at">.id =</span> <span class="st">&quot;model&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb41-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-3" tabindex="-1"></a>    <span class="at">model =</span> <span class="fu">fct_recode</span>(model, <span class="st">&quot;Gaussian (Shared Covariance)&quot;</span> <span class="ot">=</span> <span class="st">&quot;gmm&quot;</span>, <span class="st">&quot;Gaussian (Individual Covariance)&quot;</span> <span class="ot">=</span> <span class="st">&quot;gmm_cov&quot;</span>, <span class="st">&quot;Student&#39;s t (Individual Covariance)&quot;</span> <span class="ot">=</span> <span class="st">&quot;tmm&quot;</span>),</span>
+<span id="cb41-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-4" tabindex="-1"></a>    <span class="at">y_label =</span> <span class="fu">factor</span>(y_label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;True Data&quot;</span>, <span class="st">&quot;Posterior Samples&quot;</span>))</span>
+<span id="cb41-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-5" tabindex="-1"></a>    )</span>
+<span id="cb41-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-6" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-7" tabindex="-1"></a><span class="fu">ggplot</span>(p_df, <span class="fu">aes</span>(V1, V2, <span class="at">col =</span> prob.true)) <span class="sc">+</span></span>
+<span id="cb41-8"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb41-9"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-9" tabindex="-1"></a>  <span class="fu">scale_color_scico</span>(<span class="at">palette =</span> <span class="st">&quot;berlin&quot;</span>) <span class="sc">+</span></span>
+<span id="cb41-10"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Predicted Probability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-11" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">11</span>, <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb41-12"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-12" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb41-13"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb41-13" tabindex="-1"></a>  <span class="fu">facet_grid</span>(y_label <span class="sc">~</span> model)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="1400" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb42-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/modeling_iteration.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">500</span>, <span class="at">width =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="fl">4.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-1" tabindex="-1"></a><span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">unique</span>(p_df<span class="sc">$</span>model)) {</span>
+<span id="cb43-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-2" tabindex="-1"></a>  p_df <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-3" tabindex="-1"></a>    <span class="fu">filter</span>(y_label <span class="sc">==</span> <span class="st">&quot;Posterior Samples&quot;</span>, model <span class="sc">==</span> m) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-4" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(V1, V2)) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-6" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">11</span>, <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb43-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-7" tabindex="-1"></a>    <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb43-8"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-8" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>)</span>
+<span id="cb43-9"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-9" tabindex="-1"></a>  <span class="fu">ggsave</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;~/Downloads/{m}.png&quot;</span>), <span class="at">width =</span> <span class="fl">5.5</span>, <span class="at">height =</span> <span class="fl">4.5</span>)</span>
+<span id="cb43-10"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-10" tabindex="-1"></a>  </span>
+<span id="cb43-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-11" tabindex="-1"></a>  p_df <span class="sc">%&gt;%</span></span>
+<span id="cb43-12"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-12" tabindex="-1"></a>    <span class="fu">filter</span>(y_label <span class="sc">==</span> <span class="st">&quot;Posterior Samples&quot;</span>, model <span class="sc">==</span> m) <span class="sc">%&gt;%</span></span>
+<span id="cb43-13"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-13" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-14"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-14" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(V1, V2, <span class="at">col =</span> prob.true)) <span class="sc">+</span></span>
+<span id="cb43-15"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-15" tabindex="-1"></a>    <span class="fu">scale_color_scico</span>(<span class="at">palette =</span> <span class="st">&quot;berlin&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-16"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-16" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">11</span>, <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb43-17"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-17" tabindex="-1"></a>    <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb43-18"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-18" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>)</span>
+<span id="cb43-19"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-19" tabindex="-1"></a>  <span class="fu">ggsave</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;~/Downloads/{m}-prob.png&quot;</span>), <span class="at">width =</span> <span class="fl">5.5</span>, <span class="at">height =</span> <span class="fl">4.5</span>)</span>
+<span id="cb43-20"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-20" tabindex="-1"></a>  </span>
+<span id="cb43-21"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-21" tabindex="-1"></a>  p_df <span class="sc">%&gt;%</span></span>
+<span id="cb43-22"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-22" tabindex="-1"></a>    <span class="fu">filter</span>(y_label <span class="sc">==</span> <span class="st">&quot;True Data&quot;</span>, model <span class="sc">==</span> m) <span class="sc">%&gt;%</span></span>
+<span id="cb43-23"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-23" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb43-24"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-24" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(V1, V2, <span class="at">col =</span> prob.true)) <span class="sc">+</span></span>
+<span id="cb43-25"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-25" tabindex="-1"></a>    <span class="fu">scale_color_scico</span>(<span class="at">palette =</span> <span class="st">&quot;berlin&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-26"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-26" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">11</span>, <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb43-27"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-27" tabindex="-1"></a>    <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb43-28"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-28" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>)</span>
+<span id="cb43-29"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-29" tabindex="-1"></a>  <span class="fu">ggsave</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;~/Downloads/true-{m}-prob.png&quot;</span>), <span class="at">width =</span> <span class="fl">5.5</span>, <span class="at">height =</span> <span class="fl">4.5</span>)</span>
+<span id="cb43-30"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-30" tabindex="-1"></a>}</span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intervention_optimize.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stan-explained.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
