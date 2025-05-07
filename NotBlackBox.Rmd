@@ -1,17 +1,3 @@
----
-title: "Beyond Black Box Simulation"
-output:
-  xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css"]
-    lib_dir: libs
-    self_contained: false
-    fig_caption: true
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      ratio: "16:9"
-    seal: false
----
 
 # Beyond Black Box Simulation
 

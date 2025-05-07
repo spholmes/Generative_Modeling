@@ -1,6 +1,6 @@
 # Index
 
-# Workshop on using generative models
+## Workshop on using generative models
 
  **Lisbon, 7, 8 May, 2025**
 
@@ -31,6 +31,9 @@
  GANs: [Generative Adversarial network](https://en.wikipedia.org/wiki/Generative_adversarial_network)
  
  Identifiability
+ 
+ GMM : Generalized Mixed Models
+ 
  
 
 

@@ -1,8 +1,3 @@
----
-title: "Intervention Optimize"
-output: html_document
----
-
 
 # Intervention Optimize (slow)
 

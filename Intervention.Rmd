@@ -1,7 +1,6 @@
----
-title: "Intervention"
-output: html_document
----
+
+# Start defining the intervention in a time series
+
 
 ```{r, message = FALSE}
 library(tidyverse)
