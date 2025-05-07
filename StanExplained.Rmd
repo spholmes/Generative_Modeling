@@ -1,0 +1,150 @@
+# Stan Explained"
+
+## `gmm.stan` file
+
+Be very careful with the indenting and format
+```
+data {
+  int<lower=0> K;
+  int<lower=0> N;
+  matrix[N, 2] x;
+}
+
+parameters {
+  simplex[K] pi;
+  matrix[K, 2] mu;
+  real<lower=0> sigma;
+}
+
+model {
+  vector[K] log_prob;
+  for (n in 1:N) {
+    for (k in 1:K) {
+      log_prob[k] = log(pi[k]) + normal_lpdf(x[n] | mu[k], sigma);
+    }
+    target += log_sum_exp(log_prob);
+  }
+}
+
+
+generated quantities {
+  matrix[N, 2] x_sim;
+  for (n in 1:N) {
+    int z;
+    z = categorical_rng(pi);
+    x_sim[n] = to_row_vector(normal_rng(mu[z], sigma));
+  }
+}
+
+
+
+
+```
+
+The Stan file defines a mixture of K Gaussians, with shared sigma, mixture weights pi, and component means mu\[k]. The data block specifies K, N, and a 2D matrix x (of size N by 2). In the parameters block, pi is a simplex of size K, mu contains K by 2 means, and sigma is positive. The model computes log\_prob\[k] for each data point, but yes, since `normal_lpdf` expects scalar inputs, it sums across dimensions when x\[n] and mu\[k] are vectors.
+
+
+Thought for a few seconds
+
+
+Here’s what this Stan program does, block by block:
+
+---
+
+#### 1. **Data block**
+
+```
+data {
+  int<lower=0> K;            // number of mixture components
+  int<lower=0> N;            // number of observations
+  matrix[N, 2] x;            // N data points in ℝ²
+}
+```
+
+* **K**: how many Gaussian clusters you want.
+* **N**: how many 2-dimensional observations.
+* **x**: your observed data, an N×2 matrix.
+
+---
+
+#### 2. **Parameters block**
+
+```
+parameters {
+  simplex[K] pi;             // mixing proportions over K components
+  matrix[K, 2] mu;           // 2D mean vector for each component
+  real<lower=0> sigma;       // shared (isotropic) standard deviation
+}
+```
+
+* **pi** is a length-K simplex (nonnegative, sums to 1) giving the prior weight of each component.
+* **mu\[k]** is the 2-vector mean of component *k*.
+* **sigma** is a single positive scalar: all components share the same spherical (isotropic) standard deviation.
+
+---
+
+#### 3. **Model block**
+
+```
+model {
+  vector[K] log_prob;
+  for (n in 1:N) {
+    for (k in 1:K) {
+      log_prob[k] = 
+        log(pi[k])                      // log prior weight of component k
+        + normal_lpdf(x[n] | mu[k], sigma);
+        // this expands to the sum of two independent
+        // Normal(μ[k][d], σ) log-densities for d=1,2
+    }
+    target += log_sum_exp(log_prob);  // “log mixture density” trick
+  }
+}
+```
+
+* ## For each data point **x\[n]** and each component **k**, it computes
+
+  $$
+    \log\bigl(\pi_k\bigr)
+    + \sum_{d=1}^2 \log\bigl[
+       \mathrm{Normal}\bigl(x_{n,d}\mid \mu_{k,d},\sigma\bigr)
+    \bigr].
+  $$
+* It then adds
+  $\log\bigl(\sum_k \exp(\text{that})\bigr)$
+  to the joint log-posterior, which implements a K-component Gaussian mixture likelihood.
+
+---
+
+#### 4. **Generated Quantities block**
+
+```
+generated quantities {
+  matrix[N, 2] x_sim;
+  for (n in 1:N) {
+    int z;
+    z = categorical_rng(pi);                    // sample a component label
+    x_sim[n] = to_row_vector(normal_rng(mu[z], sigma));
+  }
+}
+```
+
+* After fitting, this simulates a new dataset **x\_sim** of the same size:
+
+  1. Draw a component label **z** from **Categorical(pi)**.
+  2. Draw a 2-vector from **Normal(mu\[z], σ)** in each coordinate.
+
+This gives you posterior-predictive (replicated) data from the inferred mixture.
+
+---
+
+### In plain English
+
+You are fitting a **K-component mixture of 2D, spherical Gaussians** to your data.
+
+* **π** are the mixing weights,
+* **μₖ** are the 2D cluster centers,
+* **σ** is the common cluster “spread.”
+
+The sampler will infer the posterior distribution over these parameters, and then generate a new simulated dataset of size **N** from that fitted mixture.
+
+Let me know if you’d like more details—e.g. on priors, identifiability, diagnostics, or translating this into another probabilistic language!

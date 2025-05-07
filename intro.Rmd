@@ -1,6 +1,5 @@
 # Index
-
-## Workshop on using generative models
+# Workshop on using generative models
 
  **Lisbon, 7, 8 May, 2025**
 
@@ -9,7 +8,8 @@
 
  - Learn how to use simulation tools to solve and understand statistical models.
  - Go over examples of experimental design using generative models.  
- - Use different R packages to 
+ - Use different R packages to simulate data according to a hierarchical model with
+ multiple levels of random variation.
 
 ## Prerequisites:
 
@@ -33,6 +33,11 @@
  Identifiability
  
  GMM : Generalized Mixed Models
+ 
+ GLM : Generalized Linear Models
+ 
+ HMC: Hamiltonian Monte Carlo
+ 
  
  
 

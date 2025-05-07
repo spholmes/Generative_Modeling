@@ -14,3 +14,13 @@ covasim-1
 what-are-we-going-to-study
 slides
 labs-and-challenges
+start-defining-the-intervention-in-a-time-series
+intervention-optimize-slow
+heteroskedastic-mixtures-goodness-of-fit-iterations
+stan-explained
+gmm.stan-file
+data-block
+parameters-block
+model-block
+generated-quantities-block
+in-plain-english
