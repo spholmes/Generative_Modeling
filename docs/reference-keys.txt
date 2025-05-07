@@ -14,8 +14,9 @@ covasim-1
 what-are-we-going-to-study
 slides
 labs-and-challenges
+intervention
 start-defining-the-intervention-in-a-time-series
-intervention-optimize-slow
+intervention_optimize
 heteroskedastic-mixtures-goodness-of-fit-iterations
 stan-explained
 gmm.stan-file

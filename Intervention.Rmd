@@ -1,5 +1,7 @@
 
-# Start defining the intervention in a time series
+# Intervention
+
+## Start defining the intervention in a time series
 
 
 ```{r, message = FALSE}

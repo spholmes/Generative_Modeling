@@ -1,13 +1,3 @@
----
-title: "Generative Modeling Workshop"
-author: "Susan Holmes"
-date: "`r Sys.Date()`"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 
 # Slides 
 
@@ -32,6 +22,10 @@ knitr::opts_chunk$set(echo = TRUE)
  - Try out examples from the repository of the paper at: [https://go.wisc.edu/833zs8](https://go.wisc.edu/833zs8) 
  
  - Code: [https://go.wisc.edu/7222i9](https://go.wisc.edu/7222i9)
+ 
+ 
+ Install Stan : you can ask a LLM to help for instance chatGPT provided: https://chatgpt.com/share/681bc493-1a64-8005-8d07-cc77cff145d7
+ 
  
  
  

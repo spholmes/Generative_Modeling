@@ -147,4 +147,4 @@ You are fitting a **K-component mixture of 2D, spherical Gaussians** to your dat
 
 The sampler will infer the posterior distribution over these parameters, and then generate a new simulated dataset of size **N** from that fitted mixture.
 
-Let me know if you’d like more details—e.g. on priors, identifiability, diagnostics, or translating this into another probabilistic language!
+

@@ -1,3 +1,8 @@
+---
+title : "Generative Modeling Workshop"
+author: Susan Holmes
+---
+
 # Index
 # Workshop on using generative models
 
