@@ -2,9 +2,8 @@
 # Slides 
 
  - [NotBlackBoxSimulation](Slides/NotBlackBoxS.html)
- - [Hierarchical Models](Slides/HierarchicalS.html)
  - [Experimental Design](Slides/Design1S.html)
- - [Identifiability](Slides/NonIdentifiabilityS.html)
+
  
 
 # Labs and Challenges : 
@@ -26,7 +25,8 @@
  
  Install Stan : you can ask a LLM to help for instance chatGPT provided: https://chatgpt.com/share/681bc493-1a64-8005-8d07-cc77cff145d7
  
+ - Do the examples in the `modeling` and `simulation` folders of the [generative-review github](https://go.wisc.edu/7222i9) repo.
  
- 
+ - Download the package `mbtransfer` and inspect the simulation component of the package (there is a CRAN and a [github](https://github.com/krisrs1128/mbtransfer) version).
  
 
