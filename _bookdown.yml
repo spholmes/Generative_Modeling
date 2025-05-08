@@ -3,4 +3,9 @@ rmd_files: ["intro.Rmd","NotBlackBox.Rmd","SlidesIndex.Rmd","Non-identifiability
 "goodness_of_fit.Rmd","StanExplained.Rmd","Likelihood_Free_Inference.Rmd","AvailableTools.Rmd", "Multimodal.Rmd","Otherexamples.Rmd"]
 output_dir: "docs"
 delete_merged_file: true
-fig_path: "figures/"
+fig_path: "docs/figures"
+knitr:
+  opts_chunk:
+     cache: true
+     cache.path: "_cache/"
+     

@@ -11,8 +11,10 @@ author: Susan Holmes
 
 ```{r setupInitial, include=FALSE}
 knitr::opts_chunk$set(
-  fig.path = "figures/",  # All figures will go to a 'figures' directory
+  fig.path = "docs/figures/",  # All figures will go to a 'figures' directory
   cache = TRUE,
+  cache.lazy = TRUE,
+  cache.path  = "docs/cache/",  # store caches somewhere under docs/
   cache.path = "_cache/"
   # other options...
 )
