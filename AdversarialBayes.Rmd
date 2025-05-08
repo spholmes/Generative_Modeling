@@ -1,23 +1,10 @@
 
----
-title: "Adversarial Bayesian Computation"
-author: "Susan Holmes"
-date: "May 8th, 2025"
-output:
-  xaringan::moon_reader:
-    css: 
-    - default
-    - css/xaringan-themer.css
-    mathjax: default
-    self_contained: false
-    lib_dir: libs
-    nature:
-      ratio: "16:9"
-    seal: false
----
+
+# Adversarial GOF examples
 
 
-# Adversarial Bayesian Simulation  
+
+## Bayesian Simulation  
 **Yuexi Wang & Veronika Ročková**  
 arXiv:2208.12113 
 
@@ -67,3 +54,5 @@ $$\mathrm{TV}\bigl(p(\theta\mid x),\,p_{\mathrm{B\mbox{-}GAN}}(\theta\mid x)\big
 2. Marin, J.-M., et al. (2012). *Approximate Bayesian Computational Methods*. Statistics and Computing.  
 3. Goodfellow, I., et al. (2014). *Generative Adversarial Nets*. NeurIPS.  
 4. Mescheder, L., Nowozin, S. & Geiger, A. (2017). *Adversarial Variational Bayes: Unifying Variational Autoencoders and GANs*. ICML.  
+
+
