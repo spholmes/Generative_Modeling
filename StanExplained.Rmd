@@ -1,4 +1,9 @@
-# Stan Explained"
+# Stan Explained
+
+## Installing `stan`
+
+Our suggestion is to use the new [cmdstanr](https://mc-stan.org/cmdstanr/articles/cmdstanr.html)
+
 
 ## `gmm.stan` file
 
@@ -146,5 +151,14 @@ You are fitting a **K-component mixture of 2D, spherical Gaussians** to your dat
 * **σ** is the common cluster “spread.”
 
 The sampler will infer the posterior distribution over these parameters, and then generate a new simulated dataset of size **N** from that fitted mixture.
+
+
+---
+
+## More examples
+
+
+ - [Clustering and Latent Dirichlet](https://mc-stan.org/docs/stan-users-guide/clustering.html)
+ 
 
 

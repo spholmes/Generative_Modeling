@@ -19,12 +19,14 @@ start-defining-the-intervention-in-a-time-series
 intervention_optimize
 heteroskedastic-mixtures-goodness-of-fit-iterations
 stan-explained
+installing-stan
 gmm.stan-file
 data-block
 parameters-block
 model-block
 generated-quantities-block
 in-plain-english
+more-examples
 all-the-tools-already-available
 a-cran-view-of-what-exists
 specific-packages

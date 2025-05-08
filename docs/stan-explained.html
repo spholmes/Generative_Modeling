@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Stan Explained” | Generative Modeling Workshop</title>
-  <meta name="description" content="9 Stan Explained” | Generative Modeling Workshop" />
+  <title>9 Stan Explained | Generative Modeling Workshop</title>
+  <meta name="description" content="9 Stan Explained | Generative Modeling Workshop" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Stan Explained” | Generative Modeling Workshop" />
+  <meta property="og:title" content="9 Stan Explained | Generative Modeling Workshop" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Stan Explained” | Generative Modeling Workshop" />
+  <meta name="twitter:title" content="9 Stan Explained | Generative Modeling Workshop" />
   
   
   
@@ -163,12 +163,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="intervention_optimize.html"><a href="intervention_optimize.html"><i class="fa fa-check"></i><b>7</b> Intervention_Optimize</a></li>
 <li class="chapter" data-level="8" data-path="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><i class="fa fa-check"></i><b>8</b> Heteroskedastic Mixtures : goodness of fit iterations</a></li>
-<li class="chapter" data-level="9" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>9</b> Stan Explained”</a>
+<li class="chapter" data-level="9" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>9</b> Stan Explained</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>9.1</b> <code>gmm.stan</code> file</a>
+<li class="chapter" data-level="9.1" data-path="stan-explained.html"><a href="stan-explained.html#installing-stan"><i class="fa fa-check"></i><b>9.1</b> Installing <code>stan</code></a></li>
+<li class="chapter" data-level="9.2" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>9.2</b> <code>gmm.stan</code> file</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>9.1.1</b> In plain English</a></li>
+<li class="chapter" data-level="9.2.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>9.2.1</b> In plain English</a></li>
 </ul></li>
+<li class="chapter" data-level="9.3" data-path="stan-explained.html"><a href="stan-explained.html#more-examples"><i class="fa fa-check"></i><b>9.3</b> More examples</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html"><i class="fa fa-check"></i><b>10</b> All the tools already available</a>
 <ul>
@@ -193,9 +195,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="stan-explained" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Stan Explained”<a href="stan-explained.html#stan-explained" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="gmm.stan-file" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> <code>gmm.stan</code> file<a href="stan-explained.html#gmm.stan-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h1><span class="header-section-number">9</span> Stan Explained<a href="stan-explained.html#stan-explained" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="installing-stan" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Installing <code>stan</code><a href="stan-explained.html#installing-stan" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Our suggestion is to use the new <a href="https://mc-stan.org/cmdstanr/articles/cmdstanr.html">cmdstanr</a></p>
+</div>
+<div id="gmm.stan-file" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> <code>gmm.stan</code> file<a href="stan-explained.html#gmm.stan-file" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Be very careful with the indenting and format</p>
 <pre><code>data {
   int&lt;lower=0&gt; K;
@@ -236,8 +242,8 @@ generated quantities {
 <p>Thought for a few seconds</p>
 <p>Here’s what this Stan program does, block by block:</p>
 <hr />
-<div id="data-block" class="section level4 hasAnchor" number="9.1.0.1">
-<h4><span class="header-section-number">9.1.0.1</span> 1. <strong>Data block</strong><a href="stan-explained.html#data-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="data-block" class="section level4 hasAnchor" number="9.2.0.1">
+<h4><span class="header-section-number">9.2.0.1</span> 1. <strong>Data block</strong><a href="stan-explained.html#data-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>data {
   int&lt;lower=0&gt; K;            // number of mixture components
   int&lt;lower=0&gt; N;            // number of observations
@@ -250,8 +256,8 @@ generated quantities {
 </ul>
 <hr />
 </div>
-<div id="parameters-block" class="section level4 hasAnchor" number="9.1.0.2">
-<h4><span class="header-section-number">9.1.0.2</span> 2. <strong>Parameters block</strong><a href="stan-explained.html#parameters-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="parameters-block" class="section level4 hasAnchor" number="9.2.0.2">
+<h4><span class="header-section-number">9.2.0.2</span> 2. <strong>Parameters block</strong><a href="stan-explained.html#parameters-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>parameters {
   simplex[K] pi;             // mixing proportions over K components
   matrix[K, 2] mu;           // 2D mean vector for each component
@@ -264,8 +270,8 @@ generated quantities {
 </ul>
 <hr />
 </div>
-<div id="model-block" class="section level4 hasAnchor" number="9.1.0.3">
-<h4><span class="header-section-number">9.1.0.3</span> 3. <strong>Model block</strong><a href="stan-explained.html#model-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="model-block" class="section level4 hasAnchor" number="9.2.0.3">
+<h4><span class="header-section-number">9.2.0.3</span> 3. <strong>Model block</strong><a href="stan-explained.html#model-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>model {
   vector[K] log_prob;
   for (n in 1:N) {
@@ -293,8 +299,8 @@ to the joint log-posterior, which implements a K-component Gaussian mixture like
 </ul>
 <hr />
 </div>
-<div id="generated-quantities-block" class="section level4 hasAnchor" number="9.1.0.4">
-<h4><span class="header-section-number">9.1.0.4</span> 4. <strong>Generated Quantities block</strong><a href="stan-explained.html#generated-quantities-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="generated-quantities-block" class="section level4 hasAnchor" number="9.2.0.4">
+<h4><span class="header-section-number">9.2.0.4</span> 4. <strong>Generated Quantities block</strong><a href="stan-explained.html#generated-quantities-block" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>generated quantities {
   matrix[N, 2] x_sim;
   for (n in 1:N) {
@@ -313,8 +319,8 @@ to the joint log-posterior, which implements a K-component Gaussian mixture like
 <p>This gives you posterior-predictive (replicated) data from the inferred mixture.</p>
 <hr />
 </div>
-<div id="in-plain-english" class="section level3 hasAnchor" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> In plain English<a href="stan-explained.html#in-plain-english" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="in-plain-english" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> In plain English<a href="stan-explained.html#in-plain-english" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You are fitting a <strong>K-component mixture of 2D, spherical Gaussians</strong> to your data.</p>
 <ul>
 <li><strong>π</strong> are the mixing weights,</li>
@@ -322,8 +328,15 @@ to the joint log-posterior, which implements a K-component Gaussian mixture like
 <li><strong>σ</strong> is the common cluster “spread.”</li>
 </ul>
 <p>The sampler will infer the posterior distribution over these parameters, and then generate a new simulated dataset of size <strong>N</strong> from that fitted mixture.</p>
-
+<hr />
 </div>
+</div>
+<div id="more-examples" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> More examples<a href="stan-explained.html#more-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://mc-stan.org/docs/stan-users-guide/clustering.html">Clustering and Latent Dirichlet</a></li>
+</ul>
+
 </div>
 </div>
             </section>

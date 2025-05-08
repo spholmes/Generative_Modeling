@@ -50,3 +50,4 @@
 - [MOSim](https://bioconductor.org/packages/release/bioc/html/MOSim.html): Simulates multi-omic experiments that mimic regulatory mechanisms within the cell
 - [mbtransfer](https://krisrs1128.github.io/mbtransfer/): Simulation of hypothetical community trajectories under user-specified perturbations.
 - [miniLNM](https://krisrs1128.github.io/miniLNM/) :For fitting and using logistic-normal multinomial models. It wraps a simple ‘Stan’ script.
+- [multimedia](https://krisrs1128.github.io/multimedia/) :  Multimodal mediation analysis of microbiome data
