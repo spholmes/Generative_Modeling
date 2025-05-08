@@ -1,5 +1,5 @@
 book_filename: "index"
 rmd_files: ["intro.Rmd","NotBlackBox.Rmd","SlidesIndex.Rmd","intervention.Rmd","intervention_optimize.Rmd",
-"goodness_of_fit.Rmd","StanExplained.Rmd","AvailableTools.Rmd"]
+"goodness_of_fit.Rmd","StanExplained.Rmd","AvailableTools.Rmd", "Multimodal.Rmd"]
 output_dir: "docs"
 delete_merged_file: true

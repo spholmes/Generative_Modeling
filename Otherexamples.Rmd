@@ -1,0 +1,5 @@
+# Other examples of applications
+
+
+
+[Semi synthetic data enrichment](https://github.com/krisrs1128/talks/blob/ba5efc32ec944df6061b9e795216344a66b35aaa/2025/20250328/20250328.html)

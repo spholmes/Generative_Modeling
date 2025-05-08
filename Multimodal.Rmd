@@ -1,0 +1,25 @@
+# Multimodal data examples of approaches
+
+There are some good examples for the microbiome that care instructuve for other domains.
+
+[Multimedia website](https://krisrs1128.github.io/multimedia/)
+
+```
+install.packages("multimedia")
+####or you can use the new version:
+devtools::install_github("krisrs1128/multimedia")
+BiocManager::install("phyloseq")
+```
+
+
+## Special data structures
+
+[Summarized Experiment](https://www.bioconductor.org/packages/devel/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html)
+[About MultiAssayExperiments](https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/3-thu+fri/lab-07-MultiAssayExperiment/MultiAssayExperiment.html)
+[About phyloseq](https://f1000research.com/articles/5-1492/v2)
+
+[Lecture on Microbiome Data](https://www.dropbox.com/scl/fi/h7k1s2klf96sebufqw8es/Lecture13-Microbiome.pdf?rlkey=5fjfzivmn3y55t9iqgl9x037c&st=c9jtdlro&dl=0)
+
+[Computational Challenges of Multidomain Data](https://www.dropbox.com/scl/fi/e0y9agnc2hrj1gv99wff8/BIRS_Challenges_2020.pdf?rlkey=bpn44g217mjudfs0xtywy7g35&st=1uej90io&dl=0)
+
+[Complex dependent Factors for Multiway Data](https://www.dropbox.com/scl/fi/76ouk0l3eiok39egn7xhc/MicrobiomeDependentTopics_IPAM2020.pdf?rlkey=owlfgsz9trdjvhnbs9s0zxh62&st=wqjteh50&dl=0)
