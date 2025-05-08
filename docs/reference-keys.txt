@@ -65,5 +65,9 @@ practical-tips
 advantages-limitations
 summary-outlook
 references
+all-the-tools-already-available
+a-cran-view-of-what-exists
+specific-packages
+multimodal-data-examples-of-approaches
 special-data-structures
 other-examples-of-applications

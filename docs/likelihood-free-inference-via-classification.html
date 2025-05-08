@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="stan-explained.html"/>
-<link rel="next" href="other-examples-of-applications.html"/>
+<link rel="next" href="all-the-tools-already-available.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,9 +214,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.20" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#advantages-limitations"><i class="fa fa-check"></i><b>11.20</b> Advantages &amp; Limitations</a></li>
 <li class="chapter" data-level="11.21" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#summary-outlook"><i class="fa fa-check"></i><b>11.21</b> Summary &amp; Outlook</a></li>
 <li class="chapter" data-level="11.22" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references"><i class="fa fa-check"></i><b>11.22</b> References</a></li>
-<li class="chapter" data-level="11.23" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#special-data-structures"><i class="fa fa-check"></i><b>11.23</b> Special data structures</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>12</b> Other examples of applications</a></li>
+<li class="chapter" data-level="12" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html"><i class="fa fa-check"></i><b>12</b> All the tools already available</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#a-cran-view-of-what-exists"><i class="fa fa-check"></i><b>12.1</b> A CRAN view of what exists:</a></li>
+<li class="chapter" data-level="12.2" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#specific-packages"><i class="fa fa-check"></i><b>12.2</b> Specific Packages:</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html"><i class="fa fa-check"></i><b>13</b> Multimodal data examples of approaches</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html#special-data-structures"><i class="fa fa-check"></i><b>13.1</b> Special data structures</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>14</b> Other examples of applications</a></li>
 </ul>
 
       </nav>
@@ -325,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb61-7"><a href="likelihood-free-inference-via-classification.html#cb61-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
 <span id="cb61-8"><a href="likelihood-free-inference-via-classification.html#cb61-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count&quot;</span></span>
 <span id="cb61-9"><a href="likelihood-free-inference-via-classification.html#cb61-9" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="acceptance-threshold-visualization" class="section level2 hasAnchor" number="11.7">
@@ -343,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb62-11"><a href="likelihood-free-inference-via-classification.html#cb62-11" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
 <span id="cb62-12"><a href="likelihood-free-inference-via-classification.html#cb62-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Accepted&quot;</span></span>
 <span id="cb62-13"><a href="likelihood-free-inference-via-classification.html#cb62-13" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/abc-threshold-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/abc-threshold-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="abc-approximate-posterior" class="section level2 hasAnchor" number="11.8">
@@ -357,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb63-7"><a href="likelihood-free-inference-via-classification.html#cb63-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
 <span id="cb63-8"><a href="likelihood-free-inference-via-classification.html#cb63-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
 <span id="cb63-9"><a href="likelihood-free-inference-via-classification.html#cb63-9" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/abc-posterior-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/abc-posterior-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="extensions-of-abc" class="section level2 hasAnchor" number="11.9">
@@ -486,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb67-5"><a href="likelihood-free-inference-via-classification.html#cb67-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb67-6"><a href="likelihood-free-inference-via-classification.html#cb67-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Observed vs. Simulated Samples&quot;</span>,</span>
 <span id="cb67-7"><a href="likelihood-free-inference-via-classification.html#cb67-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="example-logistic-discriminator" class="section level3 hasAnchor" number="11.17.1">
 <h3><span class="header-section-number">11.17.1</span> Example: Logistic Discriminator<a href="likelihood-free-inference-via-classification.html#example-logistic-discriminator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -516,7 +524,7 @@ D(x) = \mathrm{logit}^{-1}\bigl(\beta_0 + \beta_1 x\bigr)
 <span id="cb69-6"><a href="likelihood-free-inference-via-classification.html#cb69-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;ROC Curve (AUC = %.2f)&quot;</span>, auc_val),</span>
 <span id="cb69-7"><a href="likelihood-free-inference-via-classification.html#cb69-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;False Positive Rate&quot;</span>,</span>
 <span id="cb69-8"><a href="likelihood-free-inference-via-classification.html#cb69-8" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;True Positive Rate&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 </div>
@@ -607,90 +615,8 @@ D(x) = \mathrm{logit}^{-1}\bigl(\beta_0 + \beta_1 x\bigr)
 </li>
 <li>Papamakarios, G. &amp; Murray, I. (2016). <em>Fast ε-Free Inference of Simulation Models with Bayesian Conditional Density Estimation</em>. NeurIPS.<br />
 </li>
-<li>Gutmann, M. U. &amp; Hyvärinen, A. (2012). <em>Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models</em>. AISTATS.<br />
-</li>
+<li>Gutmann, M. U. &amp; Hyvärinen, A. (2012). <em>Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models</em>. AISTATS.</li>
 </ol>
-<pre><code>
-&lt;!--chapter:end:Likelihood_Free_Inference.Rmd--&gt;
-
-# All the tools already available
-
-
-## A CRAN view of what exists:
-
-[https://cran.r-project.org/web/views/ExperimentalDesign.html](https://cran.r-project.org/web/views/ExperimentalDesign.html)
-
-## Specific Packages:
-
-- [acebayes](https://CRAN.R-project.org/package=acebayes): Optimal Bayesian Experimental Design using the ACE Algorithm
-- [adaptDiag](https://CRAN.R-project.org/package=adaptDiag): Bayesian Adaptive Designs for Diagnostic Trials
-- [ADCT](https://CRAN.R-project.org/package=ADCT): Adaptive Design in Clinical Trials
-- [adoptr](https://CRAN.R-project.org/package=adoptr): Adaptive Optimal Two-Stage Designs in R
-- [adpss](https://CRAN.R-project.org/package=adpss): Design and Analysis of Locally or Globally Efficient Adaptive Designs
-- [agricolae](https://CRAN.R-project.org/package=agricolae): Statistical Procedures for Agricultural Research
-- [agricolaeplotr](https://CRAN.R-project.org/package=agricolaeplotr): Visualization of Design of Experiments from the &#39;agricolae&#39; Package
-- [AlgDesign](https://CRAN.R-project.org/package=AlgDesign): Algorithmic Experimental Design
-- [ALTopt](https://CRAN.R-project.org/package=ALTopt): Optimal Experimental Designs for Accelerated Life Testing
-- [Aoptbdtvc](https://CRAN.R-project.org/package=Aoptbdtvc): A-Optimal Block Designs for Comparing Test Treatments with Controls
-- [asd](https://CRAN.R-project.org/package=asd): Simulations for Adaptive Seamless Designs
-- [bacistool](https://CRAN.R-project.org/package=bacistool): Bayesian Classification and Information Sharing (BaCIS) Tool for the Design of Multi-Group Phase II Clinical Trials
-- [BayesCR](https://CRAN.R-project.org/package=BayesCR): Bayesian Analysis of Censored Regression Models Under Scale Mixture of Skew Normal Distributions
-- [bayesCT](https://CRAN.R-project.org/package=bayesCT): Simulation and Analysis of Adaptive Bayesian Clinical Trials
-- [BayesDesign](https://CRAN.R-project.org/package=BayesDesign): Bayesian Single-Arm Design with Survival Endpoints
-- [BayesPPD](https://CRAN.R-project.org/package=BayesPPD): Bayesian Power Prior Design
-- [BDEsize](https://CRAN.R-project.org/package=BDEsize): Efficient Determination of Sample Size in Balanced Design of Experiments
-- [bdlp](https://CRAN.R-project.org/package=bdlp): Transparent and Reproducible Artificial Data Generation
-- [bioOED](https://CRAN.R-project.org/package=bioOED): Sensitivity Analysis and Optimum Experiment Design for Microbial Inactivation
-- [deepgp](https://CRAN.R-project.org/package=deepgp): Sequential Design for Deep Gaussian Processes using MCMC
-- [DelayedEffect.Design](https://CRAN.R-project.org/package=DelayedEffect.Design): Sample Size and Power Calculations using the APPLE and SEPPLE Methods
-- [demu](https://CRAN.R-project.org/package=demu): Optimal Design Emulators via Point Processes
-- [DiceDesign](https://CRAN.R-project.org/package=DiceDesign): Designs of Computer Experiments
-- [DiceKriging](https://CRAN.R-project.org/package=DiceKriging): Kriging Methods for Computer Experiments
-- [DiceOptim](https://CRAN.R-project.org/package=DiceOptim): Kriging-Based Optimization for Computer Experiments
-- [earlyR](https://CRAN.R-project.org/package=earlyR): Estimation of Transmissibility in the Early Stages of a Disease Outbreak
-- [easypower](https://CRAN.R-project.org/package=easypower): Sample Size Estimation for Experimental Designs
-- [experDesign](https://CRAN.R-project.org/package=experDesign): Design Experiments for Batches
-- [faux](https://CRAN.R-project.org/package=faux): Simulation for Factorial Designs
-- [FielDHub](https://CRAN.R-project.org/package=FielDHub): A Shiny App for Design of Experiments in Life Sciences
-- [FieldSim](https://CRAN.R-project.org/package=FieldSim): Random Fields (and Bridges) Simulations
-- [geospt](https://CRAN.R-project.org/package=geospt): Geostatistical Analysis and Design of Optimal Spatial Sampling Networks
-- [gscounts](https://CRAN.R-project.org/package=gscounts): Group Sequential Designs with Negative Binomial Outcomes
-- [hiPOD](https://CRAN.R-project.org/package=hiPOD): hierarchical Pooled Optimal Design
-- [MCPModPack](https://CRAN.R-project.org/package=MCPModPack): Simulation-Based Design and Analysis of Dose-Finding Trials
-- [scDesign](https://CRAN.R-project.org/package=scDesign): Simulation-based scRNA-seq experimental design
-- [phyclust](https://CRAN.R-project.org/package=phyclust): (seqgen) Simulate the evolution of nucleotide or amino acid sequences along a phylogeny
-- [splatter](https://CRAN.R-project.org/package=splatter): Simulation of single-cell RNA sequencing count data
-- [MSstatsSampleSize](https://CRAN.R-project.org/package=MSstatsSampleSize): Simulation tool for optimal design of high-dimensional MS-based proteomics experiment
-- [PROPER](https://CRAN.R-project.org/package=PROPER): Simulation based methods for evaluating the statistical power in differential expression analysis from RNA-seq data
-- [MOSim](https://bioconductor.org/packages/release/bioc/html/MOSim.html): Simulates multi-omic experiments that mimic regulatory mechanisms within the cell
-- [mbtransfer](https://krisrs1128.github.io/mbtransfer/): Simulation of hypothetical community trajectories under user-specified perturbations.
-- [miniLNM](https://krisrs1128.github.io/miniLNM/) :For fitting and using logistic-normal multinomial models. It wraps a simple ‘Stan’ script.
-- [multimedia](https://krisrs1128.github.io/multimedia/) :  Multimodal mediation analysis of microbiome data
-
-&lt;!--chapter:end:AvailableTools.Rmd--&gt;
-
-# Multimodal data examples of approaches
-
-There are some good examples for the microbiome that care instructuve for other domains.
-
-[Multimedia website](https://krisrs1128.github.io/multimedia/)
-</code></pre>
-<p>install.packages(“multimedia”)
-####or you can use the new version:
-devtools::install_github(“krisrs1128/multimedia”)
-BiocManager::install(“phyloseq”)
-```</p>
-</div>
-<div id="special-data-structures" class="section level2 hasAnchor" number="11.23">
-<h2><span class="header-section-number">11.23</span> Special data structures<a href="likelihood-free-inference-via-classification.html#special-data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p><a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html">Summarized Experiment</a></p></li>
-<li><p><a href="https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/3-thu+fri/lab-07-MultiAssayExperiment/MultiAssayExperiment.html">About MultiAssayExperiments</a></p></li>
-<li><p><a href="https://f1000research.com/articles/5-1492/v2">About phyloseq</a></p></li>
-<li><p><a href="https://www.dropbox.com/scl/fi/h7k1s2klf96sebufqw8es/Lecture13-Microbiome.pdf?rlkey=5fjfzivmn3y55t9iqgl9x037c&amp;st=c9jtdlro&amp;dl=0">Lecture on Microbiome Data</a></p></li>
-<li><p><a href="https://www.dropbox.com/scl/fi/e0y9agnc2hrj1gv99wff8/BIRS_Challenges_2020.pdf?rlkey=bpn44g217mjudfs0xtywy7g35&amp;st=1uej90io&amp;dl=0">Computational Challenges of Multidomain Data</a></p></li>
-<li><p><a href="https://www.dropbox.com/scl/fi/76ouk0l3eiok39egn7xhc/MicrobiomeDependentTopics_IPAM2020.pdf?rlkey=owlfgsz9trdjvhnbs9s0zxh62&amp;st=wqjteh50&amp;dl=0">Complex dependent Factors for Multiway Data</a></p></li>
-</ul>
 
 </div>
 </div>
@@ -700,7 +626,7 @@ BiocManager::install(“phyloseq”)
         </div>
       </div>
 <a href="stan-explained.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="other-examples-of-applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="all-the-tools-already-available.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

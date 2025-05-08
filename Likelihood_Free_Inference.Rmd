@@ -334,4 +334,3 @@ ggplot(roc_df, aes(x = fpr, y = tpr)) +
 2. Cranmer, K., Brehmer, J., & Louppe, G. (2020). *The Frontier of Simulation-Based Inference*. PNAS.  
 3. Papamakarios, G. & Murray, I. (2016). *Fast ε-Free Inference of Simulation Models with Bayesian Conditional Density Estimation*. NeurIPS.  
 4. Gutmann, M. U. & Hyvärinen, A. (2012). *Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models*. AISTATS.  
-```

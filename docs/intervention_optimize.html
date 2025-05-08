@@ -214,9 +214,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.20" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#advantages-limitations"><i class="fa fa-check"></i><b>11.20</b> Advantages &amp; Limitations</a></li>
 <li class="chapter" data-level="11.21" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#summary-outlook"><i class="fa fa-check"></i><b>11.21</b> Summary &amp; Outlook</a></li>
 <li class="chapter" data-level="11.22" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references"><i class="fa fa-check"></i><b>11.22</b> References</a></li>
-<li class="chapter" data-level="11.23" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#special-data-structures"><i class="fa fa-check"></i><b>11.23</b> Special data structures</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>12</b> Other examples of applications</a></li>
+<li class="chapter" data-level="12" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html"><i class="fa fa-check"></i><b>12</b> All the tools already available</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#a-cran-view-of-what-exists"><i class="fa fa-check"></i><b>12.1</b> A CRAN view of what exists:</a></li>
+<li class="chapter" data-level="12.2" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#specific-packages"><i class="fa fa-check"></i><b>12.2</b> Specific Packages:</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html"><i class="fa fa-check"></i><b>13</b> Multimodal data examples of approaches</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html#special-data-structures"><i class="fa fa-check"></i><b>13.1</b> Special data structures</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>14</b> Other examples of applications</a></li>
 </ul>
 
       </nav>
@@ -294,7 +302,7 @@ They generally favor more samples in the region where the peak is located.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="intervention_optimize.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(scores) <span class="sc">+</span></span>
 <span id="cb23-2"><a href="intervention_optimize.html#cb23-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(UMAP1, UMAP2, <span class="at">col =</span> <span class="fu">log</span>(loss), <span class="at">size =</span> X4)) <span class="sc">+</span></span>
 <span id="cb23-3"><a href="intervention_optimize.html#cb23-3" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="at">option =</span> <span class="st">&quot;inferno&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intervention_optimize.html#cb24-1" tabindex="-1"></a>w_df <span class="ot">&lt;-</span> w <span class="sc">%&gt;%</span></span>
 <span id="cb24-2"><a href="intervention_optimize.html#cb24-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb24-3"><a href="intervention_optimize.html#cb24-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>loss) <span class="sc">%&gt;%</span></span>
