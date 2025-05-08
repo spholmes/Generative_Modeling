@@ -9,7 +9,7 @@ author: Susan Holmes
 # Index
 
 
-```{r setupInitial}
+```{r setupInitial, include=FALSE}
 knitr::opts_chunk$set(
   fig.path = "figures/",  # All figures will go to a 'figures' directory
   cache = TRUE,
@@ -51,7 +51,7 @@ knitr::opts_chunk$set(
  
  Identifiability
  
- GMM : Generalized Method of Moments
+ GMM: Gaussian Mixture Models (beware GMM : Generalized Method of Moments)
  
  GLM : Generalized Linear Models
  
