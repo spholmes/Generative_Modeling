@@ -1,0 +1,52 @@
+# All the tools already available
+
+
+## A CRAN view of what exists:
+
+[https://cran.r-project.org/web/views/ExperimentalDesign.html](https://cran.r-project.org/web/views/ExperimentalDesign.html)
+
+## Specific Packages:
+
+- [acebayes](https://CRAN.R-project.org/package=acebayes): Optimal Bayesian Experimental Design using the ACE Algorithm
+- [adaptDiag](https://CRAN.R-project.org/package=adaptDiag): Bayesian Adaptive Designs for Diagnostic Trials
+- [ADCT](https://CRAN.R-project.org/package=ADCT): Adaptive Design in Clinical Trials
+- [adoptr](https://CRAN.R-project.org/package=adoptr): Adaptive Optimal Two-Stage Designs in R
+- [adpss](https://CRAN.R-project.org/package=adpss): Design and Analysis of Locally or Globally Efficient Adaptive Designs
+- [agricolae](https://CRAN.R-project.org/package=agricolae): Statistical Procedures for Agricultural Research
+- [agricolaeplotr](https://CRAN.R-project.org/package=agricolaeplotr): Visualization of Design of Experiments from the 'agricolae' Package
+- [AlgDesign](https://CRAN.R-project.org/package=AlgDesign): Algorithmic Experimental Design
+- [ALTopt](https://CRAN.R-project.org/package=ALTopt): Optimal Experimental Designs for Accelerated Life Testing
+- [Aoptbdtvc](https://CRAN.R-project.org/package=Aoptbdtvc): A-Optimal Block Designs for Comparing Test Treatments with Controls
+- [asd](https://CRAN.R-project.org/package=asd): Simulations for Adaptive Seamless Designs
+- [bacistool](https://CRAN.R-project.org/package=bacistool): Bayesian Classification and Information Sharing (BaCIS) Tool for the Design of Multi-Group Phase II Clinical Trials
+- [BayesCR](https://CRAN.R-project.org/package=BayesCR): Bayesian Analysis of Censored Regression Models Under Scale Mixture of Skew Normal Distributions
+- [bayesCT](https://CRAN.R-project.org/package=bayesCT): Simulation and Analysis of Adaptive Bayesian Clinical Trials
+- [BayesDesign](https://CRAN.R-project.org/package=BayesDesign): Bayesian Single-Arm Design with Survival Endpoints
+- [BayesPPD](https://CRAN.R-project.org/package=BayesPPD): Bayesian Power Prior Design
+- [BDEsize](https://CRAN.R-project.org/package=BDEsize): Efficient Determination of Sample Size in Balanced Design of Experiments
+- [bdlp](https://CRAN.R-project.org/package=bdlp): Transparent and Reproducible Artificial Data Generation
+- [bioOED](https://CRAN.R-project.org/package=bioOED): Sensitivity Analysis and Optimum Experiment Design for Microbial Inactivation
+- [deepgp](https://CRAN.R-project.org/package=deepgp): Sequential Design for Deep Gaussian Processes using MCMC
+- [DelayedEffect.Design](https://CRAN.R-project.org/package=DelayedEffect.Design): Sample Size and Power Calculations using the APPLE and SEPPLE Methods
+- [demu](https://CRAN.R-project.org/package=demu): Optimal Design Emulators via Point Processes
+- [DiceDesign](https://CRAN.R-project.org/package=DiceDesign): Designs of Computer Experiments
+- [DiceKriging](https://CRAN.R-project.org/package=DiceKriging): Kriging Methods for Computer Experiments
+- [DiceOptim](https://CRAN.R-project.org/package=DiceOptim): Kriging-Based Optimization for Computer Experiments
+- [earlyR](https://CRAN.R-project.org/package=earlyR): Estimation of Transmissibility in the Early Stages of a Disease Outbreak
+- [easypower](https://CRAN.R-project.org/package=easypower): Sample Size Estimation for Experimental Designs
+- [experDesign](https://CRAN.R-project.org/package=experDesign): Design Experiments for Batches
+- [faux](https://CRAN.R-project.org/package=faux): Simulation for Factorial Designs
+- [FielDHub](https://CRAN.R-project.org/package=FielDHub): A Shiny App for Design of Experiments in Life Sciences
+- [FieldSim](https://CRAN.R-project.org/package=FieldSim): Random Fields (and Bridges) Simulations
+- [geospt](https://CRAN.R-project.org/package=geospt): Geostatistical Analysis and Design of Optimal Spatial Sampling Networks
+- [gscounts](https://CRAN.R-project.org/package=gscounts): Group Sequential Designs with Negative Binomial Outcomes
+- [hiPOD](https://CRAN.R-project.org/package=hiPOD): hierarchical Pooled Optimal Design
+- [MCPModPack](https://CRAN.R-project.org/package=MCPModPack): Simulation-Based Design and Analysis of Dose-Finding Trials
+- [scDesign](https://CRAN.R-project.org/package=scDesign): Simulation-based scRNA-seq experimental design
+- [phyclust](https://CRAN.R-project.org/package=phyclust): (seqgen) Simulate the evolution of nucleotide or amino acid sequences along a phylogeny
+- [splatter](https://CRAN.R-project.org/package=splatter): Simulation of single-cell RNA sequencing count data
+- [MSstatsSampleSize](https://CRAN.R-project.org/package=MSstatsSampleSize): Simulation tool for optimal design of high-dimensional MS-based proteomics experiment
+- [PROPER](https://CRAN.R-project.org/package=PROPER): Simulation based methods for evaluating the statistical power in differential expression analysis from RNA-seq data
+- [MOSim](https://bioconductor.org/packages/release/bioc/html/MOSim.html): Simulates multi-omic experiments that mimic regulatory mechanisms within the cell
+- [mbtransfer](https://krisrs1128.github.io/mbtransfer/): Simulation of hypothetical community trajectories under user-specified perturbations.
+- [miniLNM](https://krisrs1128.github.io/miniLNM/) :For fitting and using logistic-normal multinomial models. It wraps a simple ‘Stan’ script.

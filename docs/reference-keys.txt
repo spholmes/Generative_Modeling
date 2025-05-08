@@ -25,3 +25,6 @@ parameters-block
 model-block
 generated-quantities-block
 in-plain-english
+all-the-tools-already-available
+a-cran-view-of-what-exists
+specific-packages
