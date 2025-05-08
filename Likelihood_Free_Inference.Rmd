@@ -5,6 +5,16 @@ Gutmann, M. U., Dutta, R., Kaski, S., & Corander, J. (2018). *Likelihood-Free In
 ---
 
 
+```{r setupnotfigurerepeat,include=FALSE}
+knitr::opts_chunk$set(
+  fig.keep= 'last',
+  fig.path = "figures/",
+  uniqueness = FALSE,
+  cache = TRUE,
+  cache.path = "_cache/"
+)
+```
+
 ## Motivation  
 
 - Many complex simulators → no tractable likelihood  
@@ -77,7 +87,7 @@ df     <- data.frame(theta = thetas, s_sim = sims)
 
 ---
 
-```{r}
+```{r histogram_abc1}
 # 3. Histogram of summary statistics
 ggplot(df, aes(x = s_sim)) +
   geom_histogram(binwidth = 0.1, fill = "gray80", color = "white") +
@@ -217,7 +227,7 @@ for (t in seq_len(T)) {
 
 ## Example: 1D Gaussian Mixture
 
-```{r}
+```{r lfreegaussian1}
 set.seed(123)
 n <- 500; p <- 0.3
 # Observed: two-component Gaussian mixture
@@ -236,7 +246,7 @@ df <- rbind(obs, sim)
 
 ---
 
-```{r}
+```{r scattercompare}
 # Scatter plot
 library(ggplot2)
 ggplot(df, aes(x = x, y = 0, color = label)) +
@@ -256,7 +266,7 @@ $$
 
 ---
 
-```{r,message=FALSE}
+```{r logisticlf,message=FALSE}
 # Fit logistic regression
 df$y_bin <- ifelse(df$label == "Observed", 1, 0)
 fit <- glm(y_bin ~ x, data = df, family = binomial)
@@ -274,7 +284,7 @@ roc_df <- data.frame(
 
 ---
 
-```{r}
+```{r roclf}
 library(ggplot2)
 ggplot(roc_df, aes(x = fpr, y = tpr)) +
   geom_line(linewidth = 1) +
