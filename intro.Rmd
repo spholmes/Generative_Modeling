@@ -37,9 +37,11 @@ author: Susan Holmes
  
  Identifiability
  
- GMM : Generalized Mixed Models
+ GMM : Generalized Method of Moments
  
  GLM : Generalized Linear Models
+ 
+ GLMM: General Linear Mixture Models
  
  HMC: Hamiltonian Monte Carlo
  
