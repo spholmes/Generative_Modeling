@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 Likelihood-Free Inference via Classification | Generative Modeling Workshop</title>
+  <meta name="description" content="11 Likelihood-Free Inference via Classification | Generative Modeling Workshop" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 Likelihood-Free Inference via Classification | Generative Modeling Workshop" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 Likelihood-Free Inference via Classification | Generative Modeling Workshop" />
+  
+  
+  
+
+<meta name="author" content="Susan Holmes" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="stan-explained.html"/>
+<link rel="next" href="other-examples-of-applications.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html"><i class="fa fa-check"></i><b>2</b> Workshop on using generative models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#our-learning-goals"><i class="fa fa-check"></i><b>2.1</b> Our learning goals:</a></li>
+<li class="chapter" data-level="2.2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#prerequisites"><i class="fa fa-check"></i><b>2.2</b> Prerequisites:</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html"><i class="fa fa-check"></i><b>3</b> Beyond Black Box Simulation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science"><i class="fa fa-check"></i><b>3.1</b> New Lingua Franca of Science</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science-1"><i class="fa fa-check"></i><b>3.1.1</b> New Lingua Franca of Science</a></li>
+<li class="chapter" data-level="3.1.2" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#grammar-of-generative-models"><i class="fa fa-check"></i><b>3.1.2</b> Grammar of Generative Models</a></li>
+<li class="chapter" data-level="3.1.3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#discrepancy-and-iterability"><i class="fa fa-check"></i><b>3.1.3</b> Discrepancy and Iterability</a></li>
+<li class="chapter" data-level="3.1.4" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#experimental-design-renaissance"><i class="fa fa-check"></i><b>3.1.4</b> Experimental Design Renaissance</a></li>
+<li class="chapter" data-level="3.1.5" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#simulation-to-the-rescue"><i class="fa fa-check"></i><b>3.1.5</b> Simulation to the Rescue</a></li>
+<li class="chapter" data-level="3.1.6" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim"><i class="fa fa-check"></i><b>3.1.6</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.7" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim-1"><i class="fa fa-check"></i><b>3.1.7</b> Covasim</a></li>
+<li class="chapter" data-level="3.1.8" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#what-are-we-going-to-study"><i class="fa fa-check"></i><b>3.1.8</b> What are we going to study ?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="slides.html"><a href="slides.html"><i class="fa fa-check"></i><b>4</b> Slides</a></li>
+<li class="chapter" data-level="5" data-path="labs-and-challenges.html"><a href="labs-and-challenges.html"><i class="fa fa-check"></i><b>5</b> Labs and Challenges :</a></li>
+<li class="chapter" data-level="6" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html"><i class="fa fa-check"></i><b>6</b> Non-Identifiability in Mixture Models: An Example</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#introduction-to-non-identifiability"><i class="fa fa-check"></i><b>6.1</b> Introduction to Non-Identifiability</a></li>
+<li class="chapter" data-level="6.2" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#the-binomial-mixture-model"><i class="fa fa-check"></i><b>6.2</b> The Binomial Mixture Model</a></li>
+<li class="chapter" data-level="6.3" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#simulating-data-from-mixture-models"><i class="fa fa-check"></i><b>6.3</b> Simulating Data from Mixture Models</a></li>
+<li class="chapter" data-level="6.4" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#demonstrating-non-identifiability"><i class="fa fa-check"></i><b>6.4</b> Demonstrating Non-Identifiability</a></li>
+<li class="chapter" data-level="6.5" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#comparing-distributions-directly"><i class="fa fa-check"></i><b>6.5</b> Comparing Distributions Directly</a></li>
+<li class="chapter" data-level="6.6" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#exploring-parameter-space"><i class="fa fa-check"></i><b>6.6</b> Exploring Parameter Space</a></li>
+<li class="chapter" data-level="6.7" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#practical-implications-for-inference"><i class="fa fa-check"></i><b>6.7</b> Practical Implications for Inference</a></li>
+<li class="chapter" data-level="6.8" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#non-identifiability-as-a-function-of-separation"><i class="fa fa-check"></i><b>6.8</b> Non-Identifiability as a Function of Separation</a></li>
+<li class="chapter" data-level="6.9" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#visualizing-the-non-identifiability-region"><i class="fa fa-check"></i><b>6.9</b> Visualizing the Non-Identifiability Region</a></li>
+<li class="chapter" data-level="6.10" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#the-likelihood-surface"><i class="fa fa-check"></i><b>6.10</b> The Likelihood Surface</a></li>
+<li class="chapter" data-level="6.11" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#practical-implications-and-solutions"><i class="fa fa-check"></i><b>6.11</b> Practical Implications and Solutions</a></li>
+<li class="chapter" data-level="6.12" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#conclusion"><i class="fa fa-check"></i><b>6.12</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervention.html"><a href="intervention.html"><i class="fa fa-check"></i><b>7</b> Intervention</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="intervention.html"><a href="intervention.html#start-defining-the-intervention-in-a-time-series"><i class="fa fa-check"></i><b>7.1</b> Start defining the intervention in a time series</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="intervention_optimize.html"><a href="intervention_optimize.html"><i class="fa fa-check"></i><b>8</b> Intervention_Optimize</a></li>
+<li class="chapter" data-level="9" data-path="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><i class="fa fa-check"></i><b>9</b> Heteroskedastic Mixtures : goodness of fit iterations</a></li>
+<li class="chapter" data-level="10" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>10</b> Stan Explained</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="stan-explained.html"><a href="stan-explained.html#installing-stan"><i class="fa fa-check"></i><b>10.1</b> Installing <code>stan</code></a></li>
+<li class="chapter" data-level="10.2" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>10.2</b> <code>gmm.stan</code> file</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>10.2.1</b> In plain English</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="stan-explained.html"><a href="stan-explained.html#more-examples"><i class="fa fa-check"></i><b>10.3</b> More examples</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html"><i class="fa fa-check"></i><b>11</b> Likelihood-Free Inference via Classification</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#motivation"><i class="fa fa-check"></i><b>11.1</b> Motivation</a></li>
+<li class="chapter" data-level="11.2" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture"><i class="fa fa-check"></i><b>11.2</b> Likelihood-Free Inference: The Big Picture</a></li>
+<li class="chapter" data-level="11.3" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#what-is-abc"><i class="fa fa-check"></i><b>11.3</b> What is ABC?</a></li>
+<li class="chapter" data-level="11.4" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#when-to-use-abc"><i class="fa fa-check"></i><b>11.4</b> When to Use ABC</a></li>
+<li class="chapter" data-level="11.5" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#the-abc-rejection-algorithm"><i class="fa fa-check"></i><b>11.5</b> The ABC Rejection Algorithm</a></li>
+<li class="chapter" data-level="11.6" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#illustrated-example-estimating-a-mean"><i class="fa fa-check"></i><b>11.6</b> Illustrated Example: Estimating a Mean</a></li>
+<li class="chapter" data-level="11.7" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#acceptance-threshold-visualization"><i class="fa fa-check"></i><b>11.7</b> Acceptance Threshold Visualization</a></li>
+<li class="chapter" data-level="11.8" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#abc-approximate-posterior"><i class="fa fa-check"></i><b>11.8</b> ABC Approximate Posterior</a></li>
+<li class="chapter" data-level="11.9" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#extensions-of-abc"><i class="fa fa-check"></i><b>11.9</b> Extensions of ABC</a></li>
+<li class="chapter" data-level="11.10" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references-about-abc"><i class="fa fa-check"></i><b>11.10</b> References about ABC</a></li>
+<li class="chapter" data-level="11.11" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#classification-based-lfi"><i class="fa fa-check"></i><b>11.11</b> Classification-Based LFI</a></li>
+<li class="chapter" data-level="11.12" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#algorithm-sketch"><i class="fa fa-check"></i><b>11.12</b> Algorithm Sketch</a></li>
+<li class="chapter" data-level="11.13" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#motivation-1"><i class="fa fa-check"></i><b>11.13</b> Motivation</a></li>
+<li class="chapter" data-level="11.14" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture-1"><i class="fa fa-check"></i><b>11.14</b> Likelihood-Free Inference: The Big Picture</a></li>
+<li class="chapter" data-level="11.15" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#classification-based-lfi-1"><i class="fa fa-check"></i><b>11.15</b> Classification-Based LFI</a></li>
+<li class="chapter" data-level="11.16" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#algorithm-sketch-1"><i class="fa fa-check"></i><b>11.16</b> Algorithm Sketch</a></li>
+<li class="chapter" data-level="11.17" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#example-1d-gaussian-mixture"><i class="fa fa-check"></i><b>11.17</b> Example: 1D Gaussian Mixture</a>
+<ul>
+<li class="chapter" data-level="11.17.1" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#example-logistic-discriminator"><i class="fa fa-check"></i><b>11.17.1</b> Example: Logistic Discriminator</a></li>
+</ul></li>
+<li class="chapter" data-level="11.18" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#applications-case-studies"><i class="fa fa-check"></i><b>11.18</b> Applications &amp; Case Studies</a></li>
+<li class="chapter" data-level="11.19" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#practical-tips"><i class="fa fa-check"></i><b>11.19</b> Practical Tips</a></li>
+<li class="chapter" data-level="11.20" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#advantages-limitations"><i class="fa fa-check"></i><b>11.20</b> Advantages &amp; Limitations</a></li>
+<li class="chapter" data-level="11.21" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#summary-outlook"><i class="fa fa-check"></i><b>11.21</b> Summary &amp; Outlook</a></li>
+<li class="chapter" data-level="11.22" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references"><i class="fa fa-check"></i><b>11.22</b> References</a></li>
+<li class="chapter" data-level="11.23" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#special-data-structures"><i class="fa fa-check"></i><b>11.23</b> Special data structures</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>12</b> Other examples of applications</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Generative Modeling Workshop</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="likelihood-free-inference-via-classification" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Likelihood-Free Inference via Classification<a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-via-classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Gutmann, M. U., Dutta, R., Kaski, S., &amp; Corander, J. (2018). <em>Likelihood-Free Inference via Classification</em>. Statistics and Computing.</p>
+<hr />
+<div id="motivation" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Motivation<a href="likelihood-free-inference-via-classification.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Many complex simulators → no tractable likelihood<br />
+</li>
+<li><strong>Approximate Bayesian Computation (ABC)</strong> sidesteps likelihood by simulating and comparing summaries<br />
+</li>
+<li>But choosing summaries and distance thresholds is ad hoc<br />
+</li>
+<li><strong>Gutmann et al. (2018)</strong> propose learning a classifier to distinguish observed vs. simulated and use its outputs for inference</li>
+</ul>
+<hr />
+</div>
+<div id="likelihood-free-inference-the-big-picture" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Likelihood-Free Inference: The Big Picture<a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Generative model</strong> <span class="math inline">\(p(x\mid\theta)\)</span> is a black-box simulator<br />
+</li>
+<li><strong>Observed data</strong> <span class="math inline">\(x_{\rm obs}\)</span><br />
+</li>
+<li><strong>Goal:</strong> Approximate <span class="math inline">\(p(\theta\mid x_{\rm obs})\)</span> without ever evaluating <span class="math inline">\(p(x\mid\theta)\)</span></li>
+</ol>
+<hr />
+</div>
+<div id="what-is-abc" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> What is ABC?<a href="likelihood-free-inference-via-classification.html#what-is-abc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Approximate Bayesian Computation (ABC)</strong><br />
+</li>
+<li>A likelihood‐free inference method<br />
+</li>
+<li>Replace an intractable likelihood with simulation + summary statistics<br />
+</li>
+<li>Accept parameter draws that produce simulated data “close” to the observed data</li>
+</ul>
+<hr />
+</div>
+<div id="when-to-use-abc" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> When to Use ABC<a href="likelihood-free-inference-via-classification.html#when-to-use-abc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Complex generative models with intractable or expensive likelihoods<br />
+</li>
+<li>Examples: population genetics, epidemiology, systems biology<br />
+</li>
+<li>Enables Bayesian inference without ever evaluating <span class="math inline">\(p(x\mid\theta)\)</span></li>
+</ul>
+<hr />
+</div>
+<div id="the-abc-rejection-algorithm" class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> The ABC Rejection Algorithm<a href="likelihood-free-inference-via-classification.html#the-abc-rejection-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="likelihood-free-inference-via-classification.html#cb59-1" tabindex="-1"></a><span class="co"># Observed summary statistic</span></span>
+<span id="cb59-2"><a href="likelihood-free-inference-via-classification.html#cb59-2" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_obs)</span>
+<span id="cb59-3"><a href="likelihood-free-inference-via-classification.html#cb59-3" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="likelihood-free-inference-via-classification.html#cb59-4" tabindex="-1"></a><span class="co"># Rejection ABC</span></span>
+<span id="cb59-5"><a href="likelihood-free-inference-via-classification.html#cb59-5" tabindex="-1"></a>accepted <span class="ot">&lt;-</span> <span class="fu">numeric</span>()</span>
+<span id="cb59-6"><a href="likelihood-free-inference-via-classification.html#cb59-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(N)) {</span>
+<span id="cb59-7"><a href="likelihood-free-inference-via-classification.html#cb59-7" tabindex="-1"></a>  theta_i <span class="ot">&lt;-</span> <span class="fu">sample_prior</span>()</span>
+<span id="cb59-8"><a href="likelihood-free-inference-via-classification.html#cb59-8" tabindex="-1"></a>  x_sim   <span class="ot">&lt;-</span> <span class="fu">simulator</span>(theta_i)</span>
+<span id="cb59-9"><a href="likelihood-free-inference-via-classification.html#cb59-9" tabindex="-1"></a>  s_sim   <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_sim)</span>
+<span id="cb59-10"><a href="likelihood-free-inference-via-classification.html#cb59-10" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon) {</span>
+<span id="cb59-11"><a href="likelihood-free-inference-via-classification.html#cb59-11" tabindex="-1"></a>    accepted <span class="ot">&lt;-</span> <span class="fu">c</span>(accepted, theta_i)</span>
+<span id="cb59-12"><a href="likelihood-free-inference-via-classification.html#cb59-12" tabindex="-1"></a>  }</span>
+<span id="cb59-13"><a href="likelihood-free-inference-via-classification.html#cb59-13" tabindex="-1"></a>}</span>
+<span id="cb59-14"><a href="likelihood-free-inference-via-classification.html#cb59-14" tabindex="-1"></a>posterior_samples <span class="ot">&lt;-</span> accepted</span></code></pre></div>
+<hr />
+</div>
+<div id="illustrated-example-estimating-a-mean" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Illustrated Example: Estimating a Mean<a href="likelihood-free-inference-via-classification.html#illustrated-example-estimating-a-mean" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="likelihood-free-inference-via-classification.html#cb60-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb60-2"><a href="likelihood-free-inference-via-classification.html#cb60-2" tabindex="-1"></a><span class="co"># 1. Observed data</span></span>
+<span id="cb60-3"><a href="likelihood-free-inference-via-classification.html#cb60-3" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb60-4"><a href="likelihood-free-inference-via-classification.html#cb60-4" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_obs)</span>
+<span id="cb60-5"><a href="likelihood-free-inference-via-classification.html#cb60-5" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="likelihood-free-inference-via-classification.html#cb60-6" tabindex="-1"></a><span class="co"># 2. Simulate candidates</span></span>
+<span id="cb60-7"><a href="likelihood-free-inference-via-classification.html#cb60-7" tabindex="-1"></a>thetas <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb60-8"><a href="likelihood-free-inference-via-classification.html#cb60-8" tabindex="-1"></a>sims   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(thetas, <span class="cf">function</span>(theta) <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>, theta, <span class="dv">2</span>)))</span>
+<span id="cb60-9"><a href="likelihood-free-inference-via-classification.html#cb60-9" tabindex="-1"></a>df     <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">theta =</span> thetas, <span class="at">s_sim =</span> sims)</span></code></pre></div>
+<hr />
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="likelihood-free-inference-via-classification.html#cb61-1" tabindex="-1"></a><span class="co"># 3. Histogram of summary statistics</span></span>
+<span id="cb61-2"><a href="likelihood-free-inference-via-classification.html#cb61-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> s_sim)) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="likelihood-free-inference-via-classification.html#cb61-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb61-4"><a href="likelihood-free-inference-via-classification.html#cb61-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> s_obs, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb61-5"><a href="likelihood-free-inference-via-classification.html#cb61-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb61-6"><a href="likelihood-free-inference-via-classification.html#cb61-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Simulated Means vs. Observed Mean&quot;</span>,</span>
+<span id="cb61-7"><a href="likelihood-free-inference-via-classification.html#cb61-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
+<span id="cb61-8"><a href="likelihood-free-inference-via-classification.html#cb61-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count&quot;</span></span>
+<span id="cb61-9"><a href="likelihood-free-inference-via-classification.html#cb61-9" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="acceptance-threshold-visualization" class="section level2 hasAnchor" number="11.7">
+<h2><span class="header-section-number">11.7</span> Acceptance Threshold Visualization<a href="likelihood-free-inference-via-classification.html#acceptance-threshold-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="likelihood-free-inference-via-classification.html#cb62-1" tabindex="-1"></a>epsilon <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb62-2"><a href="likelihood-free-inference-via-classification.html#cb62-2" tabindex="-1"></a>df<span class="sc">$</span>accepted <span class="ot">&lt;-</span> <span class="fu">abs</span>(df<span class="sc">$</span>s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon</span>
+<span id="cb62-3"><a href="likelihood-free-inference-via-classification.html#cb62-3" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="likelihood-free-inference-via-classification.html#cb62-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> theta, <span class="at">y =</span> s_sim, <span class="at">color =</span> accepted)) <span class="sc">+</span></span>
+<span id="cb62-5"><a href="likelihood-free-inference-via-classification.html#cb62-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb62-6"><a href="likelihood-free-inference-via-classification.html#cb62-6" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray70&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb62-7"><a href="likelihood-free-inference-via-classification.html#cb62-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> s_obs, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb62-8"><a href="likelihood-free-inference-via-classification.html#cb62-8" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb62-9"><a href="likelihood-free-inference-via-classification.html#cb62-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Acceptance Region&quot;</span>,</span>
+<span id="cb62-10"><a href="likelihood-free-inference-via-classification.html#cb62-10" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
+<span id="cb62-11"><a href="likelihood-free-inference-via-classification.html#cb62-11" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
+<span id="cb62-12"><a href="likelihood-free-inference-via-classification.html#cb62-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Accepted&quot;</span></span>
+<span id="cb62-13"><a href="likelihood-free-inference-via-classification.html#cb62-13" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="index_files/figure-html/abc-threshold-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="abc-approximate-posterior" class="section level2 hasAnchor" number="11.8">
+<h2><span class="header-section-number">11.8</span> ABC Approximate Posterior<a href="likelihood-free-inference-via-classification.html#abc-approximate-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="likelihood-free-inference-via-classification.html#cb63-1" tabindex="-1"></a>post <span class="ot">&lt;-</span> df<span class="sc">$</span>theta[df<span class="sc">$</span>accepted]</span>
+<span id="cb63-2"><a href="likelihood-free-inference-via-classification.html#cb63-2" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="likelihood-free-inference-via-classification.html#cb63-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">theta =</span> post), <span class="fu">aes</span>(<span class="at">x =</span> theta)) <span class="sc">+</span></span>
+<span id="cb63-4"><a href="likelihood-free-inference-via-classification.html#cb63-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;skyblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="likelihood-free-inference-via-classification.html#cb63-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb63-6"><a href="likelihood-free-inference-via-classification.html#cb63-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Approximate Posterior for θ&quot;</span>,</span>
+<span id="cb63-7"><a href="likelihood-free-inference-via-classification.html#cb63-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
+<span id="cb63-8"><a href="likelihood-free-inference-via-classification.html#cb63-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
+<span id="cb63-9"><a href="likelihood-free-inference-via-classification.html#cb63-9" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="index_files/figure-html/abc-posterior-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="extensions-of-abc" class="section level2 hasAnchor" number="11.9">
+<h2><span class="header-section-number">11.9</span> Extensions of ABC<a href="likelihood-free-inference-via-classification.html#extensions-of-abc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>ABC‐SMC</strong>: Sequential Monte Carlo to adaptively reduce <span class="math inline">\(\varepsilon\)</span></li>
+<li><strong>ABC‐MCMC</strong>: MCMC scheme with ABC acceptance step<br />
+</li>
+<li><strong>Regression Adjustment</strong>: post‐processing to correct bias in posterior</li>
+</ul>
+<hr />
+</div>
+<div id="references-about-abc" class="section level2 hasAnchor" number="11.10">
+<h2><span class="header-section-number">11.10</span> References about ABC<a href="likelihood-free-inference-via-classification.html#references-about-abc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Beaumont, M. A., Zhang, W., &amp; Balding, D. J. (2002). Approximate Bayesian computation in population genetics. <em>Genetics</em>, <strong>162</strong>(4), 2025–2035.<br />
+</li>
+<li>Marin, J.-M., Pudlo, P., Robert, C. P., &amp; Ryder, R. J. (2012). Approximate Bayesian computational methods. <em>Statistics and Computing</em>, <strong>22</strong>(6), 1167–1180.<br />
+</li>
+<li>Sisson, S. A., Fan, Y., &amp; Beaumont, M. (2018). <em>Handbook of Approximate Bayesian Computation</em>. CRC Press.</li>
+</ol>
+<hr />
+</div>
+<div id="classification-based-lfi" class="section level2 hasAnchor" number="11.11">
+<h2><span class="header-section-number">11.11</span> Classification-Based LFI<a href="likelihood-free-inference-via-classification.html#classification-based-lfi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Simulate <span class="math inline">\(\{\theta_i,\,x_i\}\)</span> from the prior and simulator<br />
+</li>
+<li><strong>Label</strong> data:
+<ul>
+<li><span class="math inline">\(y=1\)</span> for <span class="math inline">\(x_i\sim p(x\mid\theta_i)\)</span> close to <span class="math inline">\(x_{\rm obs}\)</span><br />
+</li>
+<li><span class="math inline">\(y=0\)</span> for simulated from other <span class="math inline">\(\theta\)</span><br />
+</li>
+</ul></li>
+<li>Train a <strong>discriminator</strong> <span class="math inline">\(D(x)\approx P(y=1\mid x)\)</span><br />
+</li>
+<li>Use <span class="math inline">\(D(x_{\rm obs})\)</span> (or its logit) as a surrogate likelihood</li>
+</ul>
+<hr />
+</div>
+<div id="algorithm-sketch" class="section level2 hasAnchor" number="11.12">
+<h2><span class="header-section-number">11.12</span> Algorithm Sketch<a href="likelihood-free-inference-via-classification.html#algorithm-sketch" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pseudo-code:</p>
+<pre><code>for (t in 1:T) {
+  θ_samples &lt;- sample_prior(N)
+  x_sims &lt;- simulator(θ_samples)
+  y_labels &lt;- ifelse(distance(x_sims, x_obs) &lt; ε_t, 1, 0)
+  D_t &lt;- train_classifier(x_sims, y_labels)
+  # Use D_t to weight or propose new θ in SMC/PMC scheme
+}</code></pre>
+</div>
+<div id="motivation-1" class="section level2 hasAnchor" number="11.13">
+<h2><span class="header-section-number">11.13</span> Motivation<a href="likelihood-free-inference-via-classification.html#motivation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Many complex simulators → no tractable likelihood<br />
+</li>
+<li><strong>Approximate Bayesian Computation (ABC)</strong> sidesteps likelihood by simulating and comparing summaries<br />
+</li>
+<li>Manual choice of summaries and thresholds can be ad hoc<br />
+</li>
+<li><strong>Gutmann et al. (2018)</strong> propose using a classifier to distinguish observed vs. simulated, turning that into a discrepancy</li>
+</ul>
+<hr />
+</div>
+<div id="likelihood-free-inference-the-big-picture-1" class="section level2 hasAnchor" number="11.14">
+<h2><span class="header-section-number">11.14</span> Likelihood-Free Inference: The Big Picture<a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Simulator</strong>: black-box generative model <span class="math display">\[p(x \mid \theta)\]</span><br />
+</li>
+<li><strong>Observed data</strong>: <span class="math display">\[x_{\mathrm{obs}}\]</span><br />
+</li>
+<li><strong>Goal</strong>: Approximate posterior <span class="math display">\[p(\theta \mid x_{\mathrm{obs}})\]</span> without evaluating <span class="math display">\[p(x \mid \theta)\]</span></li>
+</ol>
+<hr />
+</div>
+<div id="classification-based-lfi-1" class="section level2 hasAnchor" number="11.15">
+<h2><span class="header-section-number">11.15</span> Classification-Based LFI<a href="likelihood-free-inference-via-classification.html#classification-based-lfi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Draw <span class="math inline">\((\theta_i, x_i)_{i=1}^N\)</span> from the prior and simulator<br />
+</li>
+<li><strong>Label</strong> each <span class="math inline">\(x_i\)</span>:
+<ul>
+<li><span class="math inline">\(y_i = 1\)</span> if <span class="math inline">\(x_i\)</span> is “close” to <span class="math inline">\(x_{\mathrm{obs}}\)</span></li>
+<li><span class="math inline">\(y_i = 0\)</span> otherwise<br />
+</li>
+</ul></li>
+<li>Train classifier <span class="math inline">\(D(x)\approx P(y=1 \mid x)\)</span></li>
+<li>Use classifier output <span class="math inline">\(D(x_{\mathrm{obs}})\)</span> or its logit as a surrogate likelihood</li>
+</ul>
+<hr />
+</div>
+<div id="algorithm-sketch-1" class="section level2 hasAnchor" number="11.16">
+<h2><span class="header-section-number">11.16</span> Algorithm Sketch<a href="likelihood-free-inference-via-classification.html#algorithm-sketch-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pseudocode</p>
+<pre><code>for (t in seq_len(T)) {
+  theta &lt;- sample_prior(N)
+  x_sim &lt;- simulator(theta)
+  y     &lt;- as.integer(distance(x_sim, x_obs) &lt; eps[t])
+  D     &lt;- train_classifier(x_sim, y)
+  # Use D to weight or propose new theta in an SMC/PMC loop
+}</code></pre>
+<hr />
+</div>
+<div id="example-1d-gaussian-mixture" class="section level2 hasAnchor" number="11.17">
+<h2><span class="header-section-number">11.17</span> Example: 1D Gaussian Mixture<a href="likelihood-free-inference-via-classification.html#example-1d-gaussian-mixture" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="likelihood-free-inference-via-classification.html#cb66-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb66-2"><a href="likelihood-free-inference-via-classification.html#cb66-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span>; p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb66-3"><a href="likelihood-free-inference-via-classification.html#cb66-3" tabindex="-1"></a><span class="co"># Observed: two-component Gaussian mixture</span></span>
+<span id="cb66-4"><a href="likelihood-free-inference-via-classification.html#cb66-4" tabindex="-1"></a>obs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb66-5"><a href="likelihood-free-inference-via-classification.html#cb66-5" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb66-6"><a href="likelihood-free-inference-via-classification.html#cb66-6" tabindex="-1"></a>        <span class="fu">rnorm</span>(n<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p), <span class="dv">3</span>, <span class="fl">0.5</span>)),</span>
+<span id="cb66-7"><a href="likelihood-free-inference-via-classification.html#cb66-7" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Observed&quot;</span></span>
+<span id="cb66-8"><a href="likelihood-free-inference-via-classification.html#cb66-8" tabindex="-1"></a>)</span>
+<span id="cb66-9"><a href="likelihood-free-inference-via-classification.html#cb66-9" tabindex="-1"></a><span class="co"># Simulated under wrong single-Gaussian model</span></span>
+<span id="cb66-10"><a href="likelihood-free-inference-via-classification.html#cb66-10" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb66-11"><a href="likelihood-free-inference-via-classification.html#cb66-11" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(n, <span class="fl">0.5</span>, <span class="fl">1.5</span>),</span>
+<span id="cb66-12"><a href="likelihood-free-inference-via-classification.html#cb66-12" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Simulated&quot;</span></span>
+<span id="cb66-13"><a href="likelihood-free-inference-via-classification.html#cb66-13" tabindex="-1"></a>)</span>
+<span id="cb66-14"><a href="likelihood-free-inference-via-classification.html#cb66-14" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(obs, sim)</span></code></pre></div>
+<hr />
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="likelihood-free-inference-via-classification.html#cb67-1" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
+<span id="cb67-2"><a href="likelihood-free-inference-via-classification.html#cb67-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb67-3"><a href="likelihood-free-inference-via-classification.html#cb67-3" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">color =</span> label)) <span class="sc">+</span></span>
+<span id="cb67-4"><a href="likelihood-free-inference-via-classification.html#cb67-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb67-5"><a href="likelihood-free-inference-via-classification.html#cb67-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb67-6"><a href="likelihood-free-inference-via-classification.html#cb67-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Observed vs. Simulated Samples&quot;</span>,</span>
+<span id="cb67-7"><a href="likelihood-free-inference-via-classification.html#cb67-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<hr />
+<div id="example-logistic-discriminator" class="section level3 hasAnchor" number="11.17.1">
+<h3><span class="header-section-number">11.17.1</span> Example: Logistic Discriminator<a href="likelihood-free-inference-via-classification.html#example-logistic-discriminator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+D(x) = \mathrm{logit}^{-1}\bigl(\beta_0 + \beta_1 x\bigr)
+\]</span></p>
+<hr />
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="likelihood-free-inference-via-classification.html#cb68-1" tabindex="-1"></a><span class="co"># Fit logistic regression</span></span>
+<span id="cb68-2"><a href="likelihood-free-inference-via-classification.html#cb68-2" tabindex="-1"></a>df<span class="sc">$</span>y_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>label <span class="sc">==</span> <span class="st">&quot;Observed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb68-3"><a href="likelihood-free-inference-via-classification.html#cb68-3" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_bin <span class="sc">~</span> x, <span class="at">data =</span> df, <span class="at">family =</span> binomial)</span>
+<span id="cb68-4"><a href="likelihood-free-inference-via-classification.html#cb68-4" tabindex="-1"></a><span class="co"># ROC curve</span></span>
+<span id="cb68-5"><a href="likelihood-free-inference-via-classification.html#cb68-5" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb68-6"><a href="likelihood-free-inference-via-classification.html#cb68-6" tabindex="-1"></a>probs   <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb68-7"><a href="likelihood-free-inference-via-classification.html#cb68-7" tabindex="-1"></a>roc_obj <span class="ot">&lt;-</span> <span class="fu">roc</span>(df<span class="sc">$</span>y_bin, probs)</span>
+<span id="cb68-8"><a href="likelihood-free-inference-via-classification.html#cb68-8" tabindex="-1"></a>auc_val <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_obj)</span>
+<span id="cb68-9"><a href="likelihood-free-inference-via-classification.html#cb68-9" tabindex="-1"></a><span class="co"># Plot ROC</span></span>
+<span id="cb68-10"><a href="likelihood-free-inference-via-classification.html#cb68-10" tabindex="-1"></a>roc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb68-11"><a href="likelihood-free-inference-via-classification.html#cb68-11" tabindex="-1"></a>  <span class="at">fpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>specificities),</span>
+<span id="cb68-12"><a href="likelihood-free-inference-via-classification.html#cb68-12" tabindex="-1"></a>  <span class="at">tpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>sensitivities)</span>
+<span id="cb68-13"><a href="likelihood-free-inference-via-classification.html#cb68-13" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="likelihood-free-inference-via-classification.html#cb69-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb69-2"><a href="likelihood-free-inference-via-classification.html#cb69-2" tabindex="-1"></a><span class="fu">ggplot</span>(roc_df, <span class="fu">aes</span>(<span class="at">x =</span> fpr, <span class="at">y =</span> tpr)) <span class="sc">+</span></span>
+<span id="cb69-3"><a href="likelihood-free-inference-via-classification.html#cb69-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb69-4"><a href="likelihood-free-inference-via-classification.html#cb69-4" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb69-5"><a href="likelihood-free-inference-via-classification.html#cb69-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb69-6"><a href="likelihood-free-inference-via-classification.html#cb69-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;ROC Curve (AUC = %.2f)&quot;</span>, auc_val),</span>
+<span id="cb69-7"><a href="likelihood-free-inference-via-classification.html#cb69-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;False Positive Rate&quot;</span>,</span>
+<span id="cb69-8"><a href="likelihood-free-inference-via-classification.html#cb69-8" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;True Positive Rate&quot;</span>)</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="2000" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="applications-case-studies" class="section level2 hasAnchor" number="11.18">
+<h2><span class="header-section-number">11.18</span> Applications &amp; Case Studies<a href="likelihood-free-inference-via-classification.html#applications-case-studies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Population genetics</strong>: coalescent simulators for demographic inference<br />
+</li>
+<li><strong>Systems biology</strong>: stochastic models of biochemical networks<br />
+</li>
+<li><strong>Epidemiology</strong>: agent-based epidemic simulators</li>
+</ul>
+<hr />
+</div>
+<div id="practical-tips" class="section level2 hasAnchor" number="11.19">
+<h2><span class="header-section-number">11.19</span> Practical Tips<a href="likelihood-free-inference-via-classification.html#practical-tips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Classifier choice</strong>:
+<ul>
+<li>Logistic regression for speed<br />
+</li>
+<li>Random forests / GBMs for nonlinearity<br />
+</li>
+<li>Neural nets for high-dimensional data<br />
+</li>
+</ul></li>
+<li><strong>Features</strong>: raw data vs. summary statistics<br />
+</li>
+<li><strong>Simulation budget</strong>: trade-off between classifier accuracy and compute cos</li>
+<li><strong>Sequential schemes</strong>: embed into SMC-ABC to adapt <span class="math inline">\(\varepsilon\)</span></li>
+</ul>
+<hr />
+</div>
+<div id="advantages-limitations" class="section level2 hasAnchor" number="11.20">
+<h2><span class="header-section-number">11.20</span> Advantages &amp; Limitations<a href="likelihood-free-inference-via-classification.html#advantages-limitations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="51%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Automatic, data-driven discrepancy</td>
+<td>Classifier may fit simulator quirks</td>
+</tr>
+<tr class="even">
+<td>Continuous distance (AUC, logit)</td>
+<td>Extra training overhead</td>
+</tr>
+<tr class="odd">
+<td>Integrates into ABC/SMC frameworks</td>
+<td>Requires careful label calibration</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="summary-outlook" class="section level2 hasAnchor" number="11.21">
+<h2><span class="header-section-number">11.21</span> Summary &amp; Outlook<a href="likelihood-free-inference-via-classification.html#summary-outlook" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Classification</strong> reframes ABC as a supervised learning problem<br />
+</li>
+<li>Provides continuous, interpretable discrepancy measures<br />
+</li>
+<li>Future directions:
+<ul>
+<li>Deep architectures for high-dimensional simulators<br />
+</li>
+<li>Amortized inference for rapid repeated queries<br />
+</li>
+<li>Hybrid likelihood-based &amp; classification approaches</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="references" class="section level2 hasAnchor" number="11.22">
+<h2><span class="header-section-number">11.22</span> References<a href="likelihood-free-inference-via-classification.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Gutmann, M. U., Dutta, R., Kaski, S., &amp; Corander, J. (2018). <em>Likelihood-Free Inference via Classification</em>. Statistics and Computing.<br />
+</li>
+<li>Cranmer, K., Brehmer, J., &amp; Louppe, G. (2020). <em>The Frontier of Simulation-Based Inference</em>. PNAS.<br />
+</li>
+<li>Papamakarios, G. &amp; Murray, I. (2016). <em>Fast ε-Free Inference of Simulation Models with Bayesian Conditional Density Estimation</em>. NeurIPS.<br />
+</li>
+<li>Gutmann, M. U. &amp; Hyvärinen, A. (2012). <em>Noise-Contrastive Estimation: A New Estimation Principle for Unnormalized Statistical Models</em>. AISTATS.<br />
+</li>
+</ol>
+<pre><code>
+&lt;!--chapter:end:Likelihood_Free_Inference.Rmd--&gt;
+
+# All the tools already available
+
+
+## A CRAN view of what exists:
+
+[https://cran.r-project.org/web/views/ExperimentalDesign.html](https://cran.r-project.org/web/views/ExperimentalDesign.html)
+
+## Specific Packages:
+
+- [acebayes](https://CRAN.R-project.org/package=acebayes): Optimal Bayesian Experimental Design using the ACE Algorithm
+- [adaptDiag](https://CRAN.R-project.org/package=adaptDiag): Bayesian Adaptive Designs for Diagnostic Trials
+- [ADCT](https://CRAN.R-project.org/package=ADCT): Adaptive Design in Clinical Trials
+- [adoptr](https://CRAN.R-project.org/package=adoptr): Adaptive Optimal Two-Stage Designs in R
+- [adpss](https://CRAN.R-project.org/package=adpss): Design and Analysis of Locally or Globally Efficient Adaptive Designs
+- [agricolae](https://CRAN.R-project.org/package=agricolae): Statistical Procedures for Agricultural Research
+- [agricolaeplotr](https://CRAN.R-project.org/package=agricolaeplotr): Visualization of Design of Experiments from the &#39;agricolae&#39; Package
+- [AlgDesign](https://CRAN.R-project.org/package=AlgDesign): Algorithmic Experimental Design
+- [ALTopt](https://CRAN.R-project.org/package=ALTopt): Optimal Experimental Designs for Accelerated Life Testing
+- [Aoptbdtvc](https://CRAN.R-project.org/package=Aoptbdtvc): A-Optimal Block Designs for Comparing Test Treatments with Controls
+- [asd](https://CRAN.R-project.org/package=asd): Simulations for Adaptive Seamless Designs
+- [bacistool](https://CRAN.R-project.org/package=bacistool): Bayesian Classification and Information Sharing (BaCIS) Tool for the Design of Multi-Group Phase II Clinical Trials
+- [BayesCR](https://CRAN.R-project.org/package=BayesCR): Bayesian Analysis of Censored Regression Models Under Scale Mixture of Skew Normal Distributions
+- [bayesCT](https://CRAN.R-project.org/package=bayesCT): Simulation and Analysis of Adaptive Bayesian Clinical Trials
+- [BayesDesign](https://CRAN.R-project.org/package=BayesDesign): Bayesian Single-Arm Design with Survival Endpoints
+- [BayesPPD](https://CRAN.R-project.org/package=BayesPPD): Bayesian Power Prior Design
+- [BDEsize](https://CRAN.R-project.org/package=BDEsize): Efficient Determination of Sample Size in Balanced Design of Experiments
+- [bdlp](https://CRAN.R-project.org/package=bdlp): Transparent and Reproducible Artificial Data Generation
+- [bioOED](https://CRAN.R-project.org/package=bioOED): Sensitivity Analysis and Optimum Experiment Design for Microbial Inactivation
+- [deepgp](https://CRAN.R-project.org/package=deepgp): Sequential Design for Deep Gaussian Processes using MCMC
+- [DelayedEffect.Design](https://CRAN.R-project.org/package=DelayedEffect.Design): Sample Size and Power Calculations using the APPLE and SEPPLE Methods
+- [demu](https://CRAN.R-project.org/package=demu): Optimal Design Emulators via Point Processes
+- [DiceDesign](https://CRAN.R-project.org/package=DiceDesign): Designs of Computer Experiments
+- [DiceKriging](https://CRAN.R-project.org/package=DiceKriging): Kriging Methods for Computer Experiments
+- [DiceOptim](https://CRAN.R-project.org/package=DiceOptim): Kriging-Based Optimization for Computer Experiments
+- [earlyR](https://CRAN.R-project.org/package=earlyR): Estimation of Transmissibility in the Early Stages of a Disease Outbreak
+- [easypower](https://CRAN.R-project.org/package=easypower): Sample Size Estimation for Experimental Designs
+- [experDesign](https://CRAN.R-project.org/package=experDesign): Design Experiments for Batches
+- [faux](https://CRAN.R-project.org/package=faux): Simulation for Factorial Designs
+- [FielDHub](https://CRAN.R-project.org/package=FielDHub): A Shiny App for Design of Experiments in Life Sciences
+- [FieldSim](https://CRAN.R-project.org/package=FieldSim): Random Fields (and Bridges) Simulations
+- [geospt](https://CRAN.R-project.org/package=geospt): Geostatistical Analysis and Design of Optimal Spatial Sampling Networks
+- [gscounts](https://CRAN.R-project.org/package=gscounts): Group Sequential Designs with Negative Binomial Outcomes
+- [hiPOD](https://CRAN.R-project.org/package=hiPOD): hierarchical Pooled Optimal Design
+- [MCPModPack](https://CRAN.R-project.org/package=MCPModPack): Simulation-Based Design and Analysis of Dose-Finding Trials
+- [scDesign](https://CRAN.R-project.org/package=scDesign): Simulation-based scRNA-seq experimental design
+- [phyclust](https://CRAN.R-project.org/package=phyclust): (seqgen) Simulate the evolution of nucleotide or amino acid sequences along a phylogeny
+- [splatter](https://CRAN.R-project.org/package=splatter): Simulation of single-cell RNA sequencing count data
+- [MSstatsSampleSize](https://CRAN.R-project.org/package=MSstatsSampleSize): Simulation tool for optimal design of high-dimensional MS-based proteomics experiment
+- [PROPER](https://CRAN.R-project.org/package=PROPER): Simulation based methods for evaluating the statistical power in differential expression analysis from RNA-seq data
+- [MOSim](https://bioconductor.org/packages/release/bioc/html/MOSim.html): Simulates multi-omic experiments that mimic regulatory mechanisms within the cell
+- [mbtransfer](https://krisrs1128.github.io/mbtransfer/): Simulation of hypothetical community trajectories under user-specified perturbations.
+- [miniLNM](https://krisrs1128.github.io/miniLNM/) :For fitting and using logistic-normal multinomial models. It wraps a simple ‘Stan’ script.
+- [multimedia](https://krisrs1128.github.io/multimedia/) :  Multimodal mediation analysis of microbiome data
+
+&lt;!--chapter:end:AvailableTools.Rmd--&gt;
+
+# Multimodal data examples of approaches
+
+There are some good examples for the microbiome that care instructuve for other domains.
+
+[Multimedia website](https://krisrs1128.github.io/multimedia/)
+</code></pre>
+<p>install.packages(“multimedia”)
+####or you can use the new version:
+devtools::install_github(“krisrs1128/multimedia”)
+BiocManager::install(“phyloseq”)
+```</p>
+</div>
+<div id="special-data-structures" class="section level2 hasAnchor" number="11.23">
+<h2><span class="header-section-number">11.23</span> Special data structures<a href="likelihood-free-inference-via-classification.html#special-data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html">Summarized Experiment</a></p></li>
+<li><p><a href="https://www.bioconductor.org/help/course-materials/2022/CSAMA/lab/3-thu+fri/lab-07-MultiAssayExperiment/MultiAssayExperiment.html">About MultiAssayExperiments</a></p></li>
+<li><p><a href="https://f1000research.com/articles/5-1492/v2">About phyloseq</a></p></li>
+<li><p><a href="https://www.dropbox.com/scl/fi/h7k1s2klf96sebufqw8es/Lecture13-Microbiome.pdf?rlkey=5fjfzivmn3y55t9iqgl9x037c&amp;st=c9jtdlro&amp;dl=0">Lecture on Microbiome Data</a></p></li>
+<li><p><a href="https://www.dropbox.com/scl/fi/e0y9agnc2hrj1gv99wff8/BIRS_Challenges_2020.pdf?rlkey=bpn44g217mjudfs0xtywy7g35&amp;st=1uej90io&amp;dl=0">Computational Challenges of Multidomain Data</a></p></li>
+<li><p><a href="https://www.dropbox.com/scl/fi/76ouk0l3eiok39egn7xhc/MicrobiomeDependentTopics_IPAM2020.pdf?rlkey=owlfgsz9trdjvhnbs9s0zxh62&amp;st=wqjteh50&amp;dl=0">Complex dependent Factors for Multiway Data</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="stan-explained.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="other-examples-of-applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
