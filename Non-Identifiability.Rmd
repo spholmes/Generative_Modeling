@@ -2,7 +2,6 @@
 # Non-Identifiability in Mixture Models: An Example
 
 ```{r setupNI, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.align = "center", cache=TRUE, fig.width = 10, fig.height = 6)
 library(ggplot2)
 library(dplyr)
 library(tidyr)

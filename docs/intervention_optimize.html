@@ -245,130 +245,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="intervention_optimize" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Intervention_Optimize<a href="intervention_optimize.html#intervention_optimize" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>(this can be slow)</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="intervention_optimize.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb19-2"><a href="intervention_optimize.html#cb19-2" tabindex="-1"></a><span class="fu">library</span>(laGP)</span>
-<span id="cb19-3"><a href="intervention_optimize.html#cb19-3" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb19-4"><a href="intervention_optimize.html#cb19-4" tabindex="-1"></a><span class="fu">library</span>(generative)</span>
-<span id="cb19-5"><a href="intervention_optimize.html#cb19-5" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
-<span id="cb19-6"><a href="intervention_optimize.html#cb19-6" tabindex="-1"></a><span class="fu">review_theme</span>()</span>
-<span id="cb19-7"><a href="intervention_optimize.html#cb19-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="intervention_optimize.html#cb20-1" tabindex="-1"></a><span class="do">### This is very slow</span></span>
-<span id="cb20-2"><a href="intervention_optimize.html#cb20-2" tabindex="-1"></a>n_init <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb20-3"><a href="intervention_optimize.html#cb20-3" tabindex="-1"></a>n_interval <span class="ot">&lt;-</span> <span class="dv">7</span></span>
-<span id="cb20-4"><a href="intervention_optimize.html#cb20-4" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">make_intervals</span>(n_interval)</span>
-<span id="cb20-5"><a href="intervention_optimize.html#cb20-5" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
-<span id="cb20-6"><a href="intervention_optimize.html#cb20-6" tabindex="-1"></a>pf <span class="ot">&lt;-</span> <span class="fu">peak_fun</span>(times, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>)</span>
-<span id="cb20-7"><a href="intervention_optimize.html#cb20-7" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="intervention_optimize.html#cb20-8" tabindex="-1"></a><span class="co"># initial sample of weights</span></span>
-<span id="cb20-9"><a href="intervention_optimize.html#cb20-9" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rerun</span>(n_init, <span class="fu">rnorm</span>(n_interval, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb20-10"><a href="intervention_optimize.html#cb20-10" tabindex="-1"></a>losses <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(betas, <span class="sc">~</span> <span class="fu">evaluate_weights</span>(., intervals, times, pf, <span class="at">N =</span> <span class="dv">25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="intervention_optimize.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb20-2"><a href="intervention_optimize.html#cb20-2" tabindex="-1"></a><span class="fu">library</span>(laGP)</span>
+<span id="cb20-3"><a href="intervention_optimize.html#cb20-3" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb20-4"><a href="intervention_optimize.html#cb20-4" tabindex="-1"></a><span class="fu">library</span>(generative)</span>
+<span id="cb20-5"><a href="intervention_optimize.html#cb20-5" tabindex="-1"></a><span class="fu">library</span>(splines)</span>
+<span id="cb20-6"><a href="intervention_optimize.html#cb20-6" tabindex="-1"></a><span class="fu">review_theme</span>()</span>
+<span id="cb20-7"><a href="intervention_optimize.html#cb20-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="intervention_optimize.html#cb21-1" tabindex="-1"></a><span class="do">### This is very slow</span></span>
+<span id="cb21-2"><a href="intervention_optimize.html#cb21-2" tabindex="-1"></a>n_init <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb21-3"><a href="intervention_optimize.html#cb21-3" tabindex="-1"></a>n_interval <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb21-4"><a href="intervention_optimize.html#cb21-4" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">make_intervals</span>(n_interval)</span>
+<span id="cb21-5"><a href="intervention_optimize.html#cb21-5" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb21-6"><a href="intervention_optimize.html#cb21-6" tabindex="-1"></a>pf <span class="ot">&lt;-</span> <span class="fu">peak_fun</span>(times, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>)</span>
+<span id="cb21-7"><a href="intervention_optimize.html#cb21-7" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="intervention_optimize.html#cb21-8" tabindex="-1"></a><span class="co"># initial sample of weights</span></span>
+<span id="cb21-9"><a href="intervention_optimize.html#cb21-9" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">rerun</span>(n_init, <span class="fu">rnorm</span>(n_interval, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb21-10"><a href="intervention_optimize.html#cb21-10" tabindex="-1"></a>losses <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(betas, <span class="sc">~</span> <span class="fu">evaluate_weights</span>(., intervals, times, pf, <span class="at">N =</span> <span class="dv">25</span>))</span></code></pre></div>
 <p>We compute the main Bayesian optimization loop below.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="intervention_optimize.html#cb21-1" tabindex="-1"></a>n_test <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb21-2"><a href="intervention_optimize.html#cb21-2" tabindex="-1"></a>n_add <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb21-3"><a href="intervention_optimize.html#cb21-3" tabindex="-1"></a>n_iters <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb21-4"><a href="intervention_optimize.html#cb21-4" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="intervention_optimize.html#cb21-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n_iters)) {</span>
-<span id="cb21-6"><a href="intervention_optimize.html#cb21-6" tabindex="-1"></a>  </span>
-<span id="cb21-7"><a href="intervention_optimize.html#cb21-7" tabindex="-1"></a>  <span class="co"># fit a GP to the betas / losses already computed</span></span>
-<span id="cb21-8"><a href="intervention_optimize.html#cb21-8" tabindex="-1"></a>  beta_norm <span class="ot">&lt;-</span> <span class="fu">scale_list</span>(betas)</span>
-<span id="cb21-9"><a href="intervention_optimize.html#cb21-9" tabindex="-1"></a>  beta_test <span class="ot">&lt;-</span> <span class="fu">rerun</span>(n_test, <span class="fu">runif</span>(n_interval, <span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb21-10"><a href="intervention_optimize.html#cb21-10" tabindex="-1"></a>  </span>
-<span id="cb21-11"><a href="intervention_optimize.html#cb21-11" tabindex="-1"></a>  <span class="co"># find most promising new test points</span></span>
-<span id="cb21-12"><a href="intervention_optimize.html#cb21-12" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">aGP</span>(beta_norm, losses, <span class="fu">scale_list</span>(beta_test), <span class="at">verb =</span> <span class="dv">0</span>)</span>
-<span id="cb21-13"><a href="intervention_optimize.html#cb21-13" tabindex="-1"></a>  sort_ix <span class="ot">&lt;-</span> <span class="fu">order</span>(y_hat<span class="sc">$</span>mean <span class="sc">-</span> y_hat<span class="sc">$</span>var)</span>
-<span id="cb21-14"><a href="intervention_optimize.html#cb21-14" tabindex="-1"></a>  </span>
-<span id="cb21-15"><a href="intervention_optimize.html#cb21-15" tabindex="-1"></a>  <span class="co"># evaluate loss on new test points</span></span>
-<span id="cb21-16"><a href="intervention_optimize.html#cb21-16" tabindex="-1"></a>  new_betas <span class="ot">&lt;-</span> beta_test[sort_ix][<span class="dv">1</span><span class="sc">:</span>n_add]</span>
-<span id="cb21-17"><a href="intervention_optimize.html#cb21-17" tabindex="-1"></a>  betas <span class="ot">&lt;-</span> <span class="fu">c</span>(betas, new_betas)</span>
-<span id="cb21-18"><a href="intervention_optimize.html#cb21-18" tabindex="-1"></a>  losses <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb21-19"><a href="intervention_optimize.html#cb21-19" tabindex="-1"></a>    losses, </span>
-<span id="cb21-20"><a href="intervention_optimize.html#cb21-20" tabindex="-1"></a>    <span class="fu">map_dbl</span>(new_betas, <span class="sc">~</span> <span class="fu">evaluate_weights</span>(., intervals, times, pf, <span class="at">N =</span> <span class="dv">25</span>))</span>
-<span id="cb21-21"><a href="intervention_optimize.html#cb21-21" tabindex="-1"></a>  )</span>
-<span id="cb21-22"><a href="intervention_optimize.html#cb21-22" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="intervention_optimize.html#cb22-1" tabindex="-1"></a>n_test <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb22-2"><a href="intervention_optimize.html#cb22-2" tabindex="-1"></a>n_add <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb22-3"><a href="intervention_optimize.html#cb22-3" tabindex="-1"></a>n_iters <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb22-4"><a href="intervention_optimize.html#cb22-4" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="intervention_optimize.html#cb22-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n_iters)) {</span>
+<span id="cb22-6"><a href="intervention_optimize.html#cb22-6" tabindex="-1"></a>  </span>
+<span id="cb22-7"><a href="intervention_optimize.html#cb22-7" tabindex="-1"></a>  <span class="co"># fit a GP to the betas / losses already computed</span></span>
+<span id="cb22-8"><a href="intervention_optimize.html#cb22-8" tabindex="-1"></a>  beta_norm <span class="ot">&lt;-</span> <span class="fu">scale_list</span>(betas)</span>
+<span id="cb22-9"><a href="intervention_optimize.html#cb22-9" tabindex="-1"></a>  beta_test <span class="ot">&lt;-</span> <span class="fu">rerun</span>(n_test, <span class="fu">runif</span>(n_interval, <span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb22-10"><a href="intervention_optimize.html#cb22-10" tabindex="-1"></a>  </span>
+<span id="cb22-11"><a href="intervention_optimize.html#cb22-11" tabindex="-1"></a>  <span class="co"># find most promising new test points</span></span>
+<span id="cb22-12"><a href="intervention_optimize.html#cb22-12" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">aGP</span>(beta_norm, losses, <span class="fu">scale_list</span>(beta_test), <span class="at">verb =</span> <span class="dv">0</span>)</span>
+<span id="cb22-13"><a href="intervention_optimize.html#cb22-13" tabindex="-1"></a>  sort_ix <span class="ot">&lt;-</span> <span class="fu">order</span>(y_hat<span class="sc">$</span>mean <span class="sc">-</span> y_hat<span class="sc">$</span>var)</span>
+<span id="cb22-14"><a href="intervention_optimize.html#cb22-14" tabindex="-1"></a>  </span>
+<span id="cb22-15"><a href="intervention_optimize.html#cb22-15" tabindex="-1"></a>  <span class="co"># evaluate loss on new test points</span></span>
+<span id="cb22-16"><a href="intervention_optimize.html#cb22-16" tabindex="-1"></a>  new_betas <span class="ot">&lt;-</span> beta_test[sort_ix][<span class="dv">1</span><span class="sc">:</span>n_add]</span>
+<span id="cb22-17"><a href="intervention_optimize.html#cb22-17" tabindex="-1"></a>  betas <span class="ot">&lt;-</span> <span class="fu">c</span>(betas, new_betas)</span>
+<span id="cb22-18"><a href="intervention_optimize.html#cb22-18" tabindex="-1"></a>  losses <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-19"><a href="intervention_optimize.html#cb22-19" tabindex="-1"></a>    losses, </span>
+<span id="cb22-20"><a href="intervention_optimize.html#cb22-20" tabindex="-1"></a>    <span class="fu">map_dbl</span>(new_betas, <span class="sc">~</span> <span class="fu">evaluate_weights</span>(., intervals, times, pf, <span class="at">N =</span> <span class="dv">25</span>))</span>
+<span id="cb22-21"><a href="intervention_optimize.html#cb22-21" tabindex="-1"></a>  )</span>
+<span id="cb22-22"><a href="intervention_optimize.html#cb22-22" tabindex="-1"></a>}</span></code></pre></div>
 <p>Here are some of the weightings that we should use for longitudinal sampling.
 They generally favor more samples in the region where the peak is located.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="intervention_optimize.html#cb22-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">map</span>(betas, <span class="sc">~</span> <span class="fu">data.frame</span>(<span class="fu">exp</span>(<span class="fu">t</span>(.)))))</span>
-<span id="cb22-2"><a href="intervention_optimize.html#cb22-2" tabindex="-1"></a>w <span class="ot">&lt;-</span> w <span class="sc">/</span> <span class="fu">rowSums</span>(w)</span>
-<span id="cb22-3"><a href="intervention_optimize.html#cb22-3" tabindex="-1"></a>w<span class="sc">$</span>loss <span class="ot">&lt;-</span> losses</span>
-<span id="cb22-4"><a href="intervention_optimize.html#cb22-4" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="intervention_optimize.html#cb22-5" tabindex="-1"></a><span class="fu">library</span>(embed)</span>
-<span id="cb22-6"><a href="intervention_optimize.html#cb22-6" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb22-7"><a href="intervention_optimize.html#cb22-7" tabindex="-1"></a>w_reduce <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="sc">~</span> ., <span class="at">data =</span> w) <span class="sc">%&gt;%</span></span>
-<span id="cb22-8"><a href="intervention_optimize.html#cb22-8" tabindex="-1"></a>  <span class="fu">update_role</span>(loss, <span class="at">new_role =</span> <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb22-9"><a href="intervention_optimize.html#cb22-9" tabindex="-1"></a>umap_rec <span class="ot">&lt;-</span> <span class="fu">step_umap</span>(w_reduce, <span class="fu">all_predictors</span>(), <span class="at">neighbors =</span> <span class="dv">30</span>, <span class="at">min_dist =</span> <span class="fl">0.05</span>)</span>
-<span id="cb22-10"><a href="intervention_optimize.html#cb22-10" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">prep</span>(umap_rec) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-11"><a href="intervention_optimize.html#cb22-11" tabindex="-1"></a>  <span class="fu">juice</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-12"><a href="intervention_optimize.html#cb22-12" tabindex="-1"></a>  <span class="fu">bind_cols</span>(w <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>loss))</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="intervention_optimize.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(scores) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="intervention_optimize.html#cb23-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(UMAP1, UMAP2, <span class="at">col =</span> <span class="fu">log</span>(loss), <span class="at">size =</span> X4)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="intervention_optimize.html#cb23-3" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="at">option =</span> <span class="st">&quot;inferno&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="1200" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intervention_optimize.html#cb24-1" tabindex="-1"></a>w_df <span class="ot">&lt;-</span> w <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="intervention_optimize.html#cb24-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="intervention_optimize.html#cb24-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>loss) <span class="sc">%&gt;%</span></span>
-<span id="cb24-4"><a href="intervention_optimize.html#cb24-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">&quot;X&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;component&quot;</span>)</span>
-<span id="cb24-5"><a href="intervention_optimize.html#cb24-5" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="intervention_optimize.html#cb24-6" tabindex="-1"></a>intervals_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(intervals)</span>
-<span id="cb24-7"><a href="intervention_optimize.html#cb24-7" tabindex="-1"></a>intervals_df<span class="sc">$</span>component <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(intervals))</span>
-<span id="cb24-8"><a href="intervention_optimize.html#cb24-8" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="intervention_optimize.html#cb24-9" tabindex="-1"></a>w_df <span class="ot">&lt;-</span> w_df <span class="sc">%&gt;%</span></span>
-<span id="cb24-10"><a href="intervention_optimize.html#cb24-10" tabindex="-1"></a>  <span class="fu">left_join</span>(intervals_df)</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="intervention_optimize.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(w_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">log</span>(loss) <span class="sc">&lt;</span> <span class="fl">0.08</span>)) <span class="sc">+</span></span>
-<span id="cb25-2"><a href="intervention_optimize.html#cb25-2" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> V1, <span class="at">xmax =</span> V2, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> value), <span class="at">fill =</span> <span class="st">&quot;#262526&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="intervention_optimize.html#cb25-3" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="intervention_optimize.html#cb25-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="intervention_optimize.html#cb25-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="fu">round</span>(loss, <span class="dv">4</span>))</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="2100" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="intervention_optimize.html#cb26-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/best_weights.png&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="intervention_optimize.html#cb27-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">25</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>))</span>
-<span id="cb27-2"><a href="intervention_optimize.html#cb27-2" tabindex="-1"></a>examples <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(u,</span>
-<span id="cb27-3"><a href="intervention_optimize.html#cb27-3" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">data.frame</span>(</span>
-<span id="cb27-4"><a href="intervention_optimize.html#cb27-4" tabindex="-1"></a>    <span class="at">u =</span> .,</span>
-<span id="cb27-5"><a href="intervention_optimize.html#cb27-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">gaussian_noise</span>(pf, .)</span>
-<span id="cb27-6"><a href="intervention_optimize.html#cb27-6" tabindex="-1"></a>  ),</span>
-<span id="cb27-7"><a href="intervention_optimize.html#cb27-7" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;run&quot;</span></span>
-<span id="cb27-8"><a href="intervention_optimize.html#cb27-8" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-9"><a href="intervention_optimize.html#cb27-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">as.factor</span>(run))</span>
-<span id="cb27-10"><a href="intervention_optimize.html#cb27-10" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="intervention_optimize.html#cb27-11" tabindex="-1"></a>preds <span class="ot">&lt;-</span> examples <span class="sc">%&gt;%</span></span>
-<span id="cb27-12"><a href="intervention_optimize.html#cb27-12" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>run) <span class="sc">%&gt;%</span></span>
-<span id="cb27-13"><a href="intervention_optimize.html#cb27-13" tabindex="-1"></a>  <span class="fu">map_dfr</span>(<span class="sc">~</span> {</span>
-<span id="cb27-14"><a href="intervention_optimize.html#cb27-14" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="fu">bs</span>(u, <span class="at">df =</span> <span class="dv">6</span>, <span class="at">degree =</span> <span class="dv">1</span>, <span class="at">Boundary.knots =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>)), <span class="at">data =</span> .)</span>
-<span id="cb27-15"><a href="intervention_optimize.html#cb27-15" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb27-16"><a href="intervention_optimize.html#cb27-16" tabindex="-1"></a>      <span class="at">times =</span> times,</span>
-<span id="cb27-17"><a href="intervention_optimize.html#cb27-17" tabindex="-1"></a>      <span class="at">mu =</span> <span class="fu">pf</span>(times),</span>
-<span id="cb27-18"><a href="intervention_optimize.html#cb27-18" tabindex="-1"></a>      <span class="at">f_hat =</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">u =</span> times))</span>
-<span id="cb27-19"><a href="intervention_optimize.html#cb27-19" tabindex="-1"></a>    )</span>
-<span id="cb27-20"><a href="intervention_optimize.html#cb27-20" tabindex="-1"></a>  },</span>
-<span id="cb27-21"><a href="intervention_optimize.html#cb27-21" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;run&quot;</span></span>
-<span id="cb27-22"><a href="intervention_optimize.html#cb27-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb27-23"><a href="intervention_optimize.html#cb27-23" tabindex="-1"></a>  <span class="fu">group_by</span>(run) <span class="sc">%&gt;%</span></span>
-<span id="cb27-24"><a href="intervention_optimize.html#cb27-24" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb27-25"><a href="intervention_optimize.html#cb27-25" tabindex="-1"></a>    <span class="at">run =</span> <span class="fu">as.factor</span>(run), </span>
-<span id="cb27-26"><a href="intervention_optimize.html#cb27-26" tabindex="-1"></a>    <span class="at">loss =</span> (f_hat <span class="sc">-</span> mu) <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb27-27"><a href="intervention_optimize.html#cb27-27" tabindex="-1"></a>  )</span>
-<span id="cb27-28"><a href="intervention_optimize.html#cb27-28" tabindex="-1"></a></span>
-<span id="cb27-29"><a href="intervention_optimize.html#cb27-29" tabindex="-1"></a>truth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">times =</span> times, <span class="at">mu =</span> <span class="fu">pf</span>(times))</span>
-<span id="cb27-30"><a href="intervention_optimize.html#cb27-30" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="intervention_optimize.html#cb27-31" tabindex="-1"></a>run_order <span class="ot">&lt;-</span> preds <span class="sc">%&gt;%</span></span>
-<span id="cb27-32"><a href="intervention_optimize.html#cb27-32" tabindex="-1"></a>  <span class="fu">group_by</span>(run) <span class="sc">%&gt;%</span></span>
-<span id="cb27-33"><a href="intervention_optimize.html#cb27-33" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mse =</span> <span class="fu">mean</span>(loss)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-34"><a href="intervention_optimize.html#cb27-34" tabindex="-1"></a>  <span class="fu">arrange</span>(mse) <span class="sc">%&gt;%</span></span>
-<span id="cb27-35"><a href="intervention_optimize.html#cb27-35" tabindex="-1"></a>  <span class="fu">pull</span>(run)</span>
-<span id="cb27-36"><a href="intervention_optimize.html#cb27-36" tabindex="-1"></a></span>
-<span id="cb27-37"><a href="intervention_optimize.html#cb27-37" tabindex="-1"></a>preds <span class="ot">&lt;-</span> preds <span class="sc">%&gt;%</span></span>
-<span id="cb27-38"><a href="intervention_optimize.html#cb27-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">factor</span>(run, <span class="at">levels =</span> run_order))</span>
-<span id="cb27-39"><a href="intervention_optimize.html#cb27-39" tabindex="-1"></a>examples <span class="ot">&lt;-</span> examples <span class="sc">%&gt;%</span></span>
-<span id="cb27-40"><a href="intervention_optimize.html#cb27-40" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">factor</span>(run, <span class="at">levels =</span> run_order))</span>
-<span id="cb27-41"><a href="intervention_optimize.html#cb27-41" tabindex="-1"></a></span>
-<span id="cb27-42"><a href="intervention_optimize.html#cb27-42" tabindex="-1"></a><span class="fu">ggplot</span>(preds) <span class="sc">+</span></span>
-<span id="cb27-43"><a href="intervention_optimize.html#cb27-43" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(times, mu), <span class="at">col =</span> <span class="st">&quot;#F27507&quot;</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb27-44"><a href="intervention_optimize.html#cb27-44" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(times, f_hat), <span class="at">col =</span> <span class="st">&quot;#087F8C&quot;</span>,  <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb27-45"><a href="intervention_optimize.html#cb27-45" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> examples, <span class="fu">aes</span>(u, y), <span class="at">col =</span> <span class="st">&quot;#221F26&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-46"><a href="intervention_optimize.html#cb27-46" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;y&quot;</span>, <span class="at">x =</span> <span class="st">&quot;time&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-47"><a href="intervention_optimize.html#cb27-47" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> run, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="1575" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="intervention_optimize.html#cb28-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/peak_samples.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">800</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="intervention_optimize.html#cb23-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">map</span>(betas, <span class="sc">~</span> <span class="fu">data.frame</span>(<span class="fu">exp</span>(<span class="fu">t</span>(.)))))</span>
+<span id="cb23-2"><a href="intervention_optimize.html#cb23-2" tabindex="-1"></a>w <span class="ot">&lt;-</span> w <span class="sc">/</span> <span class="fu">rowSums</span>(w)</span>
+<span id="cb23-3"><a href="intervention_optimize.html#cb23-3" tabindex="-1"></a>w<span class="sc">$</span>loss <span class="ot">&lt;-</span> losses</span>
+<span id="cb23-4"><a href="intervention_optimize.html#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="intervention_optimize.html#cb23-5" tabindex="-1"></a><span class="fu">library</span>(embed)</span>
+<span id="cb23-6"><a href="intervention_optimize.html#cb23-6" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb23-7"><a href="intervention_optimize.html#cb23-7" tabindex="-1"></a>w_reduce <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="sc">~</span> ., <span class="at">data =</span> w) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="intervention_optimize.html#cb23-8" tabindex="-1"></a>  <span class="fu">update_role</span>(loss, <span class="at">new_role =</span> <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb23-9"><a href="intervention_optimize.html#cb23-9" tabindex="-1"></a>umap_rec <span class="ot">&lt;-</span> <span class="fu">step_umap</span>(w_reduce, <span class="fu">all_predictors</span>(), <span class="at">neighbors =</span> <span class="dv">30</span>, <span class="at">min_dist =</span> <span class="fl">0.05</span>)</span>
+<span id="cb23-10"><a href="intervention_optimize.html#cb23-10" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">prep</span>(umap_rec) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-11"><a href="intervention_optimize.html#cb23-11" tabindex="-1"></a>  <span class="fu">juice</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="intervention_optimize.html#cb23-12" tabindex="-1"></a>  <span class="fu">bind_cols</span>(w <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>loss))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="intervention_optimize.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(scores) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="intervention_optimize.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(UMAP1, UMAP2, <span class="at">col =</span> <span class="fu">log</span>(loss), <span class="at">size =</span> X4)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="intervention_optimize.html#cb24-3" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="at">option =</span> <span class="st">&quot;inferno&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-20-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="intervention_optimize.html#cb25-1" tabindex="-1"></a>w_df <span class="ot">&lt;-</span> w <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="intervention_optimize.html#cb25-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="intervention_optimize.html#cb25-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>loss) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="intervention_optimize.html#cb25-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">&quot;X&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;component&quot;</span>)</span>
+<span id="cb25-5"><a href="intervention_optimize.html#cb25-5" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="intervention_optimize.html#cb25-6" tabindex="-1"></a>intervals_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(intervals)</span>
+<span id="cb25-7"><a href="intervention_optimize.html#cb25-7" tabindex="-1"></a>intervals_df<span class="sc">$</span>component <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;X&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(intervals))</span>
+<span id="cb25-8"><a href="intervention_optimize.html#cb25-8" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="intervention_optimize.html#cb25-9" tabindex="-1"></a>w_df <span class="ot">&lt;-</span> w_df <span class="sc">%&gt;%</span></span>
+<span id="cb25-10"><a href="intervention_optimize.html#cb25-10" tabindex="-1"></a>  <span class="fu">left_join</span>(intervals_df)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="intervention_optimize.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(w_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">log</span>(loss) <span class="sc">&lt;</span> <span class="fl">0.08</span>)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="intervention_optimize.html#cb26-2" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> V1, <span class="at">xmax =</span> V2, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> value), <span class="at">fill =</span> <span class="st">&quot;#262526&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="intervention_optimize.html#cb26-3" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="intervention_optimize.html#cb26-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="intervention_optimize.html#cb26-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="fu">round</span>(loss, <span class="dv">4</span>))</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-22-1.png" width="2100" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="intervention_optimize.html#cb27-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/best_weights.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="intervention_optimize.html#cb28-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="sc">~</span> <span class="fu">runif</span>(<span class="dv">25</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb28-2"><a href="intervention_optimize.html#cb28-2" tabindex="-1"></a>examples <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(u,</span>
+<span id="cb28-3"><a href="intervention_optimize.html#cb28-3" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-4"><a href="intervention_optimize.html#cb28-4" tabindex="-1"></a>    <span class="at">u =</span> .,</span>
+<span id="cb28-5"><a href="intervention_optimize.html#cb28-5" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">gaussian_noise</span>(pf, .)</span>
+<span id="cb28-6"><a href="intervention_optimize.html#cb28-6" tabindex="-1"></a>  ),</span>
+<span id="cb28-7"><a href="intervention_optimize.html#cb28-7" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;run&quot;</span></span>
+<span id="cb28-8"><a href="intervention_optimize.html#cb28-8" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-9"><a href="intervention_optimize.html#cb28-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">as.factor</span>(run))</span>
+<span id="cb28-10"><a href="intervention_optimize.html#cb28-10" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="intervention_optimize.html#cb28-11" tabindex="-1"></a>preds <span class="ot">&lt;-</span> examples <span class="sc">%&gt;%</span></span>
+<span id="cb28-12"><a href="intervention_optimize.html#cb28-12" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>run) <span class="sc">%&gt;%</span></span>
+<span id="cb28-13"><a href="intervention_optimize.html#cb28-13" tabindex="-1"></a>  <span class="fu">map_dfr</span>(<span class="sc">~</span> {</span>
+<span id="cb28-14"><a href="intervention_optimize.html#cb28-14" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="fu">bs</span>(u, <span class="at">df =</span> <span class="dv">6</span>, <span class="at">degree =</span> <span class="dv">1</span>, <span class="at">Boundary.knots =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>)), <span class="at">data =</span> .)</span>
+<span id="cb28-15"><a href="intervention_optimize.html#cb28-15" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb28-16"><a href="intervention_optimize.html#cb28-16" tabindex="-1"></a>      <span class="at">times =</span> times,</span>
+<span id="cb28-17"><a href="intervention_optimize.html#cb28-17" tabindex="-1"></a>      <span class="at">mu =</span> <span class="fu">pf</span>(times),</span>
+<span id="cb28-18"><a href="intervention_optimize.html#cb28-18" tabindex="-1"></a>      <span class="at">f_hat =</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">u =</span> times))</span>
+<span id="cb28-19"><a href="intervention_optimize.html#cb28-19" tabindex="-1"></a>    )</span>
+<span id="cb28-20"><a href="intervention_optimize.html#cb28-20" tabindex="-1"></a>  },</span>
+<span id="cb28-21"><a href="intervention_optimize.html#cb28-21" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">&quot;run&quot;</span></span>
+<span id="cb28-22"><a href="intervention_optimize.html#cb28-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb28-23"><a href="intervention_optimize.html#cb28-23" tabindex="-1"></a>  <span class="fu">group_by</span>(run) <span class="sc">%&gt;%</span></span>
+<span id="cb28-24"><a href="intervention_optimize.html#cb28-24" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb28-25"><a href="intervention_optimize.html#cb28-25" tabindex="-1"></a>    <span class="at">run =</span> <span class="fu">as.factor</span>(run), </span>
+<span id="cb28-26"><a href="intervention_optimize.html#cb28-26" tabindex="-1"></a>    <span class="at">loss =</span> (f_hat <span class="sc">-</span> mu) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb28-27"><a href="intervention_optimize.html#cb28-27" tabindex="-1"></a>  )</span>
+<span id="cb28-28"><a href="intervention_optimize.html#cb28-28" tabindex="-1"></a></span>
+<span id="cb28-29"><a href="intervention_optimize.html#cb28-29" tabindex="-1"></a>truth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">times =</span> times, <span class="at">mu =</span> <span class="fu">pf</span>(times))</span>
+<span id="cb28-30"><a href="intervention_optimize.html#cb28-30" tabindex="-1"></a></span>
+<span id="cb28-31"><a href="intervention_optimize.html#cb28-31" tabindex="-1"></a>run_order <span class="ot">&lt;-</span> preds <span class="sc">%&gt;%</span></span>
+<span id="cb28-32"><a href="intervention_optimize.html#cb28-32" tabindex="-1"></a>  <span class="fu">group_by</span>(run) <span class="sc">%&gt;%</span></span>
+<span id="cb28-33"><a href="intervention_optimize.html#cb28-33" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mse =</span> <span class="fu">mean</span>(loss)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-34"><a href="intervention_optimize.html#cb28-34" tabindex="-1"></a>  <span class="fu">arrange</span>(mse) <span class="sc">%&gt;%</span></span>
+<span id="cb28-35"><a href="intervention_optimize.html#cb28-35" tabindex="-1"></a>  <span class="fu">pull</span>(run)</span>
+<span id="cb28-36"><a href="intervention_optimize.html#cb28-36" tabindex="-1"></a></span>
+<span id="cb28-37"><a href="intervention_optimize.html#cb28-37" tabindex="-1"></a>preds <span class="ot">&lt;-</span> preds <span class="sc">%&gt;%</span></span>
+<span id="cb28-38"><a href="intervention_optimize.html#cb28-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">factor</span>(run, <span class="at">levels =</span> run_order))</span>
+<span id="cb28-39"><a href="intervention_optimize.html#cb28-39" tabindex="-1"></a>examples <span class="ot">&lt;-</span> examples <span class="sc">%&gt;%</span></span>
+<span id="cb28-40"><a href="intervention_optimize.html#cb28-40" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">run =</span> <span class="fu">factor</span>(run, <span class="at">levels =</span> run_order))</span>
+<span id="cb28-41"><a href="intervention_optimize.html#cb28-41" tabindex="-1"></a></span>
+<span id="cb28-42"><a href="intervention_optimize.html#cb28-42" tabindex="-1"></a><span class="fu">ggplot</span>(preds) <span class="sc">+</span></span>
+<span id="cb28-43"><a href="intervention_optimize.html#cb28-43" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(times, mu), <span class="at">col =</span> <span class="st">&quot;#F27507&quot;</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb28-44"><a href="intervention_optimize.html#cb28-44" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(times, f_hat), <span class="at">col =</span> <span class="st">&quot;#087F8C&quot;</span>,  <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb28-45"><a href="intervention_optimize.html#cb28-45" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> examples, <span class="fu">aes</span>(u, y), <span class="at">col =</span> <span class="st">&quot;#221F26&quot;</span>) <span class="sc">+</span></span>
+<span id="cb28-46"><a href="intervention_optimize.html#cb28-46" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;y&quot;</span>, <span class="at">x =</span> <span class="st">&quot;time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb28-47"><a href="intervention_optimize.html#cb28-47" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> run, <span class="at">ncol =</span> <span class="dv">4</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-23-1.png" width="1575" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="intervention_optimize.html#cb29-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/peak_samples.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">800</span>)</span></code></pre></div>
 
 </div>
             </section>

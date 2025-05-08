@@ -296,76 +296,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-abc-rejection-algorithm" class="section level2 hasAnchor" number="11.5">
 <h2><span class="header-section-number">11.5</span> The ABC Rejection Algorithm<a href="likelihood-free-inference-via-classification.html#the-abc-rejection-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="likelihood-free-inference-via-classification.html#cb59-1" tabindex="-1"></a><span class="co"># Observed summary statistic</span></span>
-<span id="cb59-2"><a href="likelihood-free-inference-via-classification.html#cb59-2" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_obs)</span>
-<span id="cb59-3"><a href="likelihood-free-inference-via-classification.html#cb59-3" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="likelihood-free-inference-via-classification.html#cb59-4" tabindex="-1"></a><span class="co"># Rejection ABC</span></span>
-<span id="cb59-5"><a href="likelihood-free-inference-via-classification.html#cb59-5" tabindex="-1"></a>accepted <span class="ot">&lt;-</span> <span class="fu">numeric</span>()</span>
-<span id="cb59-6"><a href="likelihood-free-inference-via-classification.html#cb59-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(N)) {</span>
-<span id="cb59-7"><a href="likelihood-free-inference-via-classification.html#cb59-7" tabindex="-1"></a>  theta_i <span class="ot">&lt;-</span> <span class="fu">sample_prior</span>()</span>
-<span id="cb59-8"><a href="likelihood-free-inference-via-classification.html#cb59-8" tabindex="-1"></a>  x_sim   <span class="ot">&lt;-</span> <span class="fu">simulator</span>(theta_i)</span>
-<span id="cb59-9"><a href="likelihood-free-inference-via-classification.html#cb59-9" tabindex="-1"></a>  s_sim   <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_sim)</span>
-<span id="cb59-10"><a href="likelihood-free-inference-via-classification.html#cb59-10" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon) {</span>
-<span id="cb59-11"><a href="likelihood-free-inference-via-classification.html#cb59-11" tabindex="-1"></a>    accepted <span class="ot">&lt;-</span> <span class="fu">c</span>(accepted, theta_i)</span>
-<span id="cb59-12"><a href="likelihood-free-inference-via-classification.html#cb59-12" tabindex="-1"></a>  }</span>
-<span id="cb59-13"><a href="likelihood-free-inference-via-classification.html#cb59-13" tabindex="-1"></a>}</span>
-<span id="cb59-14"><a href="likelihood-free-inference-via-classification.html#cb59-14" tabindex="-1"></a>posterior_samples <span class="ot">&lt;-</span> accepted</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="likelihood-free-inference-via-classification.html#cb60-1" tabindex="-1"></a><span class="co"># Observed summary statistic</span></span>
+<span id="cb60-2"><a href="likelihood-free-inference-via-classification.html#cb60-2" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_obs)</span>
+<span id="cb60-3"><a href="likelihood-free-inference-via-classification.html#cb60-3" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="likelihood-free-inference-via-classification.html#cb60-4" tabindex="-1"></a><span class="co"># Rejection ABC</span></span>
+<span id="cb60-5"><a href="likelihood-free-inference-via-classification.html#cb60-5" tabindex="-1"></a>accepted <span class="ot">&lt;-</span> <span class="fu">numeric</span>()</span>
+<span id="cb60-6"><a href="likelihood-free-inference-via-classification.html#cb60-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(N)) {</span>
+<span id="cb60-7"><a href="likelihood-free-inference-via-classification.html#cb60-7" tabindex="-1"></a>  theta_i <span class="ot">&lt;-</span> <span class="fu">sample_prior</span>()</span>
+<span id="cb60-8"><a href="likelihood-free-inference-via-classification.html#cb60-8" tabindex="-1"></a>  x_sim   <span class="ot">&lt;-</span> <span class="fu">simulator</span>(theta_i)</span>
+<span id="cb60-9"><a href="likelihood-free-inference-via-classification.html#cb60-9" tabindex="-1"></a>  s_sim   <span class="ot">&lt;-</span> <span class="fu">summary_statistic</span>(x_sim)</span>
+<span id="cb60-10"><a href="likelihood-free-inference-via-classification.html#cb60-10" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon) {</span>
+<span id="cb60-11"><a href="likelihood-free-inference-via-classification.html#cb60-11" tabindex="-1"></a>    accepted <span class="ot">&lt;-</span> <span class="fu">c</span>(accepted, theta_i)</span>
+<span id="cb60-12"><a href="likelihood-free-inference-via-classification.html#cb60-12" tabindex="-1"></a>  }</span>
+<span id="cb60-13"><a href="likelihood-free-inference-via-classification.html#cb60-13" tabindex="-1"></a>}</span>
+<span id="cb60-14"><a href="likelihood-free-inference-via-classification.html#cb60-14" tabindex="-1"></a>posterior_samples <span class="ot">&lt;-</span> accepted</span></code></pre></div>
 <hr />
 </div>
 <div id="illustrated-example-estimating-a-mean" class="section level2 hasAnchor" number="11.6">
 <h2><span class="header-section-number">11.6</span> Illustrated Example: Estimating a Mean<a href="likelihood-free-inference-via-classification.html#illustrated-example-estimating-a-mean" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="likelihood-free-inference-via-classification.html#cb60-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb60-2"><a href="likelihood-free-inference-via-classification.html#cb60-2" tabindex="-1"></a><span class="co"># 1. Observed data</span></span>
-<span id="cb60-3"><a href="likelihood-free-inference-via-classification.html#cb60-3" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb60-4"><a href="likelihood-free-inference-via-classification.html#cb60-4" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_obs)</span>
-<span id="cb60-5"><a href="likelihood-free-inference-via-classification.html#cb60-5" tabindex="-1"></a></span>
-<span id="cb60-6"><a href="likelihood-free-inference-via-classification.html#cb60-6" tabindex="-1"></a><span class="co"># 2. Simulate candidates</span></span>
-<span id="cb60-7"><a href="likelihood-free-inference-via-classification.html#cb60-7" tabindex="-1"></a>thetas <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb60-8"><a href="likelihood-free-inference-via-classification.html#cb60-8" tabindex="-1"></a>sims   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(thetas, <span class="cf">function</span>(theta) <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>, theta, <span class="dv">2</span>)))</span>
-<span id="cb60-9"><a href="likelihood-free-inference-via-classification.html#cb60-9" tabindex="-1"></a>df     <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">theta =</span> thetas, <span class="at">s_sim =</span> sims)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="likelihood-free-inference-via-classification.html#cb61-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb61-2"><a href="likelihood-free-inference-via-classification.html#cb61-2" tabindex="-1"></a><span class="co"># 1. Observed data</span></span>
+<span id="cb61-3"><a href="likelihood-free-inference-via-classification.html#cb61-3" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb61-4"><a href="likelihood-free-inference-via-classification.html#cb61-4" tabindex="-1"></a>s_obs <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_obs)</span>
+<span id="cb61-5"><a href="likelihood-free-inference-via-classification.html#cb61-5" tabindex="-1"></a></span>
+<span id="cb61-6"><a href="likelihood-free-inference-via-classification.html#cb61-6" tabindex="-1"></a><span class="co"># 2. Simulate candidates</span></span>
+<span id="cb61-7"><a href="likelihood-free-inference-via-classification.html#cb61-7" tabindex="-1"></a>thetas <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb61-8"><a href="likelihood-free-inference-via-classification.html#cb61-8" tabindex="-1"></a>sims   <span class="ot">&lt;-</span> <span class="fu">sapply</span>(thetas, <span class="cf">function</span>(theta) <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>, theta, <span class="dv">2</span>)))</span>
+<span id="cb61-9"><a href="likelihood-free-inference-via-classification.html#cb61-9" tabindex="-1"></a>df     <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">theta =</span> thetas, <span class="at">s_sim =</span> sims)</span></code></pre></div>
 <hr />
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="likelihood-free-inference-via-classification.html#cb61-1" tabindex="-1"></a><span class="co"># 3. Histogram of summary statistics</span></span>
-<span id="cb61-2"><a href="likelihood-free-inference-via-classification.html#cb61-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> s_sim)) <span class="sc">+</span></span>
-<span id="cb61-3"><a href="likelihood-free-inference-via-classification.html#cb61-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb61-4"><a href="likelihood-free-inference-via-classification.html#cb61-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> s_obs, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb61-5"><a href="likelihood-free-inference-via-classification.html#cb61-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb61-6"><a href="likelihood-free-inference-via-classification.html#cb61-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Simulated Means vs. Observed Mean&quot;</span>,</span>
-<span id="cb61-7"><a href="likelihood-free-inference-via-classification.html#cb61-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
-<span id="cb61-8"><a href="likelihood-free-inference-via-classification.html#cb61-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count&quot;</span></span>
-<span id="cb61-9"><a href="likelihood-free-inference-via-classification.html#cb61-9" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-38-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="likelihood-free-inference-via-classification.html#cb62-1" tabindex="-1"></a><span class="co"># 3. Histogram of summary statistics</span></span>
+<span id="cb62-2"><a href="likelihood-free-inference-via-classification.html#cb62-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> s_sim)) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="likelihood-free-inference-via-classification.html#cb62-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">&quot;gray80&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb62-4"><a href="likelihood-free-inference-via-classification.html#cb62-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> s_obs, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-5"><a href="likelihood-free-inference-via-classification.html#cb62-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb62-6"><a href="likelihood-free-inference-via-classification.html#cb62-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Simulated Means vs. Observed Mean&quot;</span>,</span>
+<span id="cb62-7"><a href="likelihood-free-inference-via-classification.html#cb62-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
+<span id="cb62-8"><a href="likelihood-free-inference-via-classification.html#cb62-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Count&quot;</span></span>
+<span id="cb62-9"><a href="likelihood-free-inference-via-classification.html#cb62-9" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-38-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="acceptance-threshold-visualization" class="section level2 hasAnchor" number="11.7">
 <h2><span class="header-section-number">11.7</span> Acceptance Threshold Visualization<a href="likelihood-free-inference-via-classification.html#acceptance-threshold-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="likelihood-free-inference-via-classification.html#cb62-1" tabindex="-1"></a>epsilon <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb62-2"><a href="likelihood-free-inference-via-classification.html#cb62-2" tabindex="-1"></a>df<span class="sc">$</span>accepted <span class="ot">&lt;-</span> <span class="fu">abs</span>(df<span class="sc">$</span>s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon</span>
-<span id="cb62-3"><a href="likelihood-free-inference-via-classification.html#cb62-3" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="likelihood-free-inference-via-classification.html#cb62-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> theta, <span class="at">y =</span> s_sim, <span class="at">color =</span> accepted)) <span class="sc">+</span></span>
-<span id="cb62-5"><a href="likelihood-free-inference-via-classification.html#cb62-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb62-6"><a href="likelihood-free-inference-via-classification.html#cb62-6" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray70&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb62-7"><a href="likelihood-free-inference-via-classification.html#cb62-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> s_obs, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb62-8"><a href="likelihood-free-inference-via-classification.html#cb62-8" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb62-9"><a href="likelihood-free-inference-via-classification.html#cb62-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Acceptance Region&quot;</span>,</span>
-<span id="cb62-10"><a href="likelihood-free-inference-via-classification.html#cb62-10" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
-<span id="cb62-11"><a href="likelihood-free-inference-via-classification.html#cb62-11" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
-<span id="cb62-12"><a href="likelihood-free-inference-via-classification.html#cb62-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Accepted&quot;</span></span>
-<span id="cb62-13"><a href="likelihood-free-inference-via-classification.html#cb62-13" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/abc-threshold-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="likelihood-free-inference-via-classification.html#cb63-1" tabindex="-1"></a>epsilon <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb63-2"><a href="likelihood-free-inference-via-classification.html#cb63-2" tabindex="-1"></a>df<span class="sc">$</span>accepted <span class="ot">&lt;-</span> <span class="fu">abs</span>(df<span class="sc">$</span>s_sim <span class="sc">-</span> s_obs) <span class="sc">&lt;</span> epsilon</span>
+<span id="cb63-3"><a href="likelihood-free-inference-via-classification.html#cb63-3" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="likelihood-free-inference-via-classification.html#cb63-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> theta, <span class="at">y =</span> s_sim, <span class="at">color =</span> accepted)) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="likelihood-free-inference-via-classification.html#cb63-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="likelihood-free-inference-via-classification.html#cb63-6" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray70&quot;</span>, <span class="st">&quot;TRUE&quot;</span> <span class="ot">=</span> <span class="st">&quot;steelblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb63-7"><a href="likelihood-free-inference-via-classification.html#cb63-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> s_obs, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-8"><a href="likelihood-free-inference-via-classification.html#cb63-8" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb63-9"><a href="likelihood-free-inference-via-classification.html#cb63-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Acceptance Region&quot;</span>,</span>
+<span id="cb63-10"><a href="likelihood-free-inference-via-classification.html#cb63-10" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
+<span id="cb63-11"><a href="likelihood-free-inference-via-classification.html#cb63-11" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Simulated Mean&quot;</span>,</span>
+<span id="cb63-12"><a href="likelihood-free-inference-via-classification.html#cb63-12" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Accepted&quot;</span></span>
+<span id="cb63-13"><a href="likelihood-free-inference-via-classification.html#cb63-13" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figures/abc-threshold-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="abc-approximate-posterior" class="section level2 hasAnchor" number="11.8">
 <h2><span class="header-section-number">11.8</span> ABC Approximate Posterior<a href="likelihood-free-inference-via-classification.html#abc-approximate-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="likelihood-free-inference-via-classification.html#cb63-1" tabindex="-1"></a>post <span class="ot">&lt;-</span> df<span class="sc">$</span>theta[df<span class="sc">$</span>accepted]</span>
-<span id="cb63-2"><a href="likelihood-free-inference-via-classification.html#cb63-2" tabindex="-1"></a></span>
-<span id="cb63-3"><a href="likelihood-free-inference-via-classification.html#cb63-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">theta =</span> post), <span class="fu">aes</span>(<span class="at">x =</span> theta)) <span class="sc">+</span></span>
-<span id="cb63-4"><a href="likelihood-free-inference-via-classification.html#cb63-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;skyblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb63-5"><a href="likelihood-free-inference-via-classification.html#cb63-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb63-6"><a href="likelihood-free-inference-via-classification.html#cb63-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Approximate Posterior for θ&quot;</span>,</span>
-<span id="cb63-7"><a href="likelihood-free-inference-via-classification.html#cb63-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
-<span id="cb63-8"><a href="likelihood-free-inference-via-classification.html#cb63-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
-<span id="cb63-9"><a href="likelihood-free-inference-via-classification.html#cb63-9" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="index_files/figure-html/abc-posterior-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="likelihood-free-inference-via-classification.html#cb64-1" tabindex="-1"></a>post <span class="ot">&lt;-</span> df<span class="sc">$</span>theta[df<span class="sc">$</span>accepted]</span>
+<span id="cb64-2"><a href="likelihood-free-inference-via-classification.html#cb64-2" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="likelihood-free-inference-via-classification.html#cb64-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">theta =</span> post), <span class="fu">aes</span>(<span class="at">x =</span> theta)) <span class="sc">+</span></span>
+<span id="cb64-4"><a href="likelihood-free-inference-via-classification.html#cb64-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&quot;skyblue&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb64-5"><a href="likelihood-free-inference-via-classification.html#cb64-5" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb64-6"><a href="likelihood-free-inference-via-classification.html#cb64-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;ABC Approximate Posterior for θ&quot;</span>,</span>
+<span id="cb64-7"><a href="likelihood-free-inference-via-classification.html#cb64-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(theta),</span>
+<span id="cb64-8"><a href="likelihood-free-inference-via-classification.html#cb64-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span></span>
+<span id="cb64-9"><a href="likelihood-free-inference-via-classification.html#cb64-9" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="figures/abc-posterior-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="extensions-of-abc" class="section level2 hasAnchor" number="11.9">
@@ -472,29 +472,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-1d-gaussian-mixture" class="section level2 hasAnchor" number="11.17">
 <h2><span class="header-section-number">11.17</span> Example: 1D Gaussian Mixture<a href="likelihood-free-inference-via-classification.html#example-1d-gaussian-mixture" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="likelihood-free-inference-via-classification.html#cb66-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb66-2"><a href="likelihood-free-inference-via-classification.html#cb66-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span>; p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb66-3"><a href="likelihood-free-inference-via-classification.html#cb66-3" tabindex="-1"></a><span class="co"># Observed: two-component Gaussian mixture</span></span>
-<span id="cb66-4"><a href="likelihood-free-inference-via-classification.html#cb66-4" tabindex="-1"></a>obs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb66-5"><a href="likelihood-free-inference-via-classification.html#cb66-5" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>),</span>
-<span id="cb66-6"><a href="likelihood-free-inference-via-classification.html#cb66-6" tabindex="-1"></a>        <span class="fu">rnorm</span>(n<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p), <span class="dv">3</span>, <span class="fl">0.5</span>)),</span>
-<span id="cb66-7"><a href="likelihood-free-inference-via-classification.html#cb66-7" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Observed&quot;</span></span>
-<span id="cb66-8"><a href="likelihood-free-inference-via-classification.html#cb66-8" tabindex="-1"></a>)</span>
-<span id="cb66-9"><a href="likelihood-free-inference-via-classification.html#cb66-9" tabindex="-1"></a><span class="co"># Simulated under wrong single-Gaussian model</span></span>
-<span id="cb66-10"><a href="likelihood-free-inference-via-classification.html#cb66-10" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb66-11"><a href="likelihood-free-inference-via-classification.html#cb66-11" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(n, <span class="fl">0.5</span>, <span class="fl">1.5</span>),</span>
-<span id="cb66-12"><a href="likelihood-free-inference-via-classification.html#cb66-12" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Simulated&quot;</span></span>
-<span id="cb66-13"><a href="likelihood-free-inference-via-classification.html#cb66-13" tabindex="-1"></a>)</span>
-<span id="cb66-14"><a href="likelihood-free-inference-via-classification.html#cb66-14" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(obs, sim)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="likelihood-free-inference-via-classification.html#cb67-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb67-2"><a href="likelihood-free-inference-via-classification.html#cb67-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span>; p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb67-3"><a href="likelihood-free-inference-via-classification.html#cb67-3" tabindex="-1"></a><span class="co"># Observed: two-component Gaussian mixture</span></span>
+<span id="cb67-4"><a href="likelihood-free-inference-via-classification.html#cb67-4" tabindex="-1"></a>obs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb67-5"><a href="likelihood-free-inference-via-classification.html#cb67-5" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>p, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb67-6"><a href="likelihood-free-inference-via-classification.html#cb67-6" tabindex="-1"></a>        <span class="fu">rnorm</span>(n<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p), <span class="dv">3</span>, <span class="fl">0.5</span>)),</span>
+<span id="cb67-7"><a href="likelihood-free-inference-via-classification.html#cb67-7" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Observed&quot;</span></span>
+<span id="cb67-8"><a href="likelihood-free-inference-via-classification.html#cb67-8" tabindex="-1"></a>)</span>
+<span id="cb67-9"><a href="likelihood-free-inference-via-classification.html#cb67-9" tabindex="-1"></a><span class="co"># Simulated under wrong single-Gaussian model</span></span>
+<span id="cb67-10"><a href="likelihood-free-inference-via-classification.html#cb67-10" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb67-11"><a href="likelihood-free-inference-via-classification.html#cb67-11" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(n, <span class="fl">0.5</span>, <span class="fl">1.5</span>),</span>
+<span id="cb67-12"><a href="likelihood-free-inference-via-classification.html#cb67-12" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Simulated&quot;</span></span>
+<span id="cb67-13"><a href="likelihood-free-inference-via-classification.html#cb67-13" tabindex="-1"></a>)</span>
+<span id="cb67-14"><a href="likelihood-free-inference-via-classification.html#cb67-14" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(obs, sim)</span></code></pre></div>
 <hr />
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="likelihood-free-inference-via-classification.html#cb67-1" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
-<span id="cb67-2"><a href="likelihood-free-inference-via-classification.html#cb67-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb67-3"><a href="likelihood-free-inference-via-classification.html#cb67-3" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">color =</span> label)) <span class="sc">+</span></span>
-<span id="cb67-4"><a href="likelihood-free-inference-via-classification.html#cb67-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb67-5"><a href="likelihood-free-inference-via-classification.html#cb67-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb67-6"><a href="likelihood-free-inference-via-classification.html#cb67-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Observed vs. Simulated Samples&quot;</span>,</span>
-<span id="cb67-7"><a href="likelihood-free-inference-via-classification.html#cb67-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-40-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="likelihood-free-inference-via-classification.html#cb68-1" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
+<span id="cb68-2"><a href="likelihood-free-inference-via-classification.html#cb68-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb68-3"><a href="likelihood-free-inference-via-classification.html#cb68-3" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">color =</span> label)) <span class="sc">+</span></span>
+<span id="cb68-4"><a href="likelihood-free-inference-via-classification.html#cb68-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb68-5"><a href="likelihood-free-inference-via-classification.html#cb68-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb68-6"><a href="likelihood-free-inference-via-classification.html#cb68-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Observed vs. Simulated Samples&quot;</span>,</span>
+<span id="cb68-7"><a href="likelihood-free-inference-via-classification.html#cb68-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">color =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-40-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="example-logistic-discriminator" class="section level3 hasAnchor" number="11.17.1">
 <h3><span class="header-section-number">11.17.1</span> Example: Logistic Discriminator<a href="likelihood-free-inference-via-classification.html#example-logistic-discriminator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -502,29 +502,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 D(x) = \mathrm{logit}^{-1}\bigl(\beta_0 + \beta_1 x\bigr)
 \]</span></p>
 <hr />
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="likelihood-free-inference-via-classification.html#cb68-1" tabindex="-1"></a><span class="co"># Fit logistic regression</span></span>
-<span id="cb68-2"><a href="likelihood-free-inference-via-classification.html#cb68-2" tabindex="-1"></a>df<span class="sc">$</span>y_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>label <span class="sc">==</span> <span class="st">&quot;Observed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb68-3"><a href="likelihood-free-inference-via-classification.html#cb68-3" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_bin <span class="sc">~</span> x, <span class="at">data =</span> df, <span class="at">family =</span> binomial)</span>
-<span id="cb68-4"><a href="likelihood-free-inference-via-classification.html#cb68-4" tabindex="-1"></a><span class="co"># ROC curve</span></span>
-<span id="cb68-5"><a href="likelihood-free-inference-via-classification.html#cb68-5" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb68-6"><a href="likelihood-free-inference-via-classification.html#cb68-6" tabindex="-1"></a>probs   <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb68-7"><a href="likelihood-free-inference-via-classification.html#cb68-7" tabindex="-1"></a>roc_obj <span class="ot">&lt;-</span> <span class="fu">roc</span>(df<span class="sc">$</span>y_bin, probs)</span>
-<span id="cb68-8"><a href="likelihood-free-inference-via-classification.html#cb68-8" tabindex="-1"></a>auc_val <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_obj)</span>
-<span id="cb68-9"><a href="likelihood-free-inference-via-classification.html#cb68-9" tabindex="-1"></a><span class="co"># Plot ROC</span></span>
-<span id="cb68-10"><a href="likelihood-free-inference-via-classification.html#cb68-10" tabindex="-1"></a>roc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb68-11"><a href="likelihood-free-inference-via-classification.html#cb68-11" tabindex="-1"></a>  <span class="at">fpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>specificities),</span>
-<span id="cb68-12"><a href="likelihood-free-inference-via-classification.html#cb68-12" tabindex="-1"></a>  <span class="at">tpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>sensitivities)</span>
-<span id="cb68-13"><a href="likelihood-free-inference-via-classification.html#cb68-13" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="likelihood-free-inference-via-classification.html#cb69-1" tabindex="-1"></a><span class="co"># Fit logistic regression</span></span>
+<span id="cb69-2"><a href="likelihood-free-inference-via-classification.html#cb69-2" tabindex="-1"></a>df<span class="sc">$</span>y_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>label <span class="sc">==</span> <span class="st">&quot;Observed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb69-3"><a href="likelihood-free-inference-via-classification.html#cb69-3" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(y_bin <span class="sc">~</span> x, <span class="at">data =</span> df, <span class="at">family =</span> binomial)</span>
+<span id="cb69-4"><a href="likelihood-free-inference-via-classification.html#cb69-4" tabindex="-1"></a><span class="co"># ROC curve</span></span>
+<span id="cb69-5"><a href="likelihood-free-inference-via-classification.html#cb69-5" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
+<span id="cb69-6"><a href="likelihood-free-inference-via-classification.html#cb69-6" tabindex="-1"></a>probs   <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb69-7"><a href="likelihood-free-inference-via-classification.html#cb69-7" tabindex="-1"></a>roc_obj <span class="ot">&lt;-</span> <span class="fu">roc</span>(df<span class="sc">$</span>y_bin, probs)</span>
+<span id="cb69-8"><a href="likelihood-free-inference-via-classification.html#cb69-8" tabindex="-1"></a>auc_val <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_obj)</span>
+<span id="cb69-9"><a href="likelihood-free-inference-via-classification.html#cb69-9" tabindex="-1"></a><span class="co"># Plot ROC</span></span>
+<span id="cb69-10"><a href="likelihood-free-inference-via-classification.html#cb69-10" tabindex="-1"></a>roc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb69-11"><a href="likelihood-free-inference-via-classification.html#cb69-11" tabindex="-1"></a>  <span class="at">fpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>specificities),</span>
+<span id="cb69-12"><a href="likelihood-free-inference-via-classification.html#cb69-12" tabindex="-1"></a>  <span class="at">tpr =</span> <span class="fu">rev</span>(roc_obj<span class="sc">$</span>sensitivities)</span>
+<span id="cb69-13"><a href="likelihood-free-inference-via-classification.html#cb69-13" tabindex="-1"></a>)</span></code></pre></div>
 <hr />
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="likelihood-free-inference-via-classification.html#cb69-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb69-2"><a href="likelihood-free-inference-via-classification.html#cb69-2" tabindex="-1"></a><span class="fu">ggplot</span>(roc_df, <span class="fu">aes</span>(<span class="at">x =</span> fpr, <span class="at">y =</span> tpr)) <span class="sc">+</span></span>
-<span id="cb69-3"><a href="likelihood-free-inference-via-classification.html#cb69-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb69-4"><a href="likelihood-free-inference-via-classification.html#cb69-4" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb69-5"><a href="likelihood-free-inference-via-classification.html#cb69-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb69-6"><a href="likelihood-free-inference-via-classification.html#cb69-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;ROC Curve (AUC = %.2f)&quot;</span>, auc_val),</span>
-<span id="cb69-7"><a href="likelihood-free-inference-via-classification.html#cb69-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;False Positive Rate&quot;</span>,</span>
-<span id="cb69-8"><a href="likelihood-free-inference-via-classification.html#cb69-8" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;True Positive Rate&quot;</span>)</span></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-42-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="likelihood-free-inference-via-classification.html#cb70-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb70-2"><a href="likelihood-free-inference-via-classification.html#cb70-2" tabindex="-1"></a><span class="fu">ggplot</span>(roc_df, <span class="fu">aes</span>(<span class="at">x =</span> fpr, <span class="at">y =</span> tpr)) <span class="sc">+</span></span>
+<span id="cb70-3"><a href="likelihood-free-inference-via-classification.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="likelihood-free-inference-via-classification.html#cb70-4" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb70-5"><a href="likelihood-free-inference-via-classification.html#cb70-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb70-6"><a href="likelihood-free-inference-via-classification.html#cb70-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">sprintf</span>(<span class="st">&quot;ROC Curve (AUC = %.2f)&quot;</span>, auc_val),</span>
+<span id="cb70-7"><a href="likelihood-free-inference-via-classification.html#cb70-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;False Positive Rate&quot;</span>,</span>
+<span id="cb70-8"><a href="likelihood-free-inference-via-classification.html#cb70-8" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;True Positive Rate&quot;</span>)</span></code></pre></div>
+<p><img src="figures/unnamed-chunk-42-1.png" width="1200" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 </div>

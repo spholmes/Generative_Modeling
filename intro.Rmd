@@ -1,9 +1,23 @@
 ---
 title : "Generative Modeling Workshop"
 author: Susan Holmes
+
 ---
 
+
+
 # Index
+
+
+```{r setupInitial}
+knitr::opts_chunk$set(
+  fig.path = "figures/",  # All figures will go to a 'figures' directory
+  cache = TRUE,
+  cache.path = "_cache/"
+  # other options...
+)
+```
+
 # Workshop on using generative models
 
  **Lisbon, 7, 8 May, 2025**
