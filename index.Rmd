@@ -1,0 +1,35 @@
+---
+title: "Generative Modeling Workshop"
+author: "Susan Holmes"
+date: "May 8, 2025"
+output:
+  bookdown::gitbook:
+    config:
+      toc:
+         collapse: section
+         depth: 1
+---
+
+```{r setup, include=FALSE}
+# Create figures directory if it doesn't exist
+if (!dir.exists("docs/figures")) {
+  dir.create("docs/figures", recursive = TRUE)
+}
+
+knitr::opts_chunk$set(
+  fig.path = "figures/",
+  fig.align = "center",
+  fig.width = 6,
+  fig.height = 4,
+  dev = "png",
+  dpi = 300,
+  cache = TRUE,
+  cache.path = "docs/cache/",
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+
+# Set unique figure names based on chunk labels
+options(knitr.duplicate.label = "allow")
+```

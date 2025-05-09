@@ -2,8 +2,6 @@
 # Beyond Black Box Simulation
 
 
-<img src="figure/transparent.png"/>
-
 ```{r, packages, echo = FALSE, warnings = FALSE, message = FALSE}
 library(RefManageR)
 library(knitr)

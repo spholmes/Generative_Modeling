@@ -19,7 +19,7 @@ set.seed(090322)
 * Fit true model
 * Repeat discrimination
 
-```{r}
+```{r generatemixtt}
 disc_data <- list()
 p <- list()
 x <- t_mixture(500)
@@ -30,7 +30,7 @@ ggplot(x) +
 ggsave("~/Downloads/true_mixture.png", dpi = 400, width = 5)
 ```
 
-```{r}
+```{r plotfitt}
 fit <- fit_gmm(x, K = 4)
 x_sim <- mixture_predictive(fit)
 ggplot(x_sim) +
@@ -75,7 +75,7 @@ p[["gmm"]] <- data.frame(prob = predict(fit, disc_data[["gmm"]], type = "prob"))
   mutate(y_label = fct_recode(y, "Posterior Samples" = "simulated", "True Data" = "true"))
 ```
 
-```{r}
+```{r bringgmm}
 fit <- fit_gmm_cov(x, K = 5)
 x_sim <- mixture_predictive(fit)
 ```
@@ -100,7 +100,7 @@ p[["gmm_cov"]] <- data.frame(prob = predict(fit, disc_data[["gmm_cov"]], type = 
   mutate(y_label = fct_recode(y, "Posterior Samples" = "simulated", "True Data" = "true"))
 ```
 
-```{r}
+```{r lookatK5}
 fit <- fit_tmm(x, K = 5)
 x_sim <- mixture_predictive(fit)
 ggplot(x_sim) +
@@ -129,7 +129,7 @@ p[["tmm"]] <- data.frame(prob = predict(fit, disc_data[["tmm"]], type = "prob"))
   mutate(y_label = fct_recode(y, "Posterior Samples" = "simulated", "True Data" = "true"))
 ```
 
-```{r, fig.width = 7, fig.height = 4.5}
+```{r showingClouds, fig.width = 7, fig.height = 4.5}
 p_df <- bind_rows(p, .id = "model") %>%
   mutate(
     model = fct_recode(model, "Gaussian (Shared Covariance)" = "gmm", "Gaussian (Individual Covariance)" = "gmm_cov", "Student's t (Individual Covariance)" = "tmm"),
@@ -147,7 +147,7 @@ ggplot(p_df, aes(V1, V2, col = prob.true)) +
 ggsave("~/Downloads/modeling_iteration.png", dpi = 500, width = 1.1 * 7, height = 1.1 * 4.5)
 ```
 
-```{r}
+```{r TrueCloudsPost}
 for (m in unique(p_df$model)) {
   p_df %>%
     filter(y_label == "Posterior Samples", model == m) %>%

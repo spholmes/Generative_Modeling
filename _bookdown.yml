@@ -1,11 +1,6 @@
-book_filename: "index"
-rmd_files: ["intro.Rmd","NotBlackBox.Rmd","SlidesIndex.Rmd","Non-identifiability.Rmd","intervention.Rmd","intervention_optimize.Rmd",
+book_filename: "workshop"
+rmd_files: ["index.Rmd","intro.Rmd","NotBlackBox.Rmd","SlidesIndex.Rmd","Non-identifiability.Rmd","intervention.Rmd","intervention_optimize.Rmd",
 "goodness_of_fit.Rmd","StanExplained.Rmd","Likelihood_Free_Inference.Rmd","AvailableTools.Rmd", "Multimodal.Rmd","Otherexamples.Rmd"]
 output_dir: "docs"
 delete_merged_file: true
-fig_path: "docs/figures"
-knitr:
-  opts_chunk:
-     cache: true
-     cache.path: "_cache/"
-     
+fig_path: "figures"

@@ -1,6 +1,7 @@
 # Intervention_Optimize
 
 
+## We are going to choose the best points
  (this can be slow)
 
 ```{r, message = FALSE}
@@ -71,13 +72,13 @@ scores <- prep(umap_rec) %>%
   bind_cols(w %>% select(-loss))
 ```
 
-```{r}
+```{r UMAPScores}
 ggplot(scores) +
   geom_point(aes(UMAP1, UMAP2, col = log(loss), size = X4)) +
   scale_color_viridis_c(direction = -1, limits = c(0, 8), option = "inferno")
 ```
 
-```{r}
+```{r mute}
 w_df <- w %>%
   mutate(id = row_number()) %>%
   arrange(-loss) %>%
@@ -90,7 +91,7 @@ w_df <- w_df %>%
   left_join(intervals_df)
 ```
 
-```{r, fig.width = 10.5, fig.height = 2.25}
+```{r bestweights, fig.width = 10.5, fig.height = 2.25}
 ggplot(w_df %>% filter(log(loss) < 0.08)) +
   geom_rect(aes(xmin = V1, xmax = V2, ymin = 0, ymax = value), fill = "#262526") +
   scale_x_continuous(expand = c(0, 0), breaks = c(-5, 0, 5)) +
@@ -99,7 +100,7 @@ ggplot(w_df %>% filter(log(loss) < 0.08)) +
 ggsave("~/Downloads/best_weights.png")
 ```
 
-```{r, fig.width = 7.875, fig.height = 3.375}
+```{r peaksamples, fig.width = 7.875, fig.height = 3.375}
 u <- map(1:8, ~ runif(25, -10, 10))
 examples <- map_dfr(u,
   ~ data.frame(
