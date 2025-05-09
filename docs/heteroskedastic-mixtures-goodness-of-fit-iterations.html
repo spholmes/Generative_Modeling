@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html#special-data-structures"><i class="fa fa-check"></i><b>12.1</b> Special data structures</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>13</b> Other examples of applications</a></li>
+<li class="chapter" data-level="13" data-path="other-examples-of-applications-to-the-microbiome.html"><a href="other-examples-of-applications-to-the-microbiome.html"><i class="fa fa-check"></i><b>13</b> Other examples of applications to the microbiome</a></li>
 </ul>
 
       </nav>
@@ -273,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb26-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(V1, V2)) <span class="sc">+</span></span>
 <span id="cb26-6"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb26-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dimension 1&quot;</span>, <span class="at">y =</span> <span class="st">&quot;dimension 2&quot;</span>) <span class="sc">+</span></span>
 <span id="cb26-7"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb26-7" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
-<p><img src="figures/generatemixtt-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/generatemixtt-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb27-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/true_mixture.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">400</span>, <span class="at">width =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb28-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_gmm</span>(x, <span class="at">K =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## ------------------------------------------------------------ 
@@ -281,8 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   This procedure has not been thoroughly tested and may be unstable 
 ##   or buggy. The interface is subject to change. 
 ## ------------------------------------------------------------ 
-## Gradient evaluation took 0.000911 seconds 
-## 1000 transitions using 10 leapfrog steps per transition would take 9.11 seconds. 
+## Gradient evaluation took 0.000799 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 7.99 seconds. 
 ## Adjust your expectations accordingly! 
 ## Begin eta adaptation. 
 ## Iteration:   1 / 250 [  0%]  (Adaptation) 
@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb30-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb30-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb30-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb30-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> .iteration) <span class="sc">+</span></span>
 <span id="cb30-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb30-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
-<p><img src="figures/plotfitt-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/plotfitt-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb31-1" tabindex="-1"></a>disc_data[[<span class="st">&quot;gmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">bind_dicriminative</span>(x, x_sim)</span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-1" tabindex="-1"></a>gbmGrid <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(</span>
 <span id="cb32-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb32-2" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">5</span>,</span>
@@ -360,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   This procedure has not been thoroughly tested and may be unstable 
 ##   or buggy. The interface is subject to change. 
 ## ------------------------------------------------------------ 
-## Gradient evaluation took 0.001961 seconds 
-## 1000 transitions using 10 leapfrog steps per transition would take 19.61 seconds. 
+## Gradient evaluation took 0.002167 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 21.67 seconds. 
 ## Adjust your expectations accordingly! 
 ## Begin eta adaptation. 
 ## Iteration:   1 / 250 [  0%]  (Adaptation) 
@@ -419,8 +419,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   This procedure has not been thoroughly tested and may be unstable 
 ##   or buggy. The interface is subject to change. 
 ## ------------------------------------------------------------ 
-## Gradient evaluation took 0.002119 seconds 
-## 1000 transitions using 10 leapfrog steps per transition would take 21.19 seconds. 
+## Gradient evaluation took 0.001927 seconds 
+## 1000 transitions using 10 leapfrog steps per transition would take 19.27 seconds. 
 ## Adjust your expectations accordingly! 
 ## Begin eta adaptation. 
 ## Iteration:   1 / 250 [  0%]  (Adaptation) 
@@ -442,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span>), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb43-4"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> .iteration) <span class="sc">+</span></span>
 <span id="cb43-5"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb43-5" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
-<p><img src="figures/lookatK5-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/lookatK5-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb44-1" tabindex="-1"></a>disc_data[[<span class="st">&quot;tmm&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">bind_dicriminative</span>(x, x_sim, <span class="at">iter =</span> <span class="dv">4</span>)</span>
 <span id="cb44-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb44-2" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
 <span id="cb44-3"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb44-3" tabindex="-1"></a>  <span class="at">x =</span> disc_data[[<span class="st">&quot;tmm&quot;</span>]] <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>y) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>(),</span>
@@ -490,7 +490,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb47-11"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb47-11" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">11</span>, <span class="dv">11</span>) <span class="sc">+</span></span>
 <span id="cb47-12"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb47-12" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
 <span id="cb47-13"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb47-13" tabindex="-1"></a>  <span class="fu">facet_grid</span>(y_label <span class="sc">~</span> model)</span></code></pre></div>
-<p><img src="figures/showingClouds-1.png" width="1400" style="display: block; margin: auto;" /></p>
+<p><img src="figures/showingClouds-1.png" width="2100" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb48-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;~/Downloads/modeling_iteration.png&quot;</span>, <span class="at">dpi =</span> <span class="dv">500</span>, <span class="at">width =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="fl">4.5</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb49-1" tabindex="-1"></a><span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">unique</span>(p_df<span class="sc">$</span>model)) {</span>
 <span id="cb49-2"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html#cb49-2" tabindex="-1"></a>  p_df <span class="sc">%&gt;%</span></span>

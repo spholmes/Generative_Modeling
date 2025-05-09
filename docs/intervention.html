@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html#special-data-structures"><i class="fa fa-check"></i><b>12.1</b> Special data structures</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="other-examples-of-applications.html"><a href="other-examples-of-applications.html"><i class="fa fa-check"></i><b>13</b> Other examples of applications</a></li>
+<li class="chapter" data-level="13" data-path="other-examples-of-applications-to-the-microbiome.html"><a href="other-examples-of-applications-to-the-microbiome.html"><i class="fa fa-check"></i><b>13</b> Other examples of applications to the microbiome</a></li>
 </ul>
 
       </nav>
@@ -261,14 +261,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-3"><a href="intervention.html#cb11-3" tabindex="-1"></a><span class="fu">plot</span>(times, <span class="fu">pf</span>(times), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
 <span id="cb11-4"><a href="intervention.html#cb11-4" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>, <span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>)</span>
 <span id="cb11-5"><a href="intervention.html#cb11-5" tabindex="-1"></a><span class="fu">points</span>(u, <span class="fu">gaussian_noise</span>(pf, u))</span></code></pre></div>
-<p><img src="figures/pontspeak-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/pontspeak-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="intervention.html#cb12-1" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
 <span id="cb12-2"><a href="intervention.html#cb12-2" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">head</span>(u, <span class="sc">-</span><span class="dv">1</span>), <span class="fu">tail</span>(u, <span class="sc">-</span><span class="dv">1</span>))</span>
 <span id="cb12-3"><a href="intervention.html#cb12-3" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span></span>
 <span id="cb12-4"><a href="intervention.html#cb12-4" tabindex="-1"></a>weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
 <span id="cb12-5"><a href="intervention.html#cb12-5" tabindex="-1"></a>locs <span class="ot">&lt;-</span> <span class="fu">weighted_sampling</span>(<span class="fl">1e4</span>, intervals, weights)</span>
 <span id="cb12-6"><a href="intervention.html#cb12-6" tabindex="-1"></a><span class="fu">hist</span>(locs)</span></code></pre></div>
-<p><img src="figures/histlocs-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/histlocs-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <ul>
 <li>We now have a way of simulating parameterized mean functions and observations with noise around them</li>
 <li>We also have ways of sampling locations to observe the function, based on a
@@ -290,7 +290,7 @@ search or bayesian optimization</li>
 <span id="cb13-9"><a href="intervention.html#cb13-9" tabindex="-1"></a><span class="fu">points</span>(u, <span class="fu">predict</span>(fit), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
 <span id="cb13-10"><a href="intervention.html#cb13-10" tabindex="-1"></a>f_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">u =</span> times))</span>
 <span id="cb13-11"><a href="intervention.html#cb13-11" tabindex="-1"></a><span class="fu">points</span>(times, f_hat, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="figures/pointsweights-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/pointsweights-1.png" width="1800" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="intervention.html#cb14-1" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
 <span id="cb14-2"><a href="intervention.html#cb14-2" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> B, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
 <span id="cb14-3"><a href="intervention.html#cb14-3" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="fu">seq_len</span>(B)) {</span>
@@ -314,7 +314,7 @@ search or bayesian optimization</li>
 <span id="cb14-21"><a href="intervention.html#cb14-21" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb14-22"><a href="intervention.html#cb14-22" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
 <span id="cb14-23"><a href="intervention.html#cb14-23" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))</span></code></pre></div>
-<p><img src="figures/mseplot1-1.png" width="1200" style="display: block; margin: auto;" /></p>
+<p><img src="figures/mseplot1-1.png" width="1800" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
