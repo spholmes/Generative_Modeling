@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13 Other examples of applications to the microbiome | Generative Modeling Workshop</title>
+  <meta name="description" content="13 Other examples of applications to the microbiome | Generative Modeling Workshop" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13 Other examples of applications to the microbiome | Generative Modeling Workshop" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13 Other examples of applications to the microbiome | Generative Modeling Workshop" />
+  
+  
+  
+
+<meta name="author" content="Susan Holmes" />
+
+
+<meta name="date" content="2025-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multimodal-data-examples-of-approaches.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html"><i class="fa fa-check"></i><b>1</b> Workshop on using generative models</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#our-learning-goals"><i class="fa fa-check"></i><b>1.1</b> Our learning goals:</a></li>
+<li class="chapter" data-level="1.2" data-path="workshop-on-using-generative-models.html"><a href="workshop-on-using-generative-models.html#prerequisites"><i class="fa fa-check"></i><b>1.2</b> Prerequisites:</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html"><i class="fa fa-check"></i><b>2</b> Beyond Black Box Simulation</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science"><i class="fa fa-check"></i><b>2.1</b> New Lingua Franca of Science</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#new-lingua-franca-of-science-1"><i class="fa fa-check"></i><b>2.1.1</b> New Lingua Franca of Science</a></li>
+<li class="chapter" data-level="2.1.2" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#grammar-of-generative-models"><i class="fa fa-check"></i><b>2.1.2</b> Grammar of Generative Models</a></li>
+<li class="chapter" data-level="2.1.3" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#discrepancy-and-iterability"><i class="fa fa-check"></i><b>2.1.3</b> Discrepancy and Iterability</a></li>
+<li class="chapter" data-level="2.1.4" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#experimental-design-renaissance"><i class="fa fa-check"></i><b>2.1.4</b> Experimental Design Renaissance</a></li>
+<li class="chapter" data-level="2.1.5" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#simulation-to-the-rescue"><i class="fa fa-check"></i><b>2.1.5</b> Simulation to the Rescue</a></li>
+<li class="chapter" data-level="2.1.6" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim"><i class="fa fa-check"></i><b>2.1.6</b> Covasim</a></li>
+<li class="chapter" data-level="2.1.7" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#covasim-1"><i class="fa fa-check"></i><b>2.1.7</b> Covasim</a></li>
+<li class="chapter" data-level="2.1.8" data-path="beyond-black-box-simulation.html"><a href="beyond-black-box-simulation.html#what-are-we-going-to-study"><i class="fa fa-check"></i><b>2.1.8</b> What are we going to study ?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="slides.html"><a href="slides.html"><i class="fa fa-check"></i><b>3</b> Slides</a></li>
+<li class="chapter" data-level="4" data-path="labs-and-challenges.html"><a href="labs-and-challenges.html"><i class="fa fa-check"></i><b>4</b> Labs and Challenges :</a></li>
+<li class="chapter" data-level="5" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html"><i class="fa fa-check"></i><b>5</b> Non-Identifiability in Mixture Models: An Example</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#what-is-non-identifiability"><i class="fa fa-check"></i><b>5.1</b> What is Non-Identifiability?</a></li>
+<li class="chapter" data-level="5.2" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#the-binomial-mixture-model"><i class="fa fa-check"></i><b>5.2</b> The Binomial Mixture Model</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#defining-parameter-sets"><i class="fa fa-check"></i><b>5.2.1</b> Defining Parameter Sets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#generating-mixture-distributions"><i class="fa fa-check"></i><b>5.3</b> Generating Mixture Distributions</a></li>
+<li class="chapter" data-level="5.4" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#visualizing-the-probability-mass-functions"><i class="fa fa-check"></i><b>5.4</b> Visualizing the Probability Mass Functions</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#generating-samples-from-each-distribution"><i class="fa fa-check"></i><b>5.4.1</b> Generating Samples from Each Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#comparing-empirical-distributions"><i class="fa fa-check"></i><b>5.5</b> Comparing Empirical Distributions</a></li>
+<li class="chapter" data-level="5.6" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#statistical-comparison-of-distributions"><i class="fa fa-check"></i><b>5.6</b> Statistical Comparison of Distributions</a></li>
+<li class="chapter" data-level="5.7" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#testing-the-empirical-similarity"><i class="fa fa-check"></i><b>5.7</b> Testing the Empirical Similarity</a></li>
+<li class="chapter" data-level="5.8" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#expected-vs-observed-distributions"><i class="fa fa-check"></i><b>5.8</b> Expected vs Observed Distributions</a></li>
+<li class="chapter" data-level="5.9" data-path="non-identifiability-in-mixture-models-an-example.html"><a href="non-identifiability-in-mixture-models-an-example.html#summary"><i class="fa fa-check"></i><b>5.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="intervention.html"><a href="intervention.html"><i class="fa fa-check"></i><b>6</b> Intervention</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="intervention.html"><a href="intervention.html#start-defining-the-intervention-in-a-time-series"><i class="fa fa-check"></i><b>6.1</b> Start defining the intervention in a time series</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="intervention_optimize.html"><a href="intervention_optimize.html"><i class="fa fa-check"></i><b>7</b> Intervention_Optimize</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="intervention_optimize.html"><a href="intervention_optimize.html#we-are-going-to-choose-the-best-points"><i class="fa fa-check"></i><b>7.1</b> We are going to choose the best points</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><a href="heteroskedastic-mixtures-goodness-of-fit-iterations.html"><i class="fa fa-check"></i><b>8</b> Heteroskedastic Mixtures : goodness of fit iterations</a></li>
+<li class="chapter" data-level="9" data-path="stan-explained.html"><a href="stan-explained.html"><i class="fa fa-check"></i><b>9</b> Stan Explained</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="stan-explained.html"><a href="stan-explained.html#installing-stan"><i class="fa fa-check"></i><b>9.1</b> Installing <code>stan</code></a></li>
+<li class="chapter" data-level="9.2" data-path="stan-explained.html"><a href="stan-explained.html#gmm.stan-file"><i class="fa fa-check"></i><b>9.2</b> <code>gmm.stan</code> file</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="stan-explained.html"><a href="stan-explained.html#in-plain-english"><i class="fa fa-check"></i><b>9.2.1</b> In plain English</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="stan-explained.html"><a href="stan-explained.html#more-examples"><i class="fa fa-check"></i><b>9.3</b> More examples</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html"><i class="fa fa-check"></i><b>10</b> Likelihood-Free Inference via Classification</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#motivation"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
+<li class="chapter" data-level="10.2" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture"><i class="fa fa-check"></i><b>10.2</b> Likelihood-Free Inference: The Big Picture</a></li>
+<li class="chapter" data-level="10.3" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#what-is-abc"><i class="fa fa-check"></i><b>10.3</b> What is ABC?</a></li>
+<li class="chapter" data-level="10.4" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#when-to-use-abc"><i class="fa fa-check"></i><b>10.4</b> When to Use ABC</a></li>
+<li class="chapter" data-level="10.5" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#the-abc-rejection-algorithm"><i class="fa fa-check"></i><b>10.5</b> The ABC Rejection Algorithm</a></li>
+<li class="chapter" data-level="10.6" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#illustrated-example-estimating-a-mean"><i class="fa fa-check"></i><b>10.6</b> Illustrated Example: Estimating a Mean</a></li>
+<li class="chapter" data-level="10.7" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#acceptance-threshold-visualization"><i class="fa fa-check"></i><b>10.7</b> Acceptance Threshold Visualization</a></li>
+<li class="chapter" data-level="10.8" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#abc-approximate-posterior"><i class="fa fa-check"></i><b>10.8</b> ABC Approximate Posterior</a></li>
+<li class="chapter" data-level="10.9" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#extensions-of-abc"><i class="fa fa-check"></i><b>10.9</b> Extensions of ABC</a></li>
+<li class="chapter" data-level="10.10" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references-about-abc"><i class="fa fa-check"></i><b>10.10</b> References about ABC</a></li>
+<li class="chapter" data-level="10.11" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#classification-based-lfi"><i class="fa fa-check"></i><b>10.11</b> Classification-Based LFI</a></li>
+<li class="chapter" data-level="10.12" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#algorithm-sketch"><i class="fa fa-check"></i><b>10.12</b> Algorithm Sketch</a></li>
+<li class="chapter" data-level="10.13" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#motivation-1"><i class="fa fa-check"></i><b>10.13</b> Motivation</a></li>
+<li class="chapter" data-level="10.14" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#likelihood-free-inference-the-big-picture-1"><i class="fa fa-check"></i><b>10.14</b> Likelihood-Free Inference: The Big Picture</a></li>
+<li class="chapter" data-level="10.15" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#classification-based-lfi-1"><i class="fa fa-check"></i><b>10.15</b> Classification-Based LFI</a></li>
+<li class="chapter" data-level="10.16" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#algorithm-sketch-1"><i class="fa fa-check"></i><b>10.16</b> Algorithm Sketch</a></li>
+<li class="chapter" data-level="10.17" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#example-1d-gaussian-mixture"><i class="fa fa-check"></i><b>10.17</b> Example: 1D Gaussian Mixture</a>
+<ul>
+<li class="chapter" data-level="10.17.1" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#example-logistic-discriminator"><i class="fa fa-check"></i><b>10.17.1</b> Example: Logistic Discriminator</a></li>
+</ul></li>
+<li class="chapter" data-level="10.18" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#applications-case-studies"><i class="fa fa-check"></i><b>10.18</b> Applications &amp; Case Studies</a></li>
+<li class="chapter" data-level="10.19" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#practical-tips"><i class="fa fa-check"></i><b>10.19</b> Practical Tips</a></li>
+<li class="chapter" data-level="10.20" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#advantages-limitations"><i class="fa fa-check"></i><b>10.20</b> Advantages &amp; Limitations</a></li>
+<li class="chapter" data-level="10.21" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#summary-outlook"><i class="fa fa-check"></i><b>10.21</b> Summary &amp; Outlook</a></li>
+<li class="chapter" data-level="10.22" data-path="likelihood-free-inference-via-classification.html"><a href="likelihood-free-inference-via-classification.html#references"><i class="fa fa-check"></i><b>10.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html"><i class="fa fa-check"></i><b>11</b> All the tools already available</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#a-cran-view-of-what-exists"><i class="fa fa-check"></i><b>11.1</b> A CRAN view of what exists:</a></li>
+<li class="chapter" data-level="11.2" data-path="all-the-tools-already-available.html"><a href="all-the-tools-already-available.html#specific-packages"><i class="fa fa-check"></i><b>11.2</b> Specific Packages:</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html"><i class="fa fa-check"></i><b>12</b> Multimodal data examples of approaches</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="multimodal-data-examples-of-approaches.html"><a href="multimodal-data-examples-of-approaches.html#special-data-structures"><i class="fa fa-check"></i><b>12.1</b> Special data structures</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="other-examples-of-applications-to-the-microbiome.html"><a href="other-examples-of-applications-to-the-microbiome.html"><i class="fa fa-check"></i><b>13</b> Other examples of applications to the microbiome</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Generative Modeling Workshop</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="other-examples-of-applications-to-the-microbiome" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">13</span> Other examples of applications to the microbiome<a href="other-examples-of-applications-to-the-microbiome.html#other-examples-of-applications-to-the-microbiome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li><p><a href="https://krisrs1128.github.io/microbiome-simulation/">Kris Sankaran’s workshop on simulation for microbiome</a></p></li>
+<li><p><a href="https://rpubs.com/krisrs1128/1146458">Kris Sankaran RPUBS site on simulation for biology</a></p></li>
+<li><p><a href="https://github.com/krisrs1128/talks/blob/ba5efc32ec944df6061b9e795216344a66b35aaa/2025/20250328/20250328.html">Kris Sankaran: Semi synthetic data enrichment</a></p></li>
+</ul>
+<p>People ask me about why compositional methods don’t apply to the microbiome, there
+is a simple answer that the data are not compositional and there are too many boxes
+for the transformed dat to fit into that model. But there are other reasons not to use them, see:</p>
+<ul>
+<li><a href="https://www.biorxiv.org/content/10.1101/2025.02.13.638109v1">Why we shouldn’t be using compositional methods for Microbiome or Transcriptome data</a></li>
+</ul>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multimodal-data-examples-of-approaches.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "depth": 1
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
